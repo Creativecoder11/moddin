@@ -1,0 +1,335 @@
+Rebuild this around your uploaded deck, not around the current site. The strongest story in the PDF is: **Bangladesh opportunity → conversion gap → Moddin’s role → services → process → partner types**. That should become the website backbone. 
+
+From competitor benchmarking, the useful pattern is clear: **BIDA** organizes around opportunities, services, resources, and direct inquiry flows like “Ask a Question,” “Book an Appointment,” and OSS; **Invest India** combines sector pages, services, success stories, and a resource repository; **IDA Ireland** leads with a sharp partner-oriented headline plus sector proof; **Enterprise Singapore** makes market entry support feel concrete through clear service buckets. For Moddin, the right move is to borrow that **clarity and structure**, but keep a more private-sector, execution-led tone than a public authority website. ([BIDA][1])
+
+## Recommended site structure
+
+**Top nav**
+Home | Why Bangladesh | Services | Who We Work With | Insights | Contact
+Primary CTA: **Book an Intro Call**
+
+This is the BIDA-style clarity you want, but simplified for Moddin.
+
+---
+
+## Homepage layout and copy
+
+### 1) Hero
+
+**Layout**
+Full-width hero image or video of Bangladesh industry / ports / urban skyline.
+Left-aligned copy.
+Two CTAs.
+Short trust strip underneath.
+
+**Copy**
+
+**Eyebrow**
+Bangladesh Market Entry & Investment Facilitation
+
+**Headline**
+**Bangladesh, Made Easier to Enter**
+
+**Subheadline**
+Moddin helps global investors, companies, and institutions understand the market, access the right stakeholders, and move from interest to execution.
+
+**Primary CTA**
+Talk to Moddin
+
+**Secondary CTA**
+Explore Bangladesh
+
+**Trust strip**
+Market Intelligence • Institutional Access • Strategic Matchmaking • Execution Support
+
+---
+
+### 2) Opportunity snapshot
+
+**Layout**
+One short paragraph + 4 stat cards.
+
+**Copy**
+
+**Section title**
+**Why Bangladesh, Why Now**
+
+**Body**
+Bangladesh is no longer just a manufacturing story. It is becoming a serious market-entry and partnership destination for global businesses looking for scale, cost competitiveness, and long-term growth.
+
+**Stats**
+
+* 176M population
+* USD 450B GDP
+* USD 55B+ exports
+* 8th largest workforce globally
+
+Use only these four. That is enough for 80/20 copy. 
+
+---
+
+### 3) The gap
+
+**Layout**
+3-column comparison block.
+
+**Copy**
+
+**Section title**
+**High Potential. Still Hard to Unlock.**
+
+**Intro line**
+Interest in Bangladesh is strong. Conversion into real investment and partnerships is where friction begins.
+
+**Column 1 — What Bangladesh already has**
+Scale, export strength, industrial depth, and cost advantage.
+
+**Column 2 — What investors still face**
+Fragmented access, regulatory complexity, and difficulty finding the right local pathways.
+
+**Column 3 — What this leads to**
+Delayed decisions, missed opportunities, and weaker market entry outcomes.
+
+This section is important because it gives Moddin a reason to exist. 
+
+---
+
+### 4) Moddin’s role
+
+**Layout**
+3 feature cards in a row.
+
+**Copy**
+
+**Section title**
+**Moddin Turns Interest Into Action**
+
+**Card 1 — Position**
+Shape the opportunity with clear market narratives, sector context, and investor-ready materials.
+
+**Card 2 — Connect**
+Open access to institutions, trade bodies, investors, and local partners who matter.
+
+**Card 3 — Execute**
+Support market entry, partnerships, trade missions, and transaction pathways from first step to real outcome.
+
+This directly translates the deck’s strongest framework into website language. 
+
+---
+
+### 5) Services
+
+**Layout**
+6-card grid, 3x2 on desktop.
+
+**Copy**
+
+**Section title**
+**What We Do**
+
+**Card 1**
+**Market Entry & Setup Support**
+Entry strategy, local navigation, regulatory guidance, and partner coordination.
+
+**Card 2**
+**Government & Institutional Facilitation**
+Coordination with ministries, agencies, trade bodies, and chambers.
+
+**Card 3**
+**Investor Outreach & Opportunity Promotion**
+Target mapping, strategic outreach, and curated opportunity visibility.
+
+**Card 4**
+**JV, M&A & Strategic Matchmaking**
+Qualified partner identification, alignment, and relationship facilitation.
+
+**Card 5**
+**Deal Structuring & Market Positioning**
+Opportunity packaging, due diligence support, and market-facing positioning.
+
+**Card 6**
+**Expos, Summits & Trade Missions**
+High-impact engagements built around curation, agenda, sponsorship, and execution.
+
+Again, keep each card to one sentence. Do not over-explain on the homepage. 
+
+---
+
+### 6) Who we work with
+
+**Layout**
+4 audience cards.
+
+**Copy**
+
+**Section title**
+**Who We Work With**
+
+**Global Companies**
+For businesses exploring sourcing, expansion, regional strategy, and operational setup in Bangladesh.
+
+**Investors & Funds**
+For capital looking at high-growth opportunities, partnerships, and long-term market access.
+
+**Government & Institutions**
+For agencies, embassies, chambers, and development organizations supporting trade and investment flows.
+
+**Bangladeshi Companies**
+For local firms seeking capital, global positioning, strategic partnerships, and cross-border growth.
+
+
+
+---
+
+### 7) Process section
+
+**Layout**
+Simple 4-step horizontal flow.
+
+**Copy**
+
+**Section title**
+**How We Work**
+
+**Step 1 — Explore**
+Understand the market, the objective, and the opportunity.
+
+**Step 2 — Structure**
+Define the right entry path, stakeholder map, and partnership model.
+
+**Step 3 — Engage**
+Activate introductions, coordination, and opportunity development.
+
+**Step 4 — Execute**
+Move into setup, deal progress, and on-ground support.
+
+This is strong because it makes the business feel operational, not abstract. 
+
+---
+
+### 8) Insights / resources
+
+**Layout**
+3 editorial cards + one CTA.
+
+**Why include it**
+BIDA and Invest India both make resources visible because serious investors want more than a brochure; they want material they can review. ([BIDA][1])
+
+**Copy**
+
+**Section title**
+**Insights for Entering Bangladesh**
+
+**Intro**
+Explore practical resources designed to help investors and companies evaluate Bangladesh with more clarity.
+
+**Card 1**
+Bangladesh Opportunity Briefs
+
+**Card 2**
+Sector Notes & Market Signals
+
+**Card 3**
+Market Entry Guides & Checklists
+
+**CTA**
+View Insights
+
+---
+
+### 9) Final CTA
+
+**Layout**
+Clean full-width CTA band.
+
+**Copy**
+
+**Headline**
+**Ready to Explore Bangladesh With More Clarity?**
+
+**Body**
+Whether you are evaluating market entry, partnerships, or investment pathways, Moddin helps you move with the right local context and execution support.
+
+**CTA**
+Book an Intro Call
+
+**Secondary line**
+Or send us your brief and we’ll point you to the right next step.
+
+---
+
+## Inner page structure
+
+### Why Bangladesh
+
+Use this as the “opportunity” page.
+
+Sections:
+
+* Hero: Bangladesh as a growth and expansion destination
+* 4 key reasons to look now
+* Priority sectors / opportunity clusters
+* “What makes entry difficult” block
+* Downloadable resources
+* CTA
+
+### Services
+
+Each service gets:
+
+* What it is
+* Who it is for
+* What outcome it supports
+* Related CTA
+
+### Who We Work With
+
+Split by:
+
+* Global companies
+* Investors & funds
+* Institutions
+* Bangladeshi companies
+
+Each audience page should answer:
+
+* Why they come to Moddin
+* What challenges they face
+* What Moddin helps them achieve
+
+### Insights
+
+Use as a serious trust-building page:
+
+* Bangladesh briefs
+* Sector notes
+* Trade mission updates
+* Market entry explainers
+
+### Contact
+
+Take the useful part of BIDA’s pattern here: **ask a question + book a meeting**. That structure works because it gives low-friction and high-intent contact options. ([BIDA][1])
+
+---
+
+## Copy rules for the whole site
+
+**1. Keep headlines outcome-led**
+Say “Bangladesh, Made Easier to Enter” instead of generic lines like “Connecting Bangladesh to Global Businesses.”
+
+**2. Keep each section to one idea**
+Do not stack country promotion, services, and proof into one paragraph.
+
+**3. Use fewer adjectives, more mechanics**
+Prefer “market entry, partner access, execution support” over “trusted, innovative, world-class.”
+
+**4. Homepage should sell clarity, not explain everything**
+The deck can stay expansive. The website should be decisive.
+
+**5. Borrow BIDA’s structure, not BIDA’s voice**
+Moddin should sound like an execution partner, not a government portal. That is the right differentiation based on the deck and the benchmark set.  ([BIDA][1])
+
+Source deck: [Moddin Business Deck13April.pdf](sandbox:/mnt/data/Moddin%20Business%20Deck13April.pdf)
+
+
+[1]: https://bida.gov.bd/ "BIDA | Explore Investment Opportunities in Bangladesh"

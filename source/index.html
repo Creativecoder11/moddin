@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Moddin — Bangladesh, Made Easier to Enter</title>
+<meta name="description" content="Moddin helps global investors, companies, and institutions understand Bangladesh, access the right stakeholders, and move from interest to execution." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Locomotive Scroll -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+
+<style>
+  :root{
+    --bone:#EFE8D9;
+    --paper:#F5F0E3;
+    --cream:#FAF5E9;
+    --linen:#E2D9C2;
+    --ink:#0B0B0C;
+    --coal:#141311;
+    --forest:#0E2B22;
+    --terracotta:#B44A1E;
+    --ember:#D66A2B;
+    --brass:#C29A4E;
+    --stone:#6B6760;
+    --rule:rgba(11,11,12,.14);
+    --rule-2:rgba(11,11,12,.08);
+    --rule-d:rgba(250,245,233,.16);
+    --rule-d-2:rgba(250,245,233,.08);
+    --serif:"PT Serif", "Times New Roman", serif;
+    --serif-2:"PT Serif", "Times New Roman", serif;
+    --sans:"Outfit", system-ui, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+  }
+
+  /* Lock locomotive-scroll transforms without breaking fixed nav */
+  html.has-scroll-smooth{overflow:hidden}
+  html.has-scroll-smooth body{overflow:hidden}
+  .has-scroll-smooth [data-scroll-container]{min-height:100vh}
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  ::selection{background:var(--terracotta);color:var(--cream)}
+
+  /* Paper grain */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:200;
+    opacity:.40;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .wrap{max-width:1440px;margin:0 auto;padding:0 clamp(24px,5vw,72px)}
+  .wide{max-width:1600px;margin:0 auto;padding:0 clamp(24px,5vw,72px)}
+
+  /* --------------------- TICKER --------------------- */
+  .ticker{
+    background:var(--ink);color:var(--cream);
+    border-bottom:1px solid var(--rule-d-2);
+    overflow:hidden;height:34px;
+    display:flex;align-items:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .ticker-track{display:flex;gap:56px;white-space:nowrap;animation:tk 48s linear infinite}
+  .ticker-track span{display:inline-flex;align-items:center;gap:12px;opacity:.85}
+  .ticker-track i{width:4px;height:4px;border-radius:50%;background:var(--ember);font-style:normal}
+  @keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* --------------------- NAV --------------------- */
+  .nav{
+    position:fixed;top:34px;left:0;right:0;z-index:50;
+    background:color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter:saturate(140%) blur(12px);
+    -webkit-backdrop-filter:saturate(140%) blur(12px);
+    border-bottom:1px solid var(--rule);
+    transition:transform .4s cubic-bezier(.2,.6,.2,1), background .3s, border-color .3s;
+  }
+  .nav.is-scrolled{background:color-mix(in srgb, var(--paper) 96%, transparent)}
+  .nav.is-hidden{transform:translateY(-100%)}
+  body{padding-top:112px}
+  .ticker{position:fixed;top:0;left:0;right:0;z-index:51;width:100%}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .brand{display:flex;align-items:baseline;gap:12px;font-family:var(--serif);font-weight:500;letter-spacing:-.02em}
+  .brand .mark{
+    width:36px;height:36px;border-radius:50%;
+    display:grid;place-items:center;
+    background:var(--ink);color:var(--cream);
+    font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;
+    font-variation-settings:"opsz" 144, "SOFT" 40, "WONK" 1;
+    align-self:center;
+    transform:translateY(-1px);
+  }
+  .brand .name{font-size:24px;font-variation-settings:"opsz" 144, "SOFT" 30}
+  .brand .name em{font-style:italic;color:var(--terracotta);font-weight:400}
+  .brand .tld{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-left:4px;align-self:center}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-size:13.5px;color:var(--ink);opacity:.75;transition:opacity .2s;letter-spacing:.01em}
+  .nav-links a:hover{opacity:1}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:11px 20px 11px 22px;border-radius:100px;
+    background:var(--ink);color:var(--cream);
+    font-size:13.5px;letter-spacing:.01em;
+    transition:transform .25s ease, background .25s;
+  }
+  .nav-cta:hover{background:var(--terracotta);transform:translateY(-1px)}
+  .nav-cta .arr{display:inline-block;transition:transform .25s ease}
+  .nav-cta:hover .arr{transform:translateX(3px)}
+  @media (max-width:860px){.nav-links{display:none}.nav-cta{padding:9px 14px}.brand .tld{display:none}}
+
+  /* --------------------- UTIL --------------------- */
+  section{position:relative}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--sans);font-size:12.5px;letter-spacing:.02em;text-transform:none;
+    color:var(--stone);font-weight:500;
+  }
+  .eyebrow .tick{width:7px;height:7px;border-radius:50%;background:var(--terracotta);display:inline-block}
+  .eyebrow .idx{font-family:var(--serif-2);font-style:italic;color:var(--terracotta);font-size:15px;letter-spacing:-.01em;font-weight:400}
+  .eyebrow .sep{width:16px;height:1px;background:currentColor;opacity:.3;display:inline-block}
+  .rule{height:1px;background:var(--rule);border:0;margin:0}
+  .rule-d{height:1px;background:var(--rule-d-2);border:0;margin:0}
+
+  .display{
+    font-family:var(--serif);
+    font-weight:350;
+    letter-spacing:-.025em;
+    line-height:.98;
+    font-variation-settings:"opsz" 144, "SOFT" 30, "WONK" 0;
+    color:var(--ink);
+  }
+  .display em{font-style:italic;font-weight:380;font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1;color:var(--terracotta)}
+  h2.section-title{
+    font-family:var(--serif);font-weight:350;letter-spacing:-.025em;
+    font-size:clamp(40px,5vw,68px);line-height:1.02;margin:0;
+    font-variation-settings:"opsz" 144, "SOFT" 30;
+  }
+  h2.section-title em{font-style:italic;color:var(--terracotta);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 22px;border-radius:100px;
+    font-size:14px;letter-spacing:.01em;
+    transition:transform .25s ease, background .25s, color .25s, border-color .25s;
+  }
+  .btn-dark{background:var(--ink);color:var(--cream)}
+  .btn-dark:hover{background:var(--terracotta);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-1px)}
+  .btn-light{background:var(--cream);color:var(--ink)}
+  .btn-light:hover{background:var(--ember);color:var(--cream)}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.2,.6,.2,1), transform .9s cubic-bezier(.2,.6,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  .reveal[data-delay="1"]{transition-delay:.08s}
+  .reveal[data-delay="2"]{transition-delay:.16s}
+  .reveal[data-delay="3"]{transition-delay:.24s}
+  .reveal[data-delay="4"]{transition-delay:.32s}
+  .reveal[data-delay="5"]{transition-delay:.4s}
+
+  /* --------------------- HERO --------------------- */
+  .hero{padding:clamp(48px,8vw,120px) 0 clamp(48px,7vw,96px)}
+  .hero-grid{display:grid;grid-template-columns:1.2fr .85fr;gap:clamp(32px,6vw,96px);align-items:end}
+  @media (max-width:980px){.hero-grid{grid-template-columns:1fr}}
+
+  .hero h1{
+    font-size:clamp(56px,8.4vw,132px);
+    margin:clamp(28px,4vw,48px) 0 clamp(28px,3vw,40px);
+  }
+  .hero .sub{
+    max-width:540px;
+    font-size:clamp(17px,1.4vw,20px);
+    line-height:1.5;
+    color:var(--ink);
+    opacity:.76;
+    margin:0 0 clamp(28px,3vw,40px);
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-photo{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:4px;
+    overflow:hidden;
+    background:#222;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.02)}
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(12,11,10,.42) 100%);
+  }
+  .hero-photo .cap{
+    position:absolute;left:22px;bottom:20px;right:22px;
+    color:var(--cream);
+    font-family:var(--serif-2);font-style:italic;font-size:15px;letter-spacing:-.005em;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    opacity:.95;
+  }
+  .hero-photo .cap .yr{font-family:var(--sans);font-style:normal;font-size:11.5px;letter-spacing:.06em;opacity:.8}
+
+  .trust-strip{
+    margin-top:clamp(56px,8vw,104px);
+    padding:28px 0 0;
+    border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;
+  }
+  .trust-strip .lab{font-family:var(--serif-2);font-style:italic;font-size:16px;color:var(--stone)}
+  .trust-list{display:flex;flex-wrap:wrap;gap:8px 38px;font-family:var(--serif);font-size:clamp(18px,1.6vw,22px);letter-spacing:-.015em;font-weight:380}
+  .trust-list span{display:inline-flex;align-items:center;gap:18px}
+  .trust-list span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--terracotta);opacity:.6}
+  .trust-list span:last-child::after{display:none}
+  @media (max-width:720px){.trust-strip{grid-template-columns:1fr;gap:16px}}
+
+  /* --------------------- OPPORTUNITY --------------------- */
+  .opportunity{padding:clamp(72px,9vw,140px) 0;border-top:1px solid var(--rule)}
+  .opp-head{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(32px,6vw,96px);margin-bottom:clamp(56px,8vw,96px)}
+  .opp-head .lead-quote{
+    font-family:var(--serif);
+    font-weight:350;
+    font-size:clamp(28px,2.6vw,38px);
+    line-height:1.18;letter-spacing:-.018em;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .opp-head .lead-quote em{font-style:italic;color:var(--terracotta);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  @media (max-width:900px){.opp-head{grid-template-columns:1fr;gap:24px}}
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .stat{
+    padding:clamp(36px,4vw,56px) clamp(28px,2.4vw,40px);
+    border-right:1px solid var(--rule);
+    position:relative;
+    display:flex;flex-direction:column;gap:0;
+    min-height:260px;
+  }
+  .stat:first-child{padding-left:0}
+  .stat:last-child{border-right:0;padding-right:0}
+  .stat .kicker{
+    font-family:var(--serif-2);font-style:italic;font-size:15px;color:var(--terracotta);
+    margin-bottom:18px;letter-spacing:-.005em;
+  }
+  .stat .n{
+    font-family:var(--serif);
+    font-weight:340;
+    font-size:clamp(64px,7.4vw,116px);
+    line-height:.92;letter-spacing:-.045em;
+    font-variation-settings:"opsz" 144, "SOFT" 30;
+    color:var(--ink);
+    display:flex;align-items:baseline;gap:4px;
+  }
+  .stat .n .unit{
+    font-family:var(--serif);font-style:italic;
+    font-size:.32em;font-weight:380;
+    color:var(--terracotta);letter-spacing:-.01em;
+    font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-left:6px;
+    transform:translateY(-.38em);
+    display:inline-block;
+    line-height:1;
+  }
+  .stat .lbl{
+    margin-top:22px;
+    font-size:15px;line-height:1.5;
+    color:var(--ink);opacity:.72;max-width:24ch;
+  }
+  @media (max-width:900px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat{border-right:0;border-bottom:1px solid var(--rule);padding:clamp(28px,3.5vw,40px) clamp(20px,2.4vw,28px)}
+    .stat:first-child,.stat:nth-child(3){padding-left:0}
+    .stat:nth-child(odd){border-right:1px solid var(--rule)}
+    .stat:nth-child(n+3){padding-bottom:0;border-bottom:0}
+    .stat:last-child{padding-right:0}
+  }
+  @media (max-width:560px){
+    .stats{grid-template-columns:1fr}
+    .stat,.stat:nth-child(odd){border-right:0;border-bottom:1px solid var(--rule);padding:32px 0}
+    .stat:last-child{border-bottom:0;padding-bottom:0}
+    .stat:first-child{padding-top:0}
+  }
+
+  /* --------------------- THE GAP --------------------- */
+  .gap{padding:clamp(72px,9vw,140px) 0;background:var(--bone);border-top:1px solid var(--rule)}
+  .gap-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+  .gap-head p{max-width:440px;color:var(--ink);opacity:.78;font-size:17px}
+  @media (max-width:900px){.gap-head{grid-template-columns:1fr}}
+
+  .gap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+  .gap-col{padding:clamp(28px,3vw,40px) clamp(24px,2.5vw,36px) clamp(28px,3vw,40px) 0;border-right:1px solid var(--rule);position:relative}
+  .gap-col:not(:first-child){padding-left:clamp(24px,2.5vw,36px)}
+  .gap-col:last-child{border-right:0;padding-right:0}
+  .gap-col .num{
+    font-family:var(--serif-2);font-style:italic;font-size:17px;
+    color:var(--terracotta);margin-bottom:32px;display:flex;align-items:baseline;gap:14px;
+    letter-spacing:-.005em;
+  }
+  .gap-col .num b{font-family:var(--serif);font-weight:360;font-style:italic;font-size:22px;color:var(--terracotta);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .gap-col .num span{color:var(--stone);font-size:15px;opacity:.9}
+  .gap-col h3{
+    font-family:var(--serif);font-weight:380;letter-spacing:-.015em;
+    font-size:clamp(22px,2vw,28px);line-height:1.2;margin:0 0 14px;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .gap-col h3 em{font-style:italic;color:var(--terracotta);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .gap-col p{margin:0;color:var(--ink);opacity:.75;font-size:15.5px;line-height:1.55;max-width:36ch}
+  @media (max-width:900px){.gap-grid{grid-template-columns:1fr}.gap-col{border-right:0;border-bottom:1px solid var(--rule);padding-right:0}.gap-col:last-child{border-bottom:0}}
+
+  /* --------------------- ROLE --------------------- */
+  .role{padding:clamp(72px,9vw,140px) 0;border-top:1px solid var(--rule)}
+  .role-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+  .role-head p{max-width:460px;color:var(--ink);opacity:.78;font-size:17px}
+  @media (max-width:900px){.role-head{grid-template-columns:1fr}}
+
+  .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,22px)}
+  @media (max-width:900px){.role-grid{grid-template-columns:1fr}}
+  .role-card{
+    border:1px solid var(--rule);
+    border-radius:6px;
+    padding:clamp(32px,3vw,44px);
+    display:flex;flex-direction:column;gap:20px;
+    min-height:460px;
+    transition:transform .6s cubic-bezier(.2,.6,.2,1), border-color .4s;
+    position:relative;overflow:hidden;
+    isolation:isolate;
+  }
+  .role-card::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(155deg, #FAF5E9 0%, #F4EBDA 48%, #E8DAC0 100%);
+  }
+  .role-card.tint-1::before{
+    background:linear-gradient(155deg, #FAF3E2 0%, #F0DCC1 50%, #E3C39A 100%);
+  }
+  .role-card.tint-2::before{
+    background:linear-gradient(155deg, #F3EEE0 0%, #DDE8DD 48%, #B9D0C0 100%);
+  }
+  .role-card.tint-3::before{
+    background:linear-gradient(155deg, #F7EBDE 0%, #EDC9B0 50%, #D99672 100%);
+  }
+  .role-card::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(ellipse at 85% 110%, rgba(180,74,30,.15), transparent 55%);
+    opacity:0;transition:opacity .6s ease;
+  }
+  .role-card:hover{transform:translateY(-6px);border-color:var(--ink)}
+  .role-card:hover::after{opacity:1}
+  .role-card .num-big{
+    font-family:var(--serif);font-weight:280;
+    font-size:clamp(80px,7.6vw,120px);line-height:.88;
+    font-variation-settings:"opsz" 144, "SOFT" 60, "WONK" 1;
+    font-style:italic;
+    color:var(--ink);
+    letter-spacing:-.05em;
+    margin-bottom:8px;
+  }
+  .role-card h3{
+    font-family:var(--serif);font-weight:400;letter-spacing:-.02em;
+    font-size:clamp(26px,2.4vw,34px);line-height:1.05;margin:0;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+    color:var(--ink);
+  }
+  .role-card p{margin:0;color:var(--ink);opacity:.72;font-size:15.5px;line-height:1.6;max-width:36ch}
+  .role-card .tag-row{
+    margin-top:auto;padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid rgba(11,11,12,.14);
+  }
+  .role-card .tag-row .lab{
+    font-family:var(--serif-2);font-style:italic;font-size:15px;color:var(--ink);opacity:.72;
+  }
+  .role-card .tag-row .arr{
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid rgba(11,11,12,.2);
+    display:grid;place-items:center;
+    transition:background .3s, color .3s, border-color .3s, transform .3s;
+    color:var(--ink);
+    background:transparent;
+  }
+  .role-card:hover .tag-row .arr{background:var(--ink);color:var(--cream);border-color:var(--ink);transform:rotate(-45deg)}
+
+  /* --------------------- BIG PHOTO BAND --------------------- */
+  .band{
+    position:relative;
+    min-height:clamp(380px,48vw,640px);
+    background:#111;
+    overflow:hidden;
+    display:flex;align-items:flex-end;
+    border-top:1px solid var(--rule);
+  }
+  .band-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02)}
+  .band::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(12,11,10,.05) 40%, rgba(12,11,10,.72) 100%);
+  }
+  .band-inner{position:relative;z-index:2;width:100%;padding-block:clamp(40px,6vw,72px);color:var(--cream)}
+  .band-inner .eyebrow{color:var(--cream);opacity:.8}
+  .band-inner .eyebrow .tick{background:var(--ember)}
+  .band-inner h3{
+    font-family:var(--serif);font-weight:350;letter-spacing:-.02em;
+    font-size:clamp(36px,4.4vw,60px);line-height:1.05;margin:20px 0 0;
+    font-variation-settings:"opsz" 144, "SOFT" 30;
+    max-width:22ch;
+  }
+  .band-inner h3 em{font-style:italic;color:var(--ember);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+
+  /* --------------------- SERVICES --------------------- */
+  .services{padding:clamp(72px,9vw,140px) 0;background:var(--bone);border-top:1px solid var(--rule)}
+  .svc-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+  .svc-head p{max-width:460px;color:var(--ink);opacity:.78;font-size:17px}
+  @media (max-width:900px){.svc-head{grid-template-columns:1fr}}
+
+  .svc-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+  }
+  @media (max-width:980px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.svc-grid{grid-template-columns:1fr}}
+  .svc-card{
+    position:relative;
+    padding:clamp(28px,3vw,44px);
+    min-height:300px;
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    display:flex;flex-direction:column;gap:12px;
+    background:var(--bone);
+    transition:background .35s ease, color .35s ease;
+    overflow:hidden;
+  }
+  .svc-card .num{
+    font-family:var(--serif);font-style:italic;font-weight:380;
+    font-size:26px;letter-spacing:-.02em;
+    color:var(--terracotta);margin-bottom:48px;display:flex;align-items:baseline;gap:12px;
+    transition:color .35s ease;
+    font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .svc-card .num .lab{
+    font-family:var(--serif-2);font-style:italic;font-size:14px;color:var(--stone);
+    letter-spacing:-.005em;font-weight:400;
+  }
+  .svc-card h3{
+    font-family:var(--serif);font-weight:400;letter-spacing:-.02em;
+    font-size:clamp(22px,2.2vw,30px);line-height:1.1;margin:0;max-width:14ch;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .svc-card p{margin:8px 0 0;color:var(--ink);opacity:.72;font-size:15px;line-height:1.55;max-width:34ch;transition:color .35s, opacity .35s}
+  .svc-card .bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:20px}
+  .svc-card .pill{
+    font-family:var(--serif-2);font-style:italic;font-size:14.5px;letter-spacing:-.005em;
+    color:var(--stone);
+    display:inline-flex;align-items:center;gap:8px;
+    transition:color .35s;
+  }
+  .svc-card .pill::before{
+    content:"";width:6px;height:6px;border-radius:50%;background:var(--terracotta);
+    transition:background .35s;
+  }
+  .svc-card .arr{
+    width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--rule);transition:all .35s cubic-bezier(.2,.6,.2,1);
+  }
+  .svc-card:hover{background:var(--ink);color:var(--cream)}
+  .svc-card:hover .num{color:var(--ember)}
+  .svc-card:hover .num .lab{color:var(--cream);opacity:.7}
+  .svc-card:hover p{opacity:.82;color:var(--cream)}
+  .svc-card:hover .pill{color:var(--cream);opacity:.85}
+  .svc-card:hover .pill::before{background:var(--ember)}
+  .svc-card:hover .arr{background:var(--ember);border-color:var(--ember);color:var(--ink);transform:rotate(-45deg)}
+  .svc-card:hover h3 em{color:var(--ember)}
+  .svc-card h3 em{font-style:italic;color:var(--terracotta);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1;transition:color .35s}
+
+  /* --------------------- WHO WE WORK WITH --------------------- */
+  .who{padding:clamp(72px,9vw,140px) 0;border-top:1px solid var(--rule)}
+  .who-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+  .who-head p{max-width:460px;color:var(--ink);opacity:.78;font-size:17px}
+  @media (max-width:900px){.who-head{grid-template-columns:1fr}}
+
+  .who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.6vw,20px)}
+  @media (max-width:1060px){.who-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.who-grid{grid-template-columns:1fr}}
+  .who-card{
+    position:relative;overflow:hidden;border-radius:4px;
+    aspect-ratio:3/4;background:#222;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:24px;color:var(--cream);
+  }
+  .who-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:saturate(.85) contrast(1.02);transition:transform .8s cubic-bezier(.2,.6,.2,1)}
+  .who-card::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(12,11,10,.1) 35%, rgba(12,11,10,.78) 100%);
+  }
+  .who-card:hover img{transform:scale(1.04)}
+  .who-card .inner{position:relative;z-index:2}
+  .who-card .idx{font-family:var(--serif-2);font-style:italic;font-size:15px;opacity:.85;margin-bottom:14px;color:var(--ember)}
+  .who-card h3{
+    font-family:var(--serif);font-weight:420;letter-spacing:-.02em;
+    font-size:clamp(24px,2vw,28px);line-height:1.08;margin:0;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .who-card p{margin:12px 0 0;font-size:14px;line-height:1.55;opacity:.9;max-width:28ch}
+  .who-card .top-tag{
+    position:absolute;top:22px;left:22px;z-index:3;
+    font-family:var(--serif-2);font-style:italic;font-size:14.5px;
+    color:var(--cream);opacity:.88;
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .who-card .top-tag::before{
+    content:"";width:6px;height:6px;border-radius:50%;background:var(--ember);
+  }
+
+  /* --------------------- PROCESS --------------------- */
+  .process{padding:clamp(72px,9vw,140px) 0;background:var(--forest);color:var(--cream);border-top:1px solid var(--rule-d-2);position:relative;overflow:hidden}
+  .process::before{
+    content:"";position:absolute;inset:0;opacity:.08;pointer-events:none;
+    background-image:radial-gradient(circle at 20% 0%, rgba(214,106,43,.6), transparent 50%),radial-gradient(circle at 80% 100%, rgba(194,154,78,.45), transparent 50%);
+  }
+  .process .eyebrow{color:var(--cream);opacity:.8}
+  .process .eyebrow .tick{background:var(--ember)}
+  .process-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(56px,7vw,96px)}
+  .process-head h2{color:var(--cream)}
+  .process-head h2 em{color:var(--ember)}
+  .process-head p{max-width:420px;color:var(--cream);opacity:.76;font-size:17px;margin:0}
+  @media (max-width:900px){.process-head{grid-template-columns:1fr}}
+
+  .steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-top:1px solid var(--rule-d-2);
+  }
+  @media (max-width:900px){.steps{grid-template-columns:1fr}}
+  .step{padding:clamp(28px,3vw,44px) clamp(24px,2.2vw,32px) clamp(28px,3vw,44px) 0;border-right:1px solid var(--rule-d-2);position:relative}
+  .step+.step{padding-left:clamp(24px,2.2vw,32px)}
+  .step:last-child{border-right:0;padding-right:0}
+  @media (max-width:900px){.step{border-right:0;border-bottom:1px solid var(--rule-d-2);padding-right:0}.step:last-child{border-bottom:0}}
+  .step .ix{
+    font-family:var(--serif-2);font-style:italic;font-size:16px;letter-spacing:-.005em;
+    color:var(--ember);display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;
+  }
+  .step .ix b{font-family:var(--serif);font-weight:360;font-style:italic;font-size:20px;margin-right:10px;font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .step .ix .dot{width:8px;height:8px;border-radius:50%;background:var(--ember);position:relative}
+  .step .ix .dot::after{
+    content:"";position:absolute;left:50%;top:50%;width:28px;height:28px;border-radius:50%;border:1px solid var(--ember);transform:translate(-50%,-50%);opacity:.4;
+    animation:ringpulse 2.4s ease-in-out infinite;
+  }
+  @keyframes ringpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.4}50%{transform:translate(-50%,-50%) scale(1.4);opacity:0}}
+  .step h3{
+    font-family:var(--serif);font-weight:380;letter-spacing:-.015em;
+    font-size:clamp(28px,3vw,42px);line-height:1;margin:0 0 14px;color:var(--cream);
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .step h3 em{font-style:italic;color:var(--ember);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .step p{margin:0;color:var(--cream);opacity:.72;font-size:14.5px;line-height:1.55;max-width:32ch}
+
+  /* --------------------- QUOTE --------------------- */
+  .quote{padding:clamp(72px,9vw,140px) 0;border-top:1px solid var(--rule)}
+  .quote-grid{display:grid;grid-template-columns:.8fr 1.6fr;gap:clamp(32px,6vw,96px);align-items:center}
+  @media (max-width:900px){.quote-grid{grid-template-columns:1fr}}
+  .quote-mark{
+    font-family:var(--serif);font-weight:300;font-size:clamp(120px,18vw,240px);line-height:.6;
+    color:var(--terracotta);font-style:italic;
+    font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1;
+    transform:translateX(-6px);
+  }
+  .quote-text{
+    font-family:var(--serif);font-weight:350;
+    font-size:clamp(26px,2.8vw,40px);line-height:1.14;letter-spacing:-.015em;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .quote-text em{font-style:italic;color:var(--terracotta);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .quote-meta{margin-top:36px;display:flex;align-items:center;gap:16px;font-family:var(--serif-2);font-style:italic;font-size:15px;color:var(--stone);letter-spacing:-.005em}
+  .quote-meta i{width:36px;height:1px;background:var(--terracotta);opacity:.6;font-style:normal}
+
+  /* --------------------- INSIGHTS --------------------- */
+  .insights{padding:clamp(72px,9vw,140px) 0;background:var(--bone);border-top:1px solid var(--rule)}
+  .ins-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,6vw,96px);align-items:end;margin-bottom:clamp(48px,6vw,80px)}
+  .ins-head p{max-width:460px;color:var(--ink);opacity:.78;font-size:17px;margin:0}
+  @media (max-width:900px){.ins-head{grid-template-columns:1fr}}
+
+  .ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+  @media (max-width:900px){.ins-grid{grid-template-columns:1fr}}
+  .ins-card{
+    background:var(--cream);border:1px solid var(--rule);border-radius:6px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .5s cubic-bezier(.2,.6,.2,1), border-color .4s;
+  }
+  .ins-card:hover{transform:translateY(-6px);border-color:var(--ink)}
+  .ins-card .cover{aspect-ratio:16/10;overflow:hidden;background:#222;position:relative}
+  .ins-card .cover img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.6,.2,1);filter:saturate(.9) contrast(1.02)}
+  .ins-card:hover .cover img{transform:scale(1.05)}
+  .ins-card .cover .tag{
+    position:absolute;top:18px;left:18px;
+    padding:6px 14px;border-radius:100px;
+    background:var(--cream);color:var(--ink);
+    font-family:var(--serif-2);font-style:italic;font-size:14px;letter-spacing:-.005em;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .ins-card .cover .tag::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--terracotta)}
+  .ins-card .body{padding:clamp(22px,2vw,30px);display:flex;flex-direction:column;gap:12px;min-height:200px}
+  .ins-card .meta{font-family:var(--serif-2);font-style:italic;font-size:14px;color:var(--stone);display:flex;gap:10px;align-items:center}
+  .ins-card .meta span{display:inline-flex;align-items:center;gap:10px}
+  .ins-card .meta span:not(:last-child)::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--stone);opacity:.4;margin-left:10px}
+  .ins-card h3{
+    font-family:var(--serif);font-weight:400;letter-spacing:-.02em;
+    font-size:clamp(22px,1.9vw,28px);line-height:1.1;margin:0;
+    font-variation-settings:"opsz" 144, "SOFT" 40;
+  }
+  .ins-card p{margin:0;color:var(--ink);opacity:.72;font-size:14.5px;line-height:1.55}
+  .ins-card .row{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--rule-2)}
+  .ins-card .row .go{font-family:var(--serif-2);font-style:italic;font-size:15.5px;color:var(--ink)}
+  .ins-card .row .arr{
+    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--rule);transition:all .3s cubic-bezier(.2,.6,.2,1);color:var(--ink);
+  }
+  .ins-card:hover .row .arr{background:var(--ink);color:var(--cream);border-color:var(--ink);transform:rotate(-45deg)}
+
+  .ins-cta{display:flex;justify-content:space-between;align-items:center;margin-top:clamp(40px,5vw,64px);padding-top:32px;border-top:1px solid var(--rule);gap:24px;flex-wrap:wrap}
+  .ins-cta .t{font-family:var(--serif-2);font-style:italic;font-size:16px;color:var(--stone)}
+
+  /* --------------------- FINAL CTA --------------------- */
+  .cta{
+    padding:clamp(80px,12vw,180px) 0;
+    background:var(--ink);color:var(--cream);
+    position:relative;overflow:hidden;
+    border-top:1px solid var(--rule-d-2);
+  }
+  .cta::before{
+    content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:70vw;
+    background:radial-gradient(circle, rgba(214,106,43,.3), transparent 60%);
+    pointer-events:none;
+    filter:blur(8px);
+  }
+  .cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(32px,6vw,96px);align-items:end}
+  @media (max-width:900px){.cta-inner{grid-template-columns:1fr}}
+  .cta h2{
+    font-family:var(--serif);font-weight:320;letter-spacing:-.025em;color:var(--cream);
+    font-size:clamp(48px,6.6vw,108px);line-height:.98;margin:24px 0 0;
+    font-variation-settings:"opsz" 144, "SOFT" 30;
+  }
+  .cta h2 em{font-style:italic;color:var(--ember);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .cta p.lead{margin:20px 0 0;font-size:18px;line-height:1.5;color:var(--cream);opacity:.76;max-width:44ch}
+  .cta .aside{
+    padding:clamp(24px,2.4vw,32px);
+    border:1px solid var(--rule-d-2);border-radius:4px;
+    background:rgba(250,245,233,.04);
+    backdrop-filter:blur(10px);
+  }
+  .cta .aside .k{font-family:var(--serif-2);font-style:italic;font-size:15px;color:var(--ember);margin-bottom:16px;display:flex;align-items:center;gap:10px;letter-spacing:-.005em}
+  .cta .aside .k i{width:6px;height:6px;border-radius:50%;background:var(--ember);font-style:normal;animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(214,106,43,.6)}70%{box-shadow:0 0 0 10px rgba(214,106,43,0)}100%{box-shadow:0 0 0 0 rgba(214,106,43,0)}}
+  .cta .aside h3{font-family:var(--serif);font-weight:380;font-size:22px;line-height:1.25;margin:0 0 8px;color:var(--cream);font-variation-settings:"opsz" 144, "SOFT" 40}
+  .cta .aside p{margin:0 0 20px;color:var(--cream);opacity:.75;font-size:14.5px}
+  .cta .aside .form{display:flex;gap:8px;border:1px solid var(--rule-d-2);border-radius:100px;padding:4px 4px 4px 16px;align-items:center}
+  .cta .aside .form input{flex:1;background:transparent;color:var(--cream);border:0;outline:0;font-family:var(--sans);font-size:14px;padding:8px 0}
+  .cta .aside .form input::placeholder{color:rgba(250,245,233,.5)}
+  .cta .aside .form button{background:var(--ember);color:var(--ink);padding:10px 18px;border-radius:100px;font-size:13px}
+  .cta .aside .form button:hover{background:var(--cream)}
+
+  .cta-ctas{margin-top:40px;display:flex;gap:12px;flex-wrap:wrap}
+  .cta .btn-light{background:var(--cream);color:var(--ink)}
+  .cta .btn-light:hover{background:var(--ember);color:var(--ink)}
+  .cta .btn-outline{background:transparent;border:1px solid var(--rule-d);color:var(--cream)}
+  .cta .btn-outline:hover{border-color:var(--cream)}
+  .cta .second{margin-top:24px;font-size:14px;color:var(--cream);opacity:.65}
+
+  /* --------------------- FOOTER --------------------- */
+  .foot{background:var(--coal);color:var(--cream);padding:clamp(56px,7vw,96px) 0 36px;position:relative}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(24px,3vw,48px);margin-bottom:64px}
+  @media (max-width:900px){.foot-top{grid-template-columns:1fr 1fr}}
+  @media (max-width:540px){.foot-top{grid-template-columns:1fr}}
+  .foot .brand-f{display:flex;flex-direction:column;gap:16px;max-width:360px}
+  .foot .brand-f .logo{display:flex;align-items:baseline;gap:12px}
+  .foot .brand-f .logo .mark{
+    width:38px;height:38px;border-radius:50%;background:var(--cream);color:var(--ink);
+    display:grid;place-items:center;
+    font-family:var(--serif);font-style:italic;font-size:24px;
+    font-variation-settings:"opsz" 144, "SOFT" 40, "WONK" 1;
+    align-self:center;transform:translateY(-1px);
+  }
+  .foot .brand-f .name{font-family:var(--serif);font-weight:400;font-size:26px;color:var(--cream);font-variation-settings:"opsz" 144, "SOFT" 40}
+  .foot .brand-f .name em{font-style:italic;color:var(--ember)}
+  .foot .brand-f p{margin:0;color:var(--cream);opacity:.68;font-size:14.5px;line-height:1.5}
+  .foot-col h4{font-family:var(--serif-2);font-style:italic;font-size:16px;color:var(--ember);margin:0 0 20px;font-weight:400;letter-spacing:-.005em}
+  .foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+  .foot-col ul a{font-size:14.5px;color:var(--cream);opacity:.78;transition:opacity .2s}
+  .foot-col ul a:hover{opacity:1;color:var(--ember)}
+  .foot-col .addr{font-size:14.5px;color:var(--cream);opacity:.78;line-height:1.55;font-style:normal;margin:0}
+  .foot-mid{
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
+    padding:28px 0;
+    border-top:1px solid var(--rule-d-2);border-bottom:1px solid var(--rule-d-2);
+  }
+  @media (max-width:720px){.foot-mid{grid-template-columns:1fr}}
+  .foot-mid .big{
+    font-family:var(--serif);font-weight:300;letter-spacing:-.025em;
+    font-size:clamp(40px,6vw,72px);line-height:1;color:var(--cream);
+    font-variation-settings:"opsz" 144, "SOFT" 30;
+  }
+  .foot-mid .big em{font-style:italic;color:var(--ember);font-variation-settings:"opsz" 144, "SOFT" 100, "WONK" 1}
+  .foot-mid .socials{display:flex;gap:10px}
+  .foot-mid .socials a{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--rule-d-2);
+    display:grid;place-items:center;transition:all .25s;color:var(--cream);
+  }
+  .foot-mid .socials a:hover{background:var(--ember);border-color:var(--ember);color:var(--ink);transform:translateY(-2px)}
+  .foot-mid .socials svg{width:16px;height:16px}
+
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:32px;font-family:var(--sans);font-size:13px;letter-spacing:.01em;color:var(--cream);opacity:.55}
+  .foot-bottom a:hover{color:var(--ember);opacity:1}
+
+  /* --------------------- GLOBAL RESPONSIVE TWEAKS --------------------- */
+  @media (max-width:560px){
+    body{padding-top:96px}
+    .nav{top:30px}
+    .hero h1{font-size:54px}
+    .stat .n{font-size:56px}
+    .quote-text{font-size:24px}
+  }
+
+  /* Flat — no shadows anywhere (global reset) */
+  .role-card, .ins-card, .who-card, .svc-card, .hero-photo, .cta, .cta .aside, .band{
+    box-shadow:none !important;
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true" data-scroll-sticky data-scroll-target="#top">
+  <div class="ticker-track">
+    <span><i></i>Bangladesh Market Entry</span>
+    <span><i></i>Investment Facilitation</span>
+    <span><i></i>Institutional Access</span>
+    <span><i></i>Strategic Matchmaking</span>
+    <span><i></i>Execution Support</span>
+    <span><i></i>Bangladesh Market Entry</span>
+    <span><i></i>Investment Facilitation</span>
+    <span><i></i>Institutional Access</span>
+    <span><i></i>Strategic Matchmaking</span>
+    <span><i></i>Execution Support</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Moddin home">
+      <span class="mark">M</span>
+      <span class="name">Modd<em>i</em>n</span>
+      <span class="tld">— BD / Global</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#why">Why Bangladesh</a>
+      <a href="#services">Services</a>
+      <a href="#who">Who We Work With</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Book an Intro Call <span class="arr">→</span></a>
+  </div>
+</header>
+
+<div data-scroll-container>
+<main data-scroll-section>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span>Bangladesh market entry &amp; investment facilitation</span></div>
+        <h1 class="display reveal" data-delay="1">
+          Bangladesh,<br/><em>Made Easier</em><br/>to Enter.
+        </h1>
+        <p class="sub reveal" data-delay="2">
+          Moddin helps global investors, companies, and institutions understand the market, access the right stakeholders, and move from interest to execution.
+        </p>
+        <div class="hero-ctas reveal" data-delay="3">
+          <a href="#contact" class="btn btn-dark">Talk to Moddin <span class="arr">→</span></a>
+          <a href="#why" class="btn btn-ghost">Explore Bangladesh</a>
+        </div>
+      </div>
+      <div class="hero-photo reveal" data-delay="2" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=1200&q=80" alt="Bangladesh industry" loading="eager" data-scroll data-scroll-speed="-1.6" />
+        <div class="cap">
+          <span>Dhaka · Chattogram · Mongla</span>
+          <span class="yr">2026 / 01</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-strip reveal" data-delay="4">
+      <span class="lab">What we do</span>
+      <div class="trust-list">
+        <span>Market Intelligence</span>
+        <span>Institutional Access</span>
+        <span>Strategic Matchmaking</span>
+        <span>Execution Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY -->
+<section class="opportunity" id="why">
+  <div class="wrap">
+    <div class="opp-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">i.</span> <span>The Opportunity</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px">Why Bangladesh,<br/><em>Why Now.</em></h2>
+      </div>
+      <div class="lead-quote reveal" data-delay="2">
+        Bangladesh is no longer just a manufacturing story. It is becoming a serious market-entry and partnership destination for global businesses looking for <em>scale, cost competitiveness, and long-term growth</em>.
+      </div>
+    </div>
+
+    <div class="stats reveal" data-delay="1">
+      <div class="stat">
+        <div class="kicker">Population</div>
+        <div class="n" data-target="176" data-prefix="" data-suffix="m">176<span class="unit">m</span></div>
+        <div class="lbl">The 8th largest consumer base in the world.</div>
+      </div>
+      <div class="stat">
+        <div class="kicker">GDP</div>
+        <div class="n" data-target="450" data-prefix="$" data-suffix="bn">$450<span class="unit">bn</span></div>
+        <div class="lbl">Consistent mid-single-digit real growth over the past decade.</div>
+      </div>
+      <div class="stat">
+        <div class="kicker">Exports</div>
+        <div class="n" data-target="55" data-prefix="$" data-suffix="bn+">$55<span class="unit">bn+</span></div>
+        <div class="lbl">Led by textiles, leather, jute, and a fast-rising digital economy.</div>
+      </div>
+      <div class="stat">
+        <div class="kicker">Workforce</div>
+        <div class="n" data-target="8" data-prefix="" data-suffix="th">8<span class="unit">th</span></div>
+        <div class="lbl">Largest workforce globally, with deep industrial and technical depth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE GAP -->
+<section class="gap">
+  <div class="wrap">
+    <div class="gap-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">ii.</span> <span>The Gap</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px">High Potential.<br/><em>Still Hard to Unlock.</em></h2>
+      </div>
+      <p class="reveal" data-delay="2">Interest in Bangladesh is strong. Conversion into real investment and partnerships is where friction begins — and where Moddin comes in.</p>
+    </div>
+
+    <div class="gap-grid">
+      <div class="gap-col reveal">
+        <div class="num"><b>i.</b> <span>What Bangladesh already has</span></div>
+        <h3>Scale, <em>export strength</em>, industrial depth, and cost advantage.</h3>
+        <p>A proven manufacturing base, a young and ambitious workforce, and two decades of consistent export-led growth.</p>
+      </div>
+      <div class="gap-col reveal" data-delay="1">
+        <div class="num"><b>ii.</b> <span>What investors still face</span></div>
+        <h3>Fragmented access, regulatory <em>complexity</em>, and difficulty finding the right local pathways.</h3>
+        <p>Navigating ministries, chambers, and capital partners without trusted intermediaries slows every decision.</p>
+      </div>
+      <div class="gap-col reveal" data-delay="2">
+        <div class="num"><b>iii.</b> <span>What this leads to</span></div>
+        <h3>Delayed decisions, <em>missed opportunities</em>, and weaker market entry outcomes.</h3>
+        <p>Strong interest stalls short of execution — not because the thesis is wrong, but because the path isn't clear.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLE -->
+<section class="role">
+  <div class="wrap">
+    <div class="role-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">iii.</span> <span>Our Role</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px">Moddin Turns Interest<br/>Into <em>Action.</em></h2>
+      </div>
+      <p class="reveal" data-delay="2">Three capabilities, designed to work together. We shape the opportunity, open the right doors, and stay on the pitch until it converts.</p>
+    </div>
+
+    <div class="role-grid">
+      <article class="role-card tint-1 reveal">
+        <div class="num-big">01</div>
+        <h3>Position.</h3>
+        <p>Shape the opportunity with clear market narratives, sector context, and investor-ready materials.</p>
+        <div class="tag-row"><span class="lab">Market shaping</span><span class="arr">→</span></div>
+      </article>
+      <article class="role-card tint-2 reveal" data-delay="1">
+        <div class="num-big">02</div>
+        <h3>Connect.</h3>
+        <p>Open access to institutions, trade bodies, investors, and local partners who actually matter.</p>
+        <div class="tag-row"><span class="lab">Access &amp; relationships</span><span class="arr">→</span></div>
+      </article>
+      <article class="role-card tint-3 reveal" data-delay="2">
+        <div class="num-big">03</div>
+        <h3>Execute.</h3>
+        <p>Support market entry, partnerships, trade missions, and transaction pathways from first step to real outcome.</p>
+        <div class="tag-row"><span class="lab">On-ground delivery</span><span class="arr">→</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BAND -->
+<section class="band" aria-label="Field work">
+  <img class="band-img" src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=2000&q=80" alt="Bangladesh textile workers on factory floor" loading="lazy" data-scroll data-scroll-speed="-2" />
+  <div class="band-inner wrap">
+    <div class="eyebrow"><span class="tick"></span> <span>On the ground in Bangladesh</span></div>
+    <h3>We spend most of our week in <em>ports, boardrooms,</em> and ministries — not on slide decks.</h3>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="svc-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">iv.</span> <span>Services</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px">What <em>We Do.</em></h2>
+      </div>
+      <p class="reveal" data-delay="2">A focused set of capabilities across the market-entry arc — from first sector map to signed MOU to an operating presence in Dhaka.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc-card reveal">
+        <div class="num">01 <span class="lab">service</span></div>
+        <h3>Market Entry &amp; <em>Setup</em> Support</h3>
+        <p>Entry strategy, local navigation, regulatory guidance, and partner coordination.</p>
+        <div class="bottom"><span class="pill">For global companies</span><span class="arr">→</span></div>
+      </article>
+      <article class="svc-card reveal" data-delay="1">
+        <div class="num">02 <span class="lab">service</span></div>
+        <h3>Government &amp; <em>Institutional</em> Facilitation</h3>
+        <p>Coordination with ministries, agencies, trade bodies, and chambers.</p>
+        <div class="bottom"><span class="pill">For institutions</span><span class="arr">→</span></div>
+      </article>
+      <article class="svc-card reveal" data-delay="2">
+        <div class="num">03 <span class="lab">service</span></div>
+        <h3>Investor Outreach &amp; <em>Opportunity</em> Promotion</h3>
+        <p>Target mapping, strategic outreach, and curated opportunity visibility.</p>
+        <div class="bottom"><span class="pill">For promoters</span><span class="arr">→</span></div>
+      </article>
+      <article class="svc-card reveal">
+        <div class="num">04 <span class="lab">service</span></div>
+        <h3>JV, M&amp;A &amp; <em>Strategic</em> Matchmaking</h3>
+        <p>Qualified partner identification, alignment, and relationship facilitation.</p>
+        <div class="bottom"><span class="pill">For investors</span><span class="arr">→</span></div>
+      </article>
+      <article class="svc-card reveal" data-delay="1">
+        <div class="num">05 <span class="lab">service</span></div>
+        <h3>Deal Structuring &amp; <em>Market</em> Positioning</h3>
+        <p>Opportunity packaging, due diligence support, and market-facing positioning.</p>
+        <div class="bottom"><span class="pill">For funds &amp; corporates</span><span class="arr">→</span></div>
+      </article>
+      <article class="svc-card reveal" data-delay="2">
+        <div class="num">06 <span class="lab">service</span></div>
+        <h3>Expos, Summits &amp; <em>Trade</em> Missions</h3>
+        <p>High-impact engagements built around curation, agenda, sponsorship, and execution.</p>
+        <div class="bottom"><span class="pill">For agencies</span><span class="arr">→</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section class="who" id="who">
+  <div class="wrap">
+    <div class="who-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">v.</span> <span>Partners</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px">Who <em>We Work With.</em></h2>
+      </div>
+      <p class="reveal" data-delay="2">Four kinds of partners typically come to Moddin. Each gets a different path — same discipline, same people on the ground.</p>
+    </div>
+
+    <div class="who-grid">
+      <article class="who-card reveal">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80" alt="Global corporates in a boardroom" loading="lazy" />
+        <span class="top-tag">Global</span>
+        <div class="inner">
+          <div class="idx">For companies</div>
+          <h3>Global Companies</h3>
+          <p>Exploring sourcing, expansion, regional strategy, and operational setup in Bangladesh.</p>
+        </div>
+      </article>
+      <article class="who-card reveal" data-delay="1">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Investors reviewing analytics" loading="lazy" />
+        <span class="top-tag">Capital</span>
+        <div class="inner">
+          <div class="idx">For capital</div>
+          <h3>Investors &amp; Funds</h3>
+          <p>Capital looking at high-growth opportunities, partnerships, and long-term market access.</p>
+        </div>
+      </article>
+      <article class="who-card reveal" data-delay="2">
+        <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=900&q=80" alt="Government and institutional meeting" loading="lazy" />
+        <span class="top-tag">Public</span>
+        <div class="inner">
+          <div class="idx">For institutions</div>
+          <h3>Government &amp; Institutions</h3>
+          <p>Agencies, embassies, chambers, and development organizations supporting trade and investment flows.</p>
+        </div>
+      </article>
+      <article class="who-card reveal" data-delay="3">
+        <img src="https://images.unsplash.com/photo-1580136607317-ead5073ba6c8?auto=format&fit=crop&w=900&q=80" alt="Bangladesh industry and export business" loading="lazy" />
+        <span class="top-tag">Local</span>
+        <div class="inner">
+          <div class="idx">For BD firms</div>
+          <h3>Bangladeshi Companies</h3>
+          <p>Local firms seeking capital, global positioning, strategic partnerships, and cross-border growth.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="wrap">
+    <div class="process-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">vi.</span> <span>How We Work</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px;color:var(--cream)">Operational, not <em>abstract.</em></h2>
+      </div>
+      <p class="reveal" data-delay="2">Every engagement moves through four stages. We name them clearly so you always know where we are — and what's next.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="ix"><span><b>i.</b>Explore</span><span class="dot"></span></div>
+        <h3>Explore.</h3>
+        <p>Understand the market, the objective, and the opportunity.</p>
+      </div>
+      <div class="step reveal" data-delay="1">
+        <div class="ix"><span><b>ii.</b>Structure</span><span class="dot"></span></div>
+        <h3>Structure.</h3>
+        <p>Define the right entry path, stakeholder map, and partnership model.</p>
+      </div>
+      <div class="step reveal" data-delay="2">
+        <div class="ix"><span><b>iii.</b>Engage</span><span class="dot"></span></div>
+        <h3>Engage.</h3>
+        <p>Activate introductions, coordination, and opportunity development.</p>
+      </div>
+      <div class="step reveal" data-delay="3">
+        <div class="ix"><span><b>iv.</b>Execute</span><span class="dot"></span></div>
+        <h3>Execute.</h3>
+        <p>Move into setup, deal progress, and on-ground support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap">
+    <div class="quote-grid">
+      <div class="quote-mark reveal">“</div>
+      <div>
+        <div class="quote-text reveal" data-delay="1">
+          The deck is expansive. The website is <em>decisive.</em> Moddin sells clarity — fewer adjectives, more mechanics — so global partners move from interest to execution <em>faster</em>.
+        </div>
+        <div class="quote-meta reveal" data-delay="2"><i></i>Editorial principle · Moddin house style</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="insights" id="insights">
+  <div class="wrap">
+    <div class="ins-head">
+      <div>
+        <div class="eyebrow reveal"><span class="tick"></span> <span class="idx">vii.</span> <span>Insights</span></div>
+        <h2 class="section-title reveal" data-delay="1" style="margin-top:20px">Insights for Entering <em>Bangladesh.</em></h2>
+      </div>
+      <p class="reveal" data-delay="2">Practical resources designed to help investors and companies evaluate Bangladesh with more clarity.</p>
+    </div>
+
+    <div class="ins-grid">
+      <article class="ins-card reveal">
+        <div class="cover">
+          <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&w=900&q=80" alt="Dhaka port" loading="lazy" />
+          <span class="tag">Brief</span>
+        </div>
+        <div class="body">
+          <div class="meta"><span>Country brief</span><span>10 min read</span></div>
+          <h3>Bangladesh Opportunity Briefs</h3>
+          <p>Short, structured primers on where the market is going — and what that means for capital and partners.</p>
+          <div class="row"><span class="go">Read the series</span><span class="arr">→</span></div>
+        </div>
+      </article>
+      <article class="ins-card reveal" data-delay="1">
+        <div class="cover">
+          <img src="https://images.unsplash.com/photo-1590556409324-aa1d726e5c3c?auto=format&fit=crop&w=900&q=80" alt="Sector analytics and signals" loading="lazy" />
+          <span class="tag">Sectors</span>
+        </div>
+        <div class="body">
+          <div class="meta"><span>Sector notes</span><span>Quarterly</span></div>
+          <h3>Sector Notes &amp; Market Signals</h3>
+          <p>On-the-ground reads across textiles, digital, energy, logistics, agri, and financial services.</p>
+          <div class="row"><span class="go">See sector notes</span><span class="arr">→</span></div>
+        </div>
+      </article>
+      <article class="ins-card reveal" data-delay="2">
+        <div class="cover">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80" alt="Market entry planning" loading="lazy" />
+          <span class="tag">Guides</span>
+        </div>
+        <div class="body">
+          <div class="meta"><span>Guides</span><span>Checklists</span></div>
+          <h3>Market Entry Guides &amp; Checklists</h3>
+          <p>Step-by-step playbooks covering setup, licensing, partner selection, and first 180 days.</p>
+          <div class="row"><span class="go">Browse the guides</span><span class="arr">→</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="ins-cta reveal">
+      <span class="t">All insights in one place</span>
+      <a href="#" class="btn btn-ghost">View Insights <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta" id="contact">
+  <div class="wrap cta-inner">
+    <div>
+      <div class="eyebrow" style="color:var(--ember)"><span class="tick" style="background:var(--ember)"></span> <span class="idx" style="color:var(--ember)">viii.</span> <span>Contact</span></div>
+      <h2 class="reveal">Ready to explore<br/>Bangladesh with <em>more clarity?</em></h2>
+      <p class="lead reveal" data-delay="1">Whether you're evaluating market entry, partnerships, or investment pathways, Moddin helps you move with the right local context and execution support.</p>
+      <div class="cta-ctas reveal" data-delay="2">
+        <a href="mailto:hello@moddin.com" class="btn btn-light">Book an Intro Call <span class="arr">→</span></a>
+        <a href="mailto:hello@moddin.com" class="btn btn-outline">Send us a brief</a>
+      </div>
+      <div class="second reveal" data-delay="3">Or send us your brief and we'll point you to the right next step.</div>
+    </div>
+
+    <aside class="aside reveal" data-delay="1">
+      <div class="k"><i></i>Quick reply · &lt; 24 hrs</div>
+      <h3>Short on time? Get the one-pager.</h3>
+      <p>The Moddin primer on Bangladesh market entry — stats, sector highlights, and our working model — in a single PDF.</p>
+      <form class="form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent ✓'; this.querySelector('input').value='';">
+        <input type="email" placeholder="you@company.com" required />
+        <button type="submit">Send</button>
+      </form>
+    </aside>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="foot" data-scroll-section>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="brand-f">
+        <div class="logo">
+          <span class="mark">M</span>
+          <span class="name">Modd<em>i</em>n</span>
+        </div>
+        <p>A Bangladesh-based execution partner for global companies, investors, and institutions entering or scaling in the country.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#why">Why Bangladesh</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#who">Who We Work With</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Market Entry &amp; Setup</a></li>
+          <li><a href="#services">Institutional Facilitation</a></li>
+          <li><a href="#services">Investor Outreach</a></li>
+          <li><a href="#services">JV, M&amp;A, Matchmaking</a></li>
+          <li><a href="#services">Deal Structuring</a></li>
+          <li><a href="#services">Expos &amp; Trade Missions</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Office</h4>
+        <address class="addr">
+          Moddin<br/>
+          Dhaka, Bangladesh<br/><br/>
+          <a href="mailto:hello@moddin.com">hello@moddin.com</a><br/>
+          <a href="tel:+8801730035100">+880 1730 035 100</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="foot-mid">
+      <div class="big">Connecting Bangladesh<br/>to <em>global businesses.</em></div>
+      <div class="socials" aria-label="Social">
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="Mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Moddin · Dhaka, Bangladesh</span>
+      <span>Connecting Bangladesh to global businesses</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /data-scroll-container -->
+
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+<script>
+  // Nav show/hide + scroll state
+  const nav = document.querySelector('.nav');
+  let lastY = 0;
+  const handleNav = (y) => {
+    if (y > 40) nav.classList.add('is-scrolled'); else nav.classList.remove('is-scrolled');
+    if (y > lastY && y > 260) nav.classList.add('is-hidden');
+    else nav.classList.remove('is-hidden');
+    lastY = y;
+  };
+
+  // Locomotive smooth scroll — only on pointer-fine + no reduced-motion
+  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const smooth = !prefersReduce && window.matchMedia('(pointer:fine)').matches && window.LocomotiveScroll;
+  let loco = null;
+
+  // Scroll reveal observer (shared)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  if (smooth) {
+    try {
+      loco = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true,
+        multiplier: 0.9,
+        lerp: 0.085,
+        smartphone: { smooth: false },
+        tablet: { smooth: false },
+      });
+      // anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if (id && id.length > 1 && document.querySelector(id)) {
+            e.preventDefault();
+            loco.scrollTo(document.querySelector(id), { offset: -100 });
+          }
+        });
+      });
+      loco.on('scroll', (args) => {
+        handleNav(args.scroll.y);
+      });
+      // Update once images load
+      window.addEventListener('load', () => setTimeout(() => loco.update(), 300));
+      window.addEventListener('resize', () => loco.update());
+    } catch (err) { loco = null; }
+  }
+  if (!loco) {
+    // Native scroll fallback
+    window.addEventListener('scroll', () => handleNav(window.scrollY), { passive: true });
+  }
+
+  // Stat counter animation — data-driven
+  const statEls = document.querySelectorAll('.stat .n[data-target]');
+  const statIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      statIO.unobserve(el);
+      const target = parseFloat(el.dataset.target);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const dur = 1600;
+      const start = performance.now();
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
+      const tick = (now) => {
+        const p = Math.min((now - start) / dur, 1);
+        const v = Math.round(target * ease(p));
+        el.innerHTML = `${prefix}${v}<span class="unit">${suffix}</span>`;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.innerHTML = `${prefix}${target}<span class="unit">${suffix}</span>`;
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+  statEls.forEach(el => statIO.observe(el));
+</script>
+</body>
+</html>

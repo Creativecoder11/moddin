@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where pdftoppm *)",
+      "Bash(pdftotext -layout \"C:/Users/jamroll/Documents/GitHub/moddin/Moddin Business Deck13April.pdf\" \"C:/Users/jamroll/Documents/GitHub/moddin/deck.txt\")",
+      "WebSearch",
+      "Bash(pnpm build *)",
+      "Bash(pnpm lint *)"
+    ]
+  }
+}
