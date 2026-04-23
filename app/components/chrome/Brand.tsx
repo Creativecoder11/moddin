@@ -1,40 +1,29 @@
-type BrandProps = {
-  /** When true, swaps to footer styling (cream mark, larger name). */
+import { type HTMLAttributes } from "react";
+
+type BrandProps = HTMLAttributes<HTMLAnchorElement> & {
   variant?: "nav" | "footer";
   showTld?: boolean;
 };
 
-/**
- * The Moddin wordmark. Used in nav (small, dark mark) and footer (large, cream mark).
- */
-export function Brand({ variant = "nav", showTld = true }: BrandProps) {
+export function Brand({ variant = "nav", showTld = true, className = "", ...rest }: BrandProps) {
   const isFooter = variant === "footer";
-  const markClasses = isFooter
-    ? "size-[38px] bg-cream text-ink"
-    : "size-9 bg-ink text-cream";
-  const nameSize = isFooter ? "text-[26px]" : "text-2xl";
 
   return (
     <a
       href="#top"
-      className="flex items-baseline gap-3 font-serif font-medium tracking-[-0.02em]"
+      className={`group flex items-baseline gap-[6px] font-serif transition-opacity hover:opacity-80 ${className}`}
       aria-label="Moddin home"
+      {...rest}
     >
       <span
-        className={`${markClasses} grid place-items-center self-center -translate-y-px rounded-full font-serif italic font-normal text-[22px]`}
-        style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40, "WONK" 1' }}
+        className={`text-[32px] leading-none tracking-[-0.04em] ${isFooter ? "text-cream" : "text-ink"}`}
+        style={{ fontVariationSettings: '"opsz" 144, "SOFT" 40, "WONK" 0' }}
       >
-        M
-      </span>
-      <span
-        className={`${nameSize} ${isFooter ? "text-cream font-normal" : ""}`}
-        style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
-      >
-        Modd<em className={`not-italic ${isFooter ? "italic text-ember font-normal" : ""}`} style={{ fontStyle: "italic", color: isFooter ? "var(--ember)" : "var(--terracotta)", fontWeight: 400 }}>i</em>n
+        Modd<em className={`italic ${isFooter ? "text-ember" : "text-terracotta"}`} style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}>i</em>n
       </span>
       {showTld && !isFooter && (
-        <span className="hidden md:inline self-center font-mono text-[10px] uppercase tracking-[0.2em] text-stone ml-1">
-          — BD / Global
+        <span className="hidden md:inline-block translate-y-[-4px] font-sans text-[9px] font-bold uppercase tracking-[0.25em] text-stone opacity-90">
+          bd
         </span>
       )}
     </a>

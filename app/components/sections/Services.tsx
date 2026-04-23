@@ -1,5 +1,6 @@
 import { Reveal } from "../ui/Reveal";
 import { SERVICES } from "@/app/data/site";
+import { ServiceIcons } from "../ui/BrandIcons";
 
 export function Services() {
   return (
@@ -26,19 +27,25 @@ export function Services() {
           {SERVICES.map((svc, i) => {
             // The original alternates delay 0/1/2 every row of three.
             const delay = (i % 3) as 0 | 1 | 2;
+            const Icon = ServiceIcons[svc.num];
             return (
               <Reveal
                 key={svc.num}
                 as="article"
                 delay={delay === 0 ? undefined : delay}
-                className="svc-card"
+                className="svc-card group"
               >
-                <div className="num">
+                {Icon && (
+                  <div className="absolute -bottom-16 -right-12 text-ink opacity-10 group-hover:text-cream group-hover:opacity-15 transition-all duration-700 ease-out pointer-events-none z-0 transform group-hover:scale-110 group-hover:-rotate-6">
+                    <Icon className="w-72 h-72 stroke-[1]" />
+                  </div>
+                )}
+                <div className="num relative z-10">
                   {svc.num} <span className="lab">service</span>
                 </div>
-                <h3 dangerouslySetInnerHTML={{ __html: svc.titleHTML }} />
-                <p>{svc.body}</p>
-                <div className="bottom">
+                <h3 className="relative z-10" dangerouslySetInnerHTML={{ __html: svc.titleHTML }} />
+                <p className="relative z-10">{svc.body}</p>
+                <div className="bottom relative z-10 mt-auto">
                   <span className="pill">{svc.pill}</span>
                   <span className="arr">→</span>
                 </div>

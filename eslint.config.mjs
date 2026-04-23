@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local agent worktrees and scratch output should not be linted as app code.
+    ".claude/**",
+    "tmp/**",
   ]),
 ]);
 
