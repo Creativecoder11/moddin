@@ -22,26 +22,33 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full bg-paper pt-[100px] md:pt-[130px] overflow-hidden min-h-[90vh] lg:min-h-screen flex flex-col">
-      {/* Background SVG Curve (The black swoosh) */}
-      <div className="absolute inset-0 z-0 pointer-events-none hidden lg:block overflow-hidden">
-        <svg 
-          className="absolute right-0 top-0 h-full w-auto min-w-[55vw] max-w-[65vw]" 
-          viewBox="0 0 1000 1000" 
-          preserveAspectRatio="none" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M0 0C250 150 150 400 350 650C500 837 800 900 1000 1000V0H0Z" fill="var(--ink)"/>
-          <path d="M350 650C500 837 800 900 1000 1000V500C800 400 550 550 350 650Z" fill="url(#hero-image-pattern)"/>
-          
-          <defs>
-            <pattern id="hero-image-pattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
-               {/* We will layer the image here via CSS/HTML to ensure parallax works, the SVG mask is just for the shape */}
-            </pattern>
-          </defs>
-        </svg>
-      </div>
+    <section className="relative w-full bg-paper pt-[100px] md:pt-[130px] min-h-[90vh] lg:min-h-screen flex flex-col">
+      {/* Inline SVG definitions for clip paths */}
+      <svg width="0" height="0" className="absolute hidden">
+        <defs>
+          <clipPath id="hero-curve-mask" clipPathUnits="objectBoundingBox">
+            {/* A smooth S-curve covering the right side. 
+                Starts top left, dips down, swoops right and down. */}
+            <path d="M0,1 
+                     C0.2,0.8 0.1,0.5 0.4,0.3 
+                     C0.6,0.1 0.8,0.1 1,0 
+                     L1,1 Z" />
+          </clipPath>
+          <clipPath id="hero-black-bg" clipPathUnits="objectBoundingBox">
+             {/* The solid black background shape extending further left */}
+             <path d="M0,0 
+                      C0.1,0.2 0.05,0.4 0.2,0.6 
+                      C0.4,0.9 0.7,0.95 1,1 
+                      L1,0 Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      {/* The solid black overarching shape for the right side */}
+      <div 
+        className="absolute right-0 top-0 bottom-0 w-full lg:w-[60%] bg-ink z-0 pointer-events-none hidden lg:block"
+        style={{ clipPath: 'url(#hero-black-bg)' }}
+      />
 
       <div className="wrap relative z-10 flex-grow flex flex-col justify-center">
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-8 relative pb-20 lg:pb-32 h-full">
@@ -87,11 +94,46 @@ export function Hero() {
           </div>
 
           {/* Right Column: Imagery & Floating Card */}
-          {/* We will implement the right column image mask and card in the next task */}
-          <div className="w-full lg:w-[50%] h-[50vh] lg:h-full lg:absolute lg:right-0 lg:top-0 relative z-10 pointer-events-none mt-8 lg:mt-0">
+          <div className="w-full lg:w-[50vw] lg:absolute lg:right-0 lg:top-0 lg:bottom-0 relative z-10 flex items-end lg:items-center justify-end lg:justify-start h-[500px] lg:h-auto mt-8 lg:mt-0">
+             
+             {/* The Image Container masked by the S-curve */}
+             <div 
+               className="absolute inset-0 right-0 lg:w-full h-full lg:h-[110%] lg:-top-[5%] overflow-hidden pointer-events-none rounded-2xl lg:rounded-none"
+               style={{ clipPath: 'url(#hero-curve-mask)' }}
+             >
+                <img 
+                  ref={imgRef}
+                  src={HERO_IMG} 
+                  alt="Bangladesh Market Horizon" 
+                  className="absolute inset-0 w-full h-full object-cover origin-center opacity-80"
+                />
+                
+                {/* Color cast overlay for the image */}
+                <div className="absolute inset-0 bg-amber-900/20 mix-blend-color" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-ink/30 mix-blend-multiply" />
+
+                {/* Map Connections Overlay Layer */}
+                <div className="absolute inset-0 z-20 overflow-hidden hidden lg:block opacity-60">
+                   <svg width="100%" height="100%" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice" fill="none">
+                      {/* Connection Arcs */}
+                      <path d="M400,300 Q200,100 100,400" stroke="rgba(255,255,255,0.4)" strokeWidth="1" fill="none" strokeDasharray="4 4" />
+                      <path d="M400,300 Q500,50 700,250" stroke="rgba(255,255,255,0.4)" strokeWidth="1" fill="none" />
+                      <path d="M400,300 Q600,400 750,600" stroke="rgba(255,255,255,0.4)" strokeWidth="1" fill="none" />
+                      
+                      {/* Highlighted Country/Region (Bangladesh approx) */}
+                      <circle cx="400" cy="300" r="8" fill="var(--terracotta)" />
+                      <circle cx="400" cy="300" r="16" fill="var(--terracotta)" opacity="0.3" className="animate-ping" />
+                      
+                      {/* Destination Nodes */}
+                      <circle cx="100" cy="400" r="4" fill="white" />
+                      <circle cx="700" cy="250" r="4" fill="white" />
+                      <circle cx="750" cy="600" r="4" fill="white" />
+                   </svg>
+                </div>
+             </div>
              
              {/* Data Card Float */}
-             <div className="absolute left-1/2 lg:-left-24 bottom-0 lg:bottom-[20%] -translate-x-1/2 lg:translate-x-0 p-8 rounded-[24px] bg-cream border border-[var(--rule-2)] w-[280px] pointer-events-auto shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-30">
+             <div className="absolute left-1/2 lg:left-[5%] bottom-0 lg:bottom-[20%] -translate-x-1/2 lg:translate-x-0 p-8 rounded-[24px] bg-cream border border-[var(--rule-2)] w-[280px] pointer-events-auto shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-30 group hover:-translate-y-2 transition-transform duration-500">
                 <div className="text-[13px] font-sans font-bold tracking-wide text-stone mb-2">Market Cap</div>
                 <div className="text-[56px] font-serif text-ink tracking-[-0.04em] leading-none mb-1">$460<span className="text-[40px] text-terracotta italic ml-[2px]">B</span></div>
                 <div className="mt-6 pt-4 border-t border-[var(--rule-2)] flex items-center gap-3">
