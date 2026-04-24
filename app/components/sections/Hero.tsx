@@ -11,11 +11,10 @@ export function Hero() {
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    // Elegant Parallax & scale on scroll
     const handleScroll = () => {
       if (!imgRef.current) return;
       const scrolled = window.scrollY;
-      imgRef.current.style.transform = `translateY(${scrolled * 0.12}px) scale(${1.05 + scrolled * 0.0003})`;
+      imgRef.current.style.transform = `translateY(${scrolled * 0.08}px) scale(${1.02 + scrolled * 0.0002})`;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -23,20 +22,32 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full overflow-visible bg-paper pt-[100px] md:pt-[130px] pb-0">
-      {/* Decorative Grid Lines Background for Editorial Polish */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage: "linear-gradient(to right, var(--ink) 1px, transparent 1px), linear-gradient(to bottom, var(--ink) 1px, transparent 1px)",
-          backgroundSize: "80px 80px"
-        }}
-      />
-      
-      <div className="wrap relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 relative min-h-[70vh] pb-10 lg:pb-16">
+    <section className="relative w-full bg-paper pt-[100px] md:pt-[130px] overflow-hidden min-h-[90vh] lg:min-h-screen flex flex-col">
+      {/* Background SVG Curve (The black swoosh) */}
+      <div className="absolute inset-0 z-0 pointer-events-none hidden lg:block overflow-hidden">
+        <svg 
+          className="absolute right-0 top-0 h-full w-auto min-w-[55vw] max-w-[65vw]" 
+          viewBox="0 0 1000 1000" 
+          preserveAspectRatio="none" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0C250 150 150 400 350 650C500 837 800 900 1000 1000V0H0Z" fill="var(--ink)"/>
+          <path d="M350 650C500 837 800 900 1000 1000V500C800 400 550 550 350 650Z" fill="url(#hero-image-pattern)"/>
+          
+          <defs>
+            <pattern id="hero-image-pattern" patternUnits="userSpaceOnUse" width="1000" height="1000">
+               {/* We will layer the image here via CSS/HTML to ensure parallax works, the SVG mask is just for the shape */}
+            </pattern>
+          </defs>
+        </svg>
+      </div>
+
+      <div className="wrap relative z-10 flex-grow flex flex-col justify-center">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-8 relative pb-20 lg:pb-32 h-full">
           
           {/* Left Column: Typography */}
-          <div className="flex-1 w-full max-w-[640px] z-20 relative mix-blend-normal">
+          <div className="flex-1 w-full max-w-[640px] z-20 relative mix-blend-normal pt-10 lg:pt-[10vh]">
             <Reveal delay={1} className="inline-flex items-center gap-3 mb-8 px-4 py-[8px] rounded-full border border-[var(--rule-2)] bg-cream backdrop-blur-sm">
                <span className="relative flex size-2">
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ember opacity-75"></span>
@@ -49,11 +60,11 @@ export function Hero() {
               Bangladesh, <br />
               <em className="italic text-terracotta relative inline-block mt-2" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}>
                 Decoded.
-                <svg className="absolute -bottom-4 left-0 w-[110%] h-auto text-terracotta opacity-[0.15] hidden md:block" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none"><path d="M0,10 Q100,-5 200,10" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
+                <svg className="absolute -bottom-4 left-0 w-[110%] h-auto text-terracotta opacity-[0.2]" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none"><path d="M0,10 Q100,-5 200,10" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
               </em>
             </Reveal>
             
-            <Reveal delay={3} className="max-w-[500px] mb-10">
+            <Reveal delay={3} className="max-w-[500px] mb-12">
               <p className="text-[clamp(20px,2.5vw,28px)] leading-[1.4] font-sans tracking-tight font-medium text-ink opacity-80 mb-5">
                 Complex markets demand clear pathways.
               </p>
@@ -75,76 +86,23 @@ export function Hero() {
             </Reveal>
           </div>
 
-          {/* Right Column: Imagery */}
-          <Reveal delay={5} className="w-full lg:w-[45%] h-[40vh] lg:h-[65vh] relative z-10 pointer-events-none mt-8 lg:mt-0 flex items-center justify-end">
-             <div className="w-full h-full relative overflow-hidden rounded-[24px] lg:rounded-l-[40px] bg-bone border border-[var(--rule-2)] pointer-events-auto">
-                <img 
-                  ref={imgRef}
-                  src={HERO_IMG} 
-                  alt="Bangladesh Market Horizon" 
-                  className="absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%] object-cover origin-center"
-                />
-                {/* Refined gradient overlay for depth */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-ink/40 via-transparent to-transparent mix-blend-multiply" />
-                <div className="absolute inset-0 bg-terracotta/5 mix-blend-color" />
-             </div>
+          {/* Right Column: Imagery & Floating Card */}
+          {/* We will implement the right column image mask and card in the next task */}
+          <div className="w-full lg:w-[50%] h-[50vh] lg:h-full lg:absolute lg:right-0 lg:top-0 relative z-10 pointer-events-none mt-8 lg:mt-0">
              
              {/* Data Card Float */}
-             <div className="absolute -left-6 lg:-left-12 bottom-12 lg:bottom-1/4 p-6 rounded-[20px] bg-cream/95 backdrop-blur-xl border border-[var(--rule-2)] w-[220px] pointer-events-auto group hover:-translate-y-2 transition-transform duration-500">
-                <div className="text-[12px] font-sans font-bold tracking-widest uppercase text-stone mb-3">Market Cap</div>
-                <div className="text-5xl font-serif text-ink tracking-[-0.04em]">$460<span className="text-3xl text-terracotta italic ml-[2px]">B</span></div>
-                <div className="mt-4 pt-4 border-t border-[var(--rule-2)] flex items-center gap-2">
-                  <div className="size-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-[11px] font-sans font-bold text-stone uppercase tracking-[0.15em]">Fastest Growing</span>
+             <div className="absolute left-1/2 lg:-left-24 bottom-0 lg:bottom-[20%] -translate-x-1/2 lg:translate-x-0 p-8 rounded-[24px] bg-cream border border-[var(--rule-2)] w-[280px] pointer-events-auto shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-30">
+                <div className="text-[13px] font-sans font-bold tracking-wide text-stone mb-2">Market Cap</div>
+                <div className="text-[56px] font-serif text-ink tracking-[-0.04em] leading-none mb-1">$460<span className="text-[40px] text-terracotta italic ml-[2px]">B</span></div>
+                <div className="mt-6 pt-4 border-t border-[var(--rule-2)] flex items-center gap-3">
+                  <div className="size-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                  <span className="text-[12px] font-sans font-medium text-stone tracking-[0.02em]">Fastest growing</span>
                 </div>
              </div>
-          </Reveal>
+          </div>
 
         </div>
       </div>
-
-      {/* High-Impact Editorial Ticker */}
-      <Reveal delay={5} className="w-full relative z-30 flex py-6 md:py-10 overflow-hidden border-y border-[var(--ink)] shadow-[0_12px_40px_rgba(11,11,12,0.15)]">
-        {/* Animated Complementary Gradient Background */}
-        <div 
-          className="absolute inset-0 z-0 opacity-95"
-          style={{
-            background: 'linear-gradient(90deg, var(--forest) 0%, var(--ink) 35%, var(--terracotta) 65%, var(--forest) 100%)',
-            backgroundSize: '200% 100%',
-            animation: 'gradient-flow 15s linear infinite'
-          }}
-        />
-        
-        <div className="flex gap-12 md:gap-24 min-w-full w-max animate-[scroll-left_35s_linear_infinite] items-center px-12 md:px-24 relative z-10">
-          {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-            <div key={i} className="flex items-center gap-12 md:gap-24 shrink-0 group">
-              <span 
-                className={`font-sans text-[clamp(28px,4vw,64px)] uppercase tracking-[0.08em] font-black whitespace-nowrap transition-transform duration-500 ease-out group-hover:scale-105 ${
-                  i % 2 === 0 
-                    ? 'text-cream drop-shadow-lg' 
-                    : 'text-transparent [-webkit-text-stroke:1.5px_var(--cream)] opacity-90'
-                }`}
-              >
-                {item}
-              </span>
-              {/* Minimalist Tech Separator */}
-              <div className="flex items-center justify-center text-brass opacity-80 group-hover:rotate-180 transition-transform duration-700 ease-out">
-                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square">
-                    <path d="M12 2v20M2 12h20" />
-                 </svg>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CSS for background flow */}
-        <style>{`
-          @keyframes gradient-flow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-          }
-        `}</style>
-      </Reveal>
     </section>
   );
 }
