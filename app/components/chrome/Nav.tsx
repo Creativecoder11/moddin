@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Brand } from "./Brand";
 import { NAV_LINKS } from "@/app/data/site";
-import { ButtonLink } from "../ui/Button";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,27 +32,32 @@ export function Nav() {
     >
       <div className="wrap flex items-center justify-between">
         <Brand className="flex-shrink-0" />
-        
-        <nav aria-label="Primary" className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-[48px]">
+
+        <nav aria-label="Primary" className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-[40px]">
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-[13px] font-sans font-medium text-ink/75 hover:text-terracotta transition-colors tracking-[0.04em] uppercase"
+              className="text-[15px] font-sans font-medium text-ink/85 hover:text-terracotta transition-colors tracking-[-0.005em]"
             >
               {l.label}
             </a>
           ))}
         </nav>
-        
+
         <div className="flex items-center flex-shrink-0">
-          <ButtonLink
+          <a
             href="#contact"
-            variant="dark"
-            className="whitespace-nowrap py-[12px] px-[26px] text-[12px] font-bold uppercase tracking-[0.15em]"
+            className="group inline-flex items-center gap-[14px] rounded-full bg-ink pl-[22px] pr-[6px] py-[6px] text-[14px] font-sans font-medium text-cream tracking-[0.005em] transition-all duration-[250ms] ease-out hover:bg-terracotta hover:-translate-y-px whitespace-nowrap"
+            style={{ color: "var(--cream)" }}
           >
-            Let&apos;s Talk
-          </ButtonLink>
+            <span className="py-[6px]">Partner With Us</span>
+            <span className="inline-flex items-center justify-center size-[34px] rounded-full bg-[color-mix(in_srgb,var(--cream)_14%,transparent)] transition-transform duration-[250ms] ease-out group-hover:translate-x-[2px]">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path d="M1 7 H13 M8 2 L13 7 L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
         </div>
       </div>
     </header>
