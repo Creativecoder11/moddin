@@ -14,10 +14,10 @@ import { FinalCta } from "./components/sections/FinalCta";
 export default function Home() {
   return (
     <>
-      <Ticker />
       <Nav />
       <main>
         <Hero />
+        <Ticker />
         <Opportunity />
         <Role />
         <PhotoBand />

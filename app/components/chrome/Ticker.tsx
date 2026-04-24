@@ -1,7 +1,7 @@
 import { TICKER_ITEMS } from "@/app/data/site";
 
 /**
- * Fixed mono-font ticker bar at the very top of the page.
+ * Mono-font ticker bar.
  * Items are doubled for a seamless CSS-keyframe loop.
  */
 export function Ticker() {
@@ -10,7 +10,7 @@ export function Ticker() {
     <>
       <div
         aria-hidden
-        className="fixed top-0 left-0 right-0 z-[51] h-[34px] flex items-center overflow-hidden bg-ink text-cream border-b border-[var(--rule-d-2)] font-mono text-[11px] uppercase tracking-[0.14em]"
+        className="relative w-full z-[51] h-[34px] flex items-center overflow-hidden bg-ink text-cream border-b border-[var(--rule-d-2)] font-mono text-[11px] uppercase tracking-[0.14em]"
       >
         <div className="flex gap-14 whitespace-nowrap animate-ticker">
           {items.map((label, i) => (

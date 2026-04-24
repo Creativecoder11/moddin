@@ -24,7 +24,7 @@ export function Nav() {
   return (
     <header
       className={[
-        "fixed top-[34px] left-0 right-0 z-50 transition-all duration-[600ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-[600ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
         scrolled
           ? "bg-[color-mix(in_srgb,var(--paper)_94%,transparent)] border-b border-[var(--rule-2)] py-[14px] backdrop-blur-[24px] backdrop-saturate-150"
           : "bg-transparent border-b border-transparent py-5",
