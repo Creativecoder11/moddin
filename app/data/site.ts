@@ -193,8 +193,8 @@ export const PARTNERS: Partner[] = [
     body: "Capital looking at high-growth opportunities, partnerships, and long-term market access.",
   },
   {
-    src: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=900&q=80",
-    alt: "Government and institutional meeting",
+    src: "/890c84c0-c673-48c9-836c-185287fdcecc-ezgif.com-resize.webp",
+    alt: "International flags outside a government institution",
     topTag: "Public",
     idx: "For institutions",
     title: "Government & Institutions",

@@ -23,7 +23,9 @@ export function Footer() {
           <div className="flex flex-col gap-4 max-w-[360px]">
             <Brand variant="footer" />
             <p className="text-cream/70 text-[14.5px] leading-[1.5]">
-              A partner to global businesses entering Bangladesh.
+              A partner to global businesses
+              <br />
+              entering Bangladesh.
             </p>
           </div>
 

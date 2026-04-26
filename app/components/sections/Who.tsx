@@ -19,8 +19,8 @@ export function Who() {
             </Reveal>
           </div>
           <Reveal as="p" delay={2}>
-            Four kinds of partners typically come to Moddin. Each gets a different
-            path — same discipline, same people on the ground.
+            Different partners, different objectives—supported by the same
+            structured approach and local capability.
           </Reveal>
         </div>
 

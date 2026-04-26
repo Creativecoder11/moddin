@@ -13,11 +13,27 @@ export function FinalCta() {
             </span>
             <span>Contact</span>
           </div>
-          <Reveal as="h2">
-            Explore Bangladesh&mdash;
-            <br />
-            With Clarity and <em>Confidence.</em>
-          </Reveal>
+          <h2
+            className="cta-title"
+            style={{
+              color: "var(--cream)",
+              fontSize: "clamp(26px, 4.2vw, 64px)",
+              lineHeight: 1,
+            }}
+          >
+            <span
+              className="cta-title-line"
+              style={{ display: "block", whiteSpace: "nowrap" }}
+            >
+              Explore Bangladesh With
+            </span>
+            <span
+              className="cta-title-line"
+              style={{ display: "block", whiteSpace: "nowrap" }}
+            >
+              Clarity and <em>Confidence.</em>
+            </span>
+          </h2>
           <Reveal as="p" delay={1} className="lead">
             Whether you&rsquo;re evaluating entry, partnerships, or investment, we help
             you move with the right local context and execution support.

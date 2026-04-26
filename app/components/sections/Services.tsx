@@ -133,8 +133,9 @@ export function Services() {
 
           <Reveal as="div" delay={2} className="svc-head__aside">
             <p className="svc-head__lead">
-              A focused set of capabilities across the market-entry arc — from
-              first sector map to signed MOU to an operating presence in Dhaka.
+              Four capabilities across the market-entry journey—from first
+              insight to signed partnership and operating presence in
+              Bangladesh.
             </p>
 
           </Reveal>
