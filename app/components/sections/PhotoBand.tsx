@@ -54,7 +54,6 @@ export function PhotoBand() {
         style={{ y: shouldReduceMotion ? 0 : textY }}
       >
         <div className="eyebrow">
-          <span className="tick" />
           <span>On the ground in Bangladesh</span>
         </div>
         <h3>

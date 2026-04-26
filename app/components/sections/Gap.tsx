@@ -8,8 +8,6 @@ export function Gap() {
         <div className="gap-head">
           <div>
             <Reveal className="eyebrow">
-              <span className="tick" />
-              <span className="idx">ii.</span>
               <span>The Gap</span>
             </Reveal>
             <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>

@@ -10,17 +10,15 @@ export function Insights() {
         <div className="ins-head">
           <div>
             <Reveal className="eyebrow">
-              <span className="tick" />
-              <span className="idx">vii.</span>
               <span>Insights</span>
             </Reveal>
             <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>
-              Insights for Entering <em>Bangladesh.</em>
+              Bangladesh Market <em>Insights.</em>
             </Reveal>
           </div>
           <Reveal as="p" delay={2}>
-            Practical resources designed to help investors and companies evaluate
-            Bangladesh with more clarity.
+            Practical insights, sector updates, and guides for companies and
+            investors evaluating Bangladesh.
           </Reveal>
         </div>
 

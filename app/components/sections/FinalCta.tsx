@@ -7,10 +7,6 @@ export function FinalCta() {
       <div className="wrap cta-inner">
         <div>
           <div className="eyebrow" style={{ color: "var(--ember)" }}>
-            <span className="tick" style={{ background: "var(--ember)" }} />
-            <span className="idx" style={{ color: "var(--ember)" }}>
-              viii.
-            </span>
             <span>Contact</span>
           </div>
           <h2

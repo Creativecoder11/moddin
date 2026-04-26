@@ -8,12 +8,13 @@ export function Quote() {
           <Reveal className="quote-mark">“</Reveal>
           <div>
             <Reveal delay={1} className="quote-text">
-              The deck is expansive. The website is <em>decisive.</em> Moddin sells
-              clarity — fewer adjectives, more mechanics — so global partners move
-              from interest to execution <em>faster</em>.
+              Clarity over complexity.
+              <br />
+              Fewer words, stronger direction—so global partners move from interest
+              to action faster.
             </Reveal>
             <Reveal delay={2} className="quote-meta">
-              <i /> Editorial principle · Moddin house style
+              <i /> Our approach · The Moddin way
             </Reveal>
           </div>
         </div>

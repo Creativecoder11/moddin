@@ -9,8 +9,6 @@ export function Opportunity() {
         <div className="opp-head">
           <div>
             <Reveal className="eyebrow">
-              <span className="tick" />
-              <span className="idx">i.</span>
               <span>The Opportunity</span>
             </Reveal>
             <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>

@@ -10,8 +10,6 @@ export function Who() {
         <div className="who-head">
           <div>
             <Reveal className="eyebrow">
-              <span className="tick" />
-              <span className="idx">v.</span>
               <span>Partners</span>
             </Reveal>
             <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>

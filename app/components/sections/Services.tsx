@@ -122,8 +122,6 @@ export function Services() {
         <div className="svc-head">
           <div className="svc-head__main">
             <Reveal className="eyebrow">
-              <span className="tick" />
-              <span className="idx">iv.</span>
               <span>Services</span>
             </Reveal>
             <Reveal as="h2" delay={1} className="section-title svc-h2">
