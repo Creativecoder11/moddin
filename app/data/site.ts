@@ -127,6 +127,7 @@ export const ROLES: Role[] = [
 export type Service = {
   num: string;
   label: string;
+  footerLabel: string;
   titleHTML: string;
   body: string;
   pill: string;
@@ -135,6 +136,7 @@ export const SERVICES: Service[] = [
   {
     num: "01",
     label: "Trade",
+    footerLabel: "Trade & Market Expansion",
     titleHTML: "Trade &amp; <em>Market</em> Expansion",
     body: "Enable cross-border trade through structured market access, sourcing alignment, and partner connections across Bangladesh’s industrial ecosystem.",
     pill: "For global companies",
@@ -142,6 +144,7 @@ export const SERVICES: Service[] = [
   {
     num: "02",
     label: "Investment",
+    footerLabel: "Investment & Deal Facilitation",
     titleHTML: "Investment &amp; <em>Deal</em> Facilitation",
     body: "Support investors from opportunity discovery to deal execution—covering partnerships, structuring, and market entry.",
     pill: "For investors & corporates",
@@ -149,6 +152,7 @@ export const SERVICES: Service[] = [
   {
     num: "03",
     label: "Branding",
+    footerLabel: "Country Branding & Positioning",
     titleHTML: "Country Branding &amp; <em>Positioning</em>",
     body: "Shape how Bangladesh is understood globally—through clear investment narratives, sector positioning, and investor-facing communication.",
     pill: "For governments & national platforms",
@@ -156,6 +160,7 @@ export const SERVICES: Service[] = [
   {
     num: "04",
     label: "Policy & Access",
+    footerLabel: "Policy & Institutional Access",
     titleHTML: "Policy &amp; <em>Institutional</em> Access",
     body: "Navigate regulatory pathways and unlock access to ministries, agencies, and key institutions—enabling smoother entry and execution.",
     pill: "For institutions & partners",
@@ -285,11 +290,9 @@ export const FOOTER_LINKS = {
     { href: "#contact", label: "Contact" },
   ],
   services: [
-    { href: "#services", label: "Market Entry & Setup" },
-    { href: "#services", label: "Institutional Facilitation" },
-    { href: "#services", label: "Investor Outreach" },
-    { href: "#services", label: "JV, M&A, Matchmaking" },
-    { href: "#services", label: "Deal Structuring" },
-    { href: "#services", label: "Expos & Trade Missions" },
+    ...SERVICES.map((service) => ({
+      href: "#services",
+      label: service.footerLabel,
+    })),
   ],
 } as const;
