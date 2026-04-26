@@ -94,7 +94,7 @@ export function Hero() {
               <span className="relative inline-flex rounded-full size-2 bg-terracotta" />
             </span>
             <span className="text-[12px] font-sans tracking-[0.16em] uppercase text-stone font-bold">
-              Strategic Market Entry
+              Moddin
             </span>
           </Reveal>
 

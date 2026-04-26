@@ -50,14 +50,14 @@ export function Nav() {
     <>
       <header
         className={[
-          "fixed top-[2rem] left-1/2 -translate-x-1/2 z-50 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "fixed top-[0.75rem] sm:top-[1rem] left-1/2 -translate-x-1/2 z-50 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
           "w-[calc(100vw-2rem)] lg:w-max max-w-[calc(100vw-2rem)] rounded-full",
-          "bg-[var(--paper)]",
+          "bg-ink text-cream",
           scrolled
-            ? "shadow-[0_8px_32px_-8px_rgba(11,11,12,0.08),0_2px_8px_-2px_rgba(11,11,12,0.04)]"
-            : "shadow-sm",
+            ? "shadow-[0_10px_36px_-12px_rgba(11,11,12,0.48),0_2px_10px_-4px_rgba(11,11,12,0.34)]"
+            : "shadow-[0_10px_26px_-18px_rgba(11,11,12,0.42)]",
           // Hide auto-scroll only when drawer is closed
-          !open && hidden ? "-translate-y-[calc(100%+3rem)] opacity-0 scale-[0.98]" : "translate-y-0 opacity-100 scale-100",
+          !open && hidden ? "-translate-y-[calc(100%+2rem)] opacity-0 scale-[0.98]" : "translate-y-0 opacity-100 scale-100",
         ].join(" ")}
       >
         <div className="flex items-center justify-between lg:justify-start w-full py-[6px] pl-[20px] pr-[6px] lg:pr-[6px] gap-[clamp(16px,4vw,64px)]">
@@ -69,9 +69,9 @@ export function Nav() {
           >
             {NAV_LINKS.map((l, i) => (
               <div key={l.label} className="flex items-center">
-                {i > 0 && <span className="w-[1px] h-[14px] bg-[var(--rule-2)] mx-[clamp(16px,2vw,32px)]" />}
+                {i > 0 && <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />}
                 <span
-                  className="flex items-center text-[14.5px] font-sans text-ink/75 whitespace-nowrap cursor-default"
+                  className="flex items-center text-[14.5px] font-sans text-cream/78 whitespace-nowrap cursor-default"
                 >
                   <span>{l.label}</span>
                 </span>
@@ -79,13 +79,13 @@ export function Nav() {
             ))}
 
             <div className="flex items-center">
-              <span className="w-[1px] h-[14px] bg-[var(--rule-2)] mx-[clamp(16px,2vw,32px)]" />
+              <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />
               <a
                 href="#contact"
-                className="inline-flex group relative items-center gap-[10px] rounded-full bg-ink overflow-hidden pl-[16px] pr-[5px] py-[5px] text-[13px] font-sans font-medium text-cream tracking-[0.01em] transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02]"
+                className="inline-flex group relative items-center gap-[10px] rounded-full bg-cream overflow-hidden pl-[16px] pr-[5px] py-[5px] text-[13px] font-sans font-medium text-ink tracking-[0.01em] transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02]"
               >
                 <span className="relative z-10 py-[2px]">Partner With Us</span>
-                <span className="relative z-10 flex items-center justify-center size-[28px] rounded-full bg-[color-mix(in_srgb,var(--cream)_16%,transparent)] text-cream transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-terracotta group-hover:-rotate-45">
+                <span className="relative z-10 flex items-center justify-center size-[28px] rounded-full bg-ink text-cream transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-terracotta group-hover:-rotate-45">
                   <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
                     <path d="M1 7H13M8 2L13 7L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -101,7 +101,7 @@ export function Nav() {
               aria-expanded={open}
               aria-controls="mobile-mega-menu"
               onClick={() => setOpen((v) => !v)}
-              className="relative inline-flex items-center justify-center size-[38px] sm:size-[40px] rounded-full border border-[var(--rule)] bg-[color-mix(in_srgb,var(--cream)_60%,transparent)] text-ink transition-colors hover:bg-ink hover:text-cream"
+              className="relative inline-flex items-center justify-center size-[38px] sm:size-[40px] rounded-full border border-[var(--rule-d)] bg-[color-mix(in_srgb,var(--cream)_10%,transparent)] text-cream transition-colors hover:bg-cream hover:text-ink"
             >
               <span className="sr-only">{open ? "Close" : "Menu"}</span>
               <span className="relative block w-[16px] h-[10px]" aria-hidden>

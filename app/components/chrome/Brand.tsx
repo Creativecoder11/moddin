@@ -22,7 +22,7 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
         height={isFooter ? 36 : 25}
         priority={!isFooter}
         sizes={isFooter ? "180px" : "128px"}
-        className={`object-contain ${isFooter ? "brightness-0 invert" : ""}`}
+        className="object-contain brightness-0 invert"
       />
     </a>
   );
