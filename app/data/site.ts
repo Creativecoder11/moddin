@@ -103,29 +103,30 @@ export type Role = {
 export const ROLES: Role[] = [
   {
     num: "01",
-    title: "Position.",
-    body: "Shape the opportunity with clear market narratives, sector context, and investor-ready materials.",
-    tag: "Market shaping",
+    title: "Position",
+    body: "We shape how Bangladesh is understood—through clear market narratives, sector insights, and investor-ready positioning.",
+    tag: "Opportunity Definition",
     tint: 1,
   },
   {
     num: "02",
-    title: "Connect.",
-    body: "Open access to institutions, trade bodies, investors, and local partners who actually matter.",
-    tag: "Access & relationships",
+    title: "Connect",
+    body: "We connect you to institutions, investors, and partners that matter—turning access into aligned opportunity.",
+    tag: "Strategic Access",
     tint: 2,
   },
   {
     num: "03",
-    title: "Execute.",
-    body: "Support market entry, partnerships, trade missions, and transaction pathways from first step to real outcome.",
-    tag: "On-ground delivery",
+    title: "Execute",
+    body: "We support market entry, partnerships, and transactions—ensuring progress from first step to measurable result.",
+    tag: "Execution & Delivery",
     tint: 3,
   },
 ];
 
 export type Service = {
   num: string;
+  label: string;
   titleHTML: string;
   body: string;
   pill: string;
@@ -133,39 +134,31 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     num: "01",
-    titleHTML: "Market Entry &amp; <em>Setup</em> Support",
-    body: "Entry strategy, local navigation, regulatory guidance, and partner coordination.",
+    label: "Trade",
+    titleHTML: "Trade &amp; <em>Market</em> Expansion",
+    body: "Enable cross-border trade through structured market access, sourcing alignment, and partner connections across Bangladesh’s industrial ecosystem.",
     pill: "For global companies",
   },
   {
     num: "02",
-    titleHTML: "Government &amp; <em>Institutional</em> Facilitation",
-    body: "Coordination with ministries, agencies, trade bodies, and chambers.",
-    pill: "For institutions",
+    label: "Investment",
+    titleHTML: "Investment &amp; <em>Deal</em> Facilitation",
+    body: "Support investors from opportunity discovery to deal execution—covering partnerships, structuring, and market entry.",
+    pill: "For investors & corporates",
   },
   {
     num: "03",
-    titleHTML: "Investor Outreach &amp; <em>Opportunity</em> Promotion",
-    body: "Target mapping, strategic outreach, and curated opportunity visibility.",
-    pill: "For promoters",
+    label: "Branding",
+    titleHTML: "Country Branding &amp; <em>Positioning</em>",
+    body: "Shape how Bangladesh is understood globally—through clear investment narratives, sector positioning, and investor-facing communication.",
+    pill: "For governments & national platforms",
   },
   {
     num: "04",
-    titleHTML: "JV, M&amp;A &amp; <em>Strategic</em> Matchmaking",
-    body: "Qualified partner identification, alignment, and relationship facilitation.",
-    pill: "For investors",
-  },
-  {
-    num: "05",
-    titleHTML: "Deal Structuring &amp; <em>Market</em> Positioning",
-    body: "Opportunity packaging, due diligence support, and market-facing positioning.",
-    pill: "For funds & corporates",
-  },
-  {
-    num: "06",
-    titleHTML: "Expos, Summits &amp; <em>Trade</em> Missions",
-    body: "High-impact engagements built around curation, agenda, sponsorship, and execution.",
-    pill: "For agencies",
+    label: "Policy & Access",
+    titleHTML: "Policy &amp; <em>Institutional</em> Access",
+    body: "Navigate regulatory pathways and unlock access to ministries, agencies, and key institutions—enabling smoother entry and execution.",
+    pill: "For institutions & partners",
   },
 ];
 

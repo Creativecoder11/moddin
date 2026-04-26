@@ -16,7 +16,14 @@ export function PhotoBand() {
           <span>On the ground in Bangladesh</span>
         </div>
         <h3>
-          We spend most of our week in <em>ports, boardrooms,</em> and ministries —
+          We spend most of
+          <br />
+          our week in
+          <br />
+          <em>ports, boardrooms,</em>
+          <br />
+          and <em>ministries</em> —
+          <br />
           not on slide decks.
         </h3>
       </div>

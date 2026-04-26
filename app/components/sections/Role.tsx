@@ -13,14 +13,14 @@ export function Role() {
               <span>Our Role</span>
             </Reveal>
             <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>
-              Moddin Turns Interest
+              Turning Market Interest <em>Into</em>
               <br />
-              Into <em>Action.</em>
+              <em>Real Outcomes.</em>
             </Reveal>
           </div>
           <Reveal as="p" delay={2}>
-            Three capabilities, designed to work together. We shape the opportunity,
-            open the right doors, and stay on the pitch until it converts.
+            A structured approach to move from opportunity to execution—clearly,
+            confidently, and at speed.
           </Reveal>
         </div>
 

@@ -43,7 +43,7 @@ function ServiceCard({
     >
       <header className="svc-card__head">
         <span className="svc-num">{svc.num}</span>
-        <span className="svc-card__lab">service</span>
+        <span className="svc-card__lab">{svc.label}</span>
         <span className="svc-rule" aria-hidden />
         <span className="svc-rule__dot" aria-hidden />
       </header>
@@ -124,20 +124,16 @@ export function Services() {
 
         <div className="svc-grid">
           {/* Row 1 */}
-          <ServiceCard svc={SERVICES[0]} delay={1} />
-          <PhotoCard photo={SERVICE_PHOTOS[0]} delay={2} />
-          <ServiceCard svc={SERVICES[1]} delay={2} />
-          <PhotoCard photo={SERVICE_PHOTOS[1]} delay={3} />
+          <PhotoCard photo={SERVICE_PHOTOS[0]} delay={1} />
+          <ServiceCard svc={SERVICES[0]} delay={2} />
+          <PhotoCard photo={SERVICE_PHOTOS[1]} delay={2} />
+          <ServiceCard svc={SERVICES[1]} delay={3} />
 
           {/* Row 2 */}
           <ServiceCard svc={SERVICES[2]} variant="dark" delay={1} />
-          <ServiceCard svc={SERVICES[3]} delay={2} />
           <PhotoCard photo={SERVICE_PHOTOS[2]} delay={2} />
-          <ServiceCard svc={SERVICES[4]} delay={3} />
-
-          {/* Row 3 */}
-          <PhotoCard photo={SERVICE_PHOTOS[3]} wide delay={1} />
-          <ServiceCard svc={SERVICES[5]} wide delay={2} />
+          <ServiceCard svc={SERVICES[3]} delay={2} />
+          <PhotoCard photo={SERVICE_PHOTOS[3]} delay={3} />
         </div>
       </div>
     </section>

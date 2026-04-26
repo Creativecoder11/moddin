@@ -8,41 +8,88 @@ import { ButtonLink } from "../ui/Button";
 const HERO_IMG = "/hero-bangladesh-network.webp";
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
+  const metricRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const section = sectionRef.current;
+    const image = imgRef.current;
+    const copy = copyRef.current;
+    const metric = metricRef.current;
+    if (!section || !image || !copy) return;
+
     let raf = 0;
     let pending = false;
-    const handleScroll = () => {
+
+    const reset = () => {
+      image.style.transform = "translate3d(0, 0, 0)";
+      copy.style.transform = "translate3d(0, 0, 0)";
+      if (metric) metric.style.transform = "translate3d(0, 0, 0)";
+    };
+
+    const update = () => {
+      pending = false;
+
+      if (reduceMotion.matches) {
+        reset();
+        return;
+      }
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+
+      if (rect.bottom < 0 || rect.top > viewportHeight) {
+        return;
+      }
+
+      const progress = Math.min(
+        Math.max((viewportHeight - rect.top) / (viewportHeight + rect.height), 0),
+        1
+      );
+      const centered = progress - 0.5;
+
+      image.style.transform = `translate3d(0, ${centered * 72}px, 0)`;
+      copy.style.transform = `translate3d(0, ${centered * -28}px, 0)`;
+      if (metric) {
+        metric.style.transform = `translate3d(0, ${centered * -44}px, 0)`;
+      }
+    };
+
+    const schedule = () => {
       if (pending) return;
       pending = true;
-      raf = requestAnimationFrame(() => {
-        pending = false;
-        const el = imgRef.current;
-        if (!el) return;
-        const y = window.scrollY;
-        if (y > window.innerHeight) return;
-        el.style.transform = `translate3d(0, ${y * 0.05}px, 0)`;
-      });
+      raf = requestAnimationFrame(update);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+
+    const handleMotionChange = () => schedule();
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    reduceMotion.addEventListener("change", handleMotionChange);
+    schedule();
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      reduceMotion.removeEventListener("change", handleMotionChange);
       cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       className="hero-section relative w-full overflow-hidden bg-paper -mt-[112px] max-[560px]:-mt-[96px]"
       aria-label="Bangladesh, Unlocked"
     >
       {/* Single full-bleed image. CSS handles mobile bg vs desktop right-column. */}
       <div
         ref={imgRef}
-        className="hero-image absolute inset-0 lg:inset-y-0 lg:right-0 lg:left-[52.38%] will-change-transform"
-        style={{ transform: "translateZ(0)" }}
+        className="hero-image absolute -inset-y-[8%] inset-x-0 lg:right-0 lg:left-[52.38%] will-change-transform"
+        style={{ transform: "translate3d(0, 0, 0)" }}
         aria-hidden
       >
         <Image
@@ -84,7 +131,10 @@ export function Hero() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] min-h-[100svh] lg:min-h-screen relative">
         {/* LEFT — typography */}
-        <div className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(140px,22vw,200px)] lg:pt-[clamp(160px,16vw,220px)] pb-[clamp(64px,12vw,140px)] lg:pb-[clamp(96px,12vw,160px)]">
+        <div
+          ref={copyRef}
+          className="hero-copy relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(140px,22vw,200px)] lg:pt-[clamp(160px,16vw,220px)] pb-[clamp(64px,12vw,140px)] lg:pb-[clamp(96px,12vw,160px)] will-change-transform"
+        >
           <Reveal
             delay={1}
             className="inline-flex self-start items-center gap-3 mb-[clamp(24px,4vw,40px)] px-4 py-[8px] rounded-full border border-[var(--rule-2)] bg-cream/95 backdrop-blur-sm lg:bg-cream lg:backdrop-blur-0"
@@ -174,33 +224,35 @@ export function Hero() {
         <div className="hidden lg:block" aria-hidden />
 
         {/* Floating Market Cap card — desktop only */}
-        <Reveal
-          delay={4}
-          className="absolute z-30 right-[100px] bottom-[100px] w-[320px] hidden lg:block"
+        <div
+          ref={metricRef}
+          className="absolute z-30 right-[100px] bottom-[100px] w-[320px] hidden lg:block will-change-transform"
         >
-          <div className="p-7 rounded-[24px] bg-cream border border-[var(--rule-2)] ring-1 ring-black/5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-transform duration-500">
-            <div className="text-[13px] font-sans font-semibold tracking-[0.01em] text-stone mb-3 uppercase">
-              Opportunity Size
+          <Reveal delay={4}>
+            <div className="p-7 rounded-[24px] bg-cream border border-[var(--rule-2)] ring-1 ring-black/5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-transform duration-500">
+              <div className="text-[13px] font-sans font-semibold tracking-[0.01em] text-stone mb-3 uppercase">
+                Opportunity Size
+              </div>
+              <div className="text-[64px] font-serif text-ink tracking-[-0.04em] leading-none">
+                $460
+                <span
+                  className="text-[44px] text-terracotta italic ml-[2px]"
+                  style={{
+                    fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1',
+                  }}
+                >
+                  B
+                </span>
+              </div>
+              <div className="mt-5 pt-4 border-t border-[var(--rule-2)] flex items-center gap-3">
+                <span className="size-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                <span className="text-[13px] font-sans font-medium text-stone tracking-[0.01em]">
+                  Fastest growing
+                </span>
+              </div>
             </div>
-            <div className="text-[64px] font-serif text-ink tracking-[-0.04em] leading-none">
-              $460
-              <span
-                className="text-[44px] text-terracotta italic ml-[2px]"
-                style={{
-                  fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1',
-                }}
-              >
-                B
-              </span>
-            </div>
-            <div className="mt-5 pt-4 border-t border-[var(--rule-2)] flex items-center gap-3">
-              <span className="size-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-              <span className="text-[13px] font-sans font-medium text-stone tracking-[0.01em]">
-                Fastest growing
-              </span>
-            </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
