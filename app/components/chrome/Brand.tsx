@@ -18,8 +18,10 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
       <Image
         src="/logo.png"
         alt="Moddin Logo"
-        width={isFooter ? 132 : 120}
-        height={isFooter ? 44 : 40}
+        width={isFooter ? 180 : 128}
+        height={isFooter ? 34 : 24}
+        priority={!isFooter}
+        sizes={isFooter ? "180px" : "128px"}
         className="object-contain"
       />
     </a>

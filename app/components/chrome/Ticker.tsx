@@ -10,7 +10,7 @@ export function Ticker() {
     <>
       <div
         aria-hidden
-        className="relative w-full z-[51] h-[34px] flex items-center overflow-hidden bg-ink text-cream border-b border-[var(--rule-d-2)] font-mono text-[11px] uppercase tracking-[0.14em]"
+        className="relative w-full z-10 h-[34px] flex items-center overflow-hidden bg-ink text-cream border-b border-[var(--rule-d-2)] font-mono text-[11px] uppercase tracking-[0.14em]"
       >
         <div className="flex gap-14 whitespace-nowrap animate-ticker">
           {items.map((label, i) => (

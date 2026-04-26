@@ -5,7 +5,28 @@
       "Bash(pdftotext -layout \"C:/Users/jamroll/Documents/GitHub/moddin/Moddin Business Deck13April.pdf\" \"C:/Users/jamroll/Documents/GitHub/moddin/deck.txt\")",
       "WebSearch",
       "Bash(pnpm build *)",
-      "Bash(pnpm lint *)"
+      "Bash(pnpm lint *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /tmp/moddin.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /tmp/moddin2.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl *)",
+      "Bash(python C:/Users/jamroll/Documents/GitHub/moddin/tmp/verify/verify_hero.py)",
+      "Bash(python C:/Users/jamroll/Documents/GitHub/moddin/tmp/verify/verify_sections.py)",
+      "Bash(npm install *)",
+      "Bash(cat C:\\\\\\\\Users\\\\\\\\jamroll\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\C--Users-jamroll-Documents-GitHub-moddin\\\\\\\\5adc8261-d465-4320-82c2-008f6f8ed5f6\\\\\\\\tasks\\\\\\\\bebmmppl7.output)",
+      "Bash(ls C:\\\\\\\\Users\\\\\\\\jamroll\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\C--Users-jamroll-Documents-GitHub-moddin\\\\\\\\5adc8261-d465-4320-82c2-008f6f8ed5f6\\\\\\\\tasks\\\\\\\\ *)",
+      "Bash(cat *)",
+      "Bash(grep -q \"npm error\" \"C:\\\\\\\\Users\\\\\\\\jamroll\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\C--Users-jamroll-Documents-GitHub-moddin\\\\\\\\5adc8261-d465-4320-82c2-008f6f8ed5f6\\\\\\\\tasks\\\\\\\\b0is2dty8.output\")",
+      "Bash(pnpm add *)",
+      "Bash(pnpm dev *)",
+      "Bash(grep -qE \"Ready in|error|Error|Compiled with errors|Failed to compile\" \"C:\\\\\\\\Users\\\\\\\\jamroll\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\C--Users-jamroll-Documents-GitHub-moddin\\\\\\\\5adc8261-d465-4320-82c2-008f6f8ed5f6\\\\\\\\tasks\\\\\\\\b3in4gi3k.output\")",
+      "Bash(ls \"C:\\\\\\\\Users\\\\\\\\jamroll\\\\\\\\Documents\\\\\\\\GitHub\\\\\\\\moddin\\\\\\\\.next\\\\\\\\dev\\\\\\\\logs\\\\\\\\\")",
+      "Bash(tail *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(taskkill //F //FI \"ImageName eq node.exe\")",
+      "Bash(npx next *)",
+      "Bash(npx eslint *)"
     ]
   }
 }
