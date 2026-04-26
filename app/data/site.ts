@@ -5,11 +5,10 @@
  */
 
 export const NAV_LINKS = [
-  { href: "#why", label: "Why Bangladesh" },
-  { href: "#services", label: "Services" },
-  { href: "#who", label: "Who We Work With" },
-  { href: "#insights", label: "Insights" },
-  { href: "#contact", label: "Contact" },
+  { label: "Trade" },
+  { label: "Investment" },
+  { label: "Branding" },
+  { label: "Policy & Access" },
 ] as const;
 
 export const TICKER_ITEMS = [
@@ -43,7 +42,7 @@ export const STATS: Stat[] = [
   },
   {
     kicker: "GDP",
-    value: 450,
+    value: 460,
     prefix: "$",
     suffix: "bn",
     label: "Consistent mid-single-digit real growth over the past decade.",
@@ -59,16 +58,23 @@ export const STATS: Stat[] = [
     kicker: "Workforce",
     value: 8,
     suffix: "th",
-    label: "Largest workforce globally, with deep industrial and technical depth.",
+    label:
+      "Largest workforce globally, with deep industrial and technical depth.",
   },
 ];
 
-export type GapItem = { num: string; label: string; titleHTML: string; body: string };
+export type GapItem = {
+  num: string;
+  label: string;
+  titleHTML: string;
+  body: string;
+};
 export const GAP_ITEMS: GapItem[] = [
   {
     num: "i.",
     label: "What Bangladesh already has",
-    titleHTML: "Scale, <em>export strength</em>, industrial depth, and cost advantage.",
+    titleHTML:
+      "Scale, <em>export strength</em>, industrial depth, and cost advantage.",
     body: "A proven manufacturing base, a young and ambitious workforce, and two decades of consistent export-led growth.",
   },
   {
@@ -87,7 +93,13 @@ export const GAP_ITEMS: GapItem[] = [
   },
 ];
 
-export type Role = { num: string; title: string; body: string; tag: string; tint: 1 | 2 | 3 };
+export type Role = {
+  num: string;
+  title: string;
+  body: string;
+  tag: string;
+  tint: 1 | 2 | 3;
+};
 export const ROLES: Role[] = [
   {
     num: "01",
@@ -112,7 +124,12 @@ export const ROLES: Role[] = [
   },
 ];
 
-export type Service = { num: string; titleHTML: string; body: string; pill: string };
+export type Service = {
+  num: string;
+  titleHTML: string;
+  body: string;
+  pill: string;
+};
 export const SERVICES: Service[] = [
   {
     num: "01",
@@ -197,10 +214,30 @@ export const PARTNERS: Partner[] = [
 
 export type Step = { num: string; label: string; title: string; body: string };
 export const STEPS: Step[] = [
-  { num: "i.", label: "Explore", title: "Explore.", body: "Understand the market, the objective, and the opportunity." },
-  { num: "ii.", label: "Structure", title: "Structure.", body: "Define the right entry path, stakeholder map, and partnership model." },
-  { num: "iii.", label: "Engage", title: "Engage.", body: "Activate introductions, coordination, and opportunity development." },
-  { num: "iv.", label: "Execute", title: "Execute.", body: "Move into setup, deal progress, and on-ground support." },
+  {
+    num: "i.",
+    label: "Explore",
+    title: "Explore.",
+    body: "Understand the market, the objective, and the opportunity.",
+  },
+  {
+    num: "ii.",
+    label: "Structure",
+    title: "Structure.",
+    body: "Define the right entry path, stakeholder map, and partnership model.",
+  },
+  {
+    num: "iii.",
+    label: "Engage",
+    title: "Engage.",
+    body: "Activate introductions, coordination, and opportunity development.",
+  },
+  {
+    num: "iv.",
+    label: "Execute",
+    title: "Execute.",
+    body: "Move into setup, deal progress, and on-ground support.",
+  },
 ];
 
 export type Insight = {

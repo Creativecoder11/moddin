@@ -68,19 +68,13 @@ export function Nav() {
             className="hidden lg:flex items-center"
           >
             {NAV_LINKS.map((l, i) => (
-              <div key={l.href} className="flex items-center">
+              <div key={l.label} className="flex items-center">
                 {i > 0 && <span className="w-[1px] h-[14px] bg-[var(--rule-2)] mx-[clamp(16px,2vw,32px)]" />}
-                <a
-                  href={l.href}
-                  className="group flex items-center gap-[2px] text-[14.5px] font-sans text-ink/75 hover:text-ink transition-colors whitespace-nowrap"
+                <span
+                  className="flex items-center text-[14.5px] font-sans text-ink/75 whitespace-nowrap cursor-default"
                 >
-                  <span className="font-serif italic text-terracotta text-[12px] opacity-0 max-w-0 -translate-x-2 group-hover:max-w-[20px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
-                    {l.label}
-                  </span>
-                </a>
+                  <span>{l.label}</span>
+                </span>
               </div>
             ))}
 
@@ -203,31 +197,20 @@ function MegaMenu({ onClose }: { onClose: () => void }) {
           </motion.div>
 
           <ul className="flex flex-col gap-1">
-            {NAV_LINKS.map((l, i) => (
-              <motion.li key={l.href} variants={itemVariants(reduce)}>
-                <a
-                  href={l.href}
-                  onClick={onClose}
-                  className="group flex items-center justify-between py-[16px] border-b border-[var(--rule-2)] hover:border-[var(--ink)] transition-colors whitespace-nowrap overflow-hidden"
+            {NAV_LINKS.map((l) => (
+              <motion.li key={l.label} variants={itemVariants(reduce)}>
+                <div
+                  className="flex items-center justify-between py-[16px] border-b border-[var(--rule-2)] whitespace-nowrap overflow-hidden cursor-default"
                 >
-                  <span className="flex items-baseline gap-4 overflow-hidden">
-                    <span className="font-serif italic text-[14px] text-terracotta opacity-70 group-hover:opacity-100 transition-opacity shrink-0">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+                  <span className="flex items-baseline overflow-hidden">
                     <span
-                      className="font-serif text-[clamp(32px,8vw,48px)] leading-none tracking-[-0.02em] text-ink transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-2 truncate"
+                      className="font-serif text-[clamp(32px,8vw,48px)] leading-none tracking-[-0.02em] text-ink truncate"
                       style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
                     >
                       {l.label}
                     </span>
                   </span>
-                  <span className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] text-terracotta">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </span>
-                </a>
+                </div>
               </motion.li>
             ))}
           </ul>

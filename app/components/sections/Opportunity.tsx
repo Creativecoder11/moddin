@@ -20,10 +20,9 @@ export function Opportunity() {
             </Reveal>
           </div>
           <Reveal delay={2} className="lead-quote">
-            Bangladesh is no longer just a manufacturing story. It is becoming a
-            serious market-entry and partnership destination for global businesses
-            looking for{" "}
-            <em>scale, cost competitiveness, and long-term growth</em>.
+            Bangladesh is no longer defined by manufacturing alone. It is becoming
+            a strategic destination for global businesses seeking scale,{" "}
+            <em>efficiency, and long-term growth</em>.
           </Reveal>
         </div>
 

@@ -36,7 +36,7 @@ export function Hero() {
   return (
     <section
       className="hero-section relative w-full overflow-hidden bg-paper -mt-[112px] max-[560px]:-mt-[96px]"
-      aria-label="Bangladesh, Decoded"
+      aria-label="Bangladesh, Unlocked"
     >
       {/* Single full-bleed image. CSS handles mobile bg vs desktop right-column. */}
       <div
@@ -108,9 +108,11 @@ export function Hero() {
             <br />
             <em
               className="italic text-ember lg:text-terracotta relative inline-block mt-1"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
+              style={{
+                fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1',
+              }}
             >
-              Decoded.
+              Unlocked.
               <svg
                 className="absolute -bottom-3 left-0 w-[90%] h-auto text-ember lg:text-terracotta opacity-40 lg:opacity-30"
                 viewBox="0 0 160 10"
@@ -118,25 +120,40 @@ export function Hero() {
                 preserveAspectRatio="none"
                 aria-hidden
               >
-                <path d="M0,8 Q80,-4 160,8" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                <path
+                  d="M0,8 Q80,-4 160,8"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                />
               </svg>
             </em>
           </Reveal>
 
           <Reveal delay={3} className="max-w-[520px] mb-[clamp(28px,5vw,48px)]">
             <p className="text-[clamp(18px,2vw,26px)] leading-[1.3] font-sans font-semibold text-cream lg:text-ink mb-[clamp(12px,2vw,20px)] tracking-[-0.01em]">
-              Complex markets demand clear pathways.
+              Your gateway to Bangladesh’s market.
             </p>
             <p
               className="text-[clamp(15px,1.1vw,17px)] leading-[1.65] text-cream/75 lg:text-ink/65 font-serif max-w-[440px]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 20' }}
             >
-              Moddin accelerates market access for global capital. We connect foreign investors to high-growth opportunities, transforming friction into leverage.
+              Moddin connects global businesses with Bangladesh—enabling trade,
+              investment, and real market entry.
             </p>
           </Reveal>
 
-          <Reveal delay={4} className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <ButtonLink href="#contact" variant="dark" arrow className="px-7 py-[14px] text-[15px] font-medium">
+          <Reveal
+            delay={4}
+            className="flex flex-wrap items-center gap-x-6 gap-y-4"
+          >
+            <ButtonLink
+              href="#contact"
+              variant="dark"
+              arrow
+              className="px-7 py-[14px] text-[15px] font-medium"
+            >
               Partner With Us
             </ButtonLink>
             <a
@@ -144,7 +161,9 @@ export function Hero() {
               className="group text-[15px] font-sans font-medium text-cream/80 lg:text-ink/70 hover:text-cream lg:hover:text-ink transition-colors flex items-center gap-3"
             >
               <span className="flex items-center justify-center size-10 rounded-full border border-cream/30 lg:border-[var(--rule)] group-hover:border-cream lg:group-hover:border-ink lg:group-hover:bg-cream transition-all duration-300">
-                <span className="group-hover:translate-y-[2px] transition-transform text-[12px]">↓</span>
+                <span className="group-hover:translate-y-[2px] transition-transform text-[12px]">
+                  ↓
+                </span>
               </span>
               Explore the thesis
             </a>
@@ -154,20 +173,22 @@ export function Hero() {
         {/* Empty right-side spacer — image already absolutely positioned */}
         <div className="hidden lg:block" aria-hidden />
 
-        {/* Floating Market Cap card — desktop only, straddles the seam */}
+        {/* Floating Market Cap card — desktop only */}
         <Reveal
           delay={4}
-          className="absolute z-30 left-[calc(52.38%-160px)] top-1/2 -translate-y-1/2 w-[320px] hidden lg:block"
+          className="absolute z-30 right-[100px] bottom-[100px] w-[320px] hidden lg:block"
         >
           <div className="p-7 rounded-[24px] bg-cream border border-[var(--rule-2)] ring-1 ring-black/5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-transform duration-500">
             <div className="text-[13px] font-sans font-semibold tracking-[0.01em] text-stone mb-3 uppercase">
-              Market Cap
+              Opportunity Size
             </div>
             <div className="text-[64px] font-serif text-ink tracking-[-0.04em] leading-none">
               $460
               <span
                 className="text-[44px] text-terracotta italic ml-[2px]"
-                style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
+                style={{
+                  fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1',
+                }}
               >
                 B
               </span>

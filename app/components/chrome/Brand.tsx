@@ -16,13 +16,13 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
       {...rest}
     >
       <Image
-        src="/logo.png"
+        src="/Moddin-Logo.svg"
         alt="Moddin Logo"
         width={isFooter ? 180 : 128}
-        height={isFooter ? 34 : 24}
+        height={isFooter ? 36 : 25}
         priority={!isFooter}
         sizes={isFooter ? "180px" : "128px"}
-        className="object-contain"
+        className={`object-contain ${isFooter ? "brightness-0 invert" : ""}`}
       />
     </a>
   );
