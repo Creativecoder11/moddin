@@ -100,14 +100,14 @@ export function Nav() {
             </div>
           </nav>
 
-          <div className="flex items-center gap-2 flex-shrink-0 ml-auto lg:ml-0">
+          <div className="flex lg:hidden items-center gap-2 flex-shrink-0 ml-auto">
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-mega-menu"
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden relative inline-flex items-center justify-center size-[38px] sm:size-[40px] rounded-full border border-[var(--rule)] bg-[color-mix(in_srgb,var(--cream)_60%,transparent)] text-ink transition-colors hover:bg-ink hover:text-cream"
+              className="relative inline-flex items-center justify-center size-[38px] sm:size-[40px] rounded-full border border-[var(--rule)] bg-[color-mix(in_srgb,var(--cream)_60%,transparent)] text-ink transition-colors hover:bg-ink hover:text-cream"
             >
               <span className="sr-only">{open ? "Close" : "Menu"}</span>
               <span className="relative block w-[16px] h-[10px]" aria-hidden>
