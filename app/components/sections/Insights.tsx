@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
 import { INSIGHTS } from "@/app/data/site";
+import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
 
 export function Insights() {
   return (
@@ -31,8 +33,15 @@ export function Insights() {
               className="ins-card"
             >
               <div className="cover">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={card.src} alt={card.alt} loading="lazy" />
+                <Image
+                  src={card.src}
+                  alt={card.alt}
+                  fill
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL={IMAGE_BLUR_DATA_URL}
+                  sizes="(max-width: 900px) 100vw, 33vw"
+                />
                 <span className="tag">{card.tag}</span>
               </div>
               <div className="body">

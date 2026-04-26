@@ -23,8 +23,7 @@ export function Footer() {
           <div className="flex flex-col gap-4 max-w-[360px]">
             <Brand variant="footer" />
             <p className="text-cream/70 text-[14.5px] leading-[1.5]">
-              A Bangladesh-based execution partner for global companies, investors,
-              and institutions entering or scaling in the country.
+              A partner to global businesses entering Bangladesh.
             </p>
           </div>
 
@@ -97,7 +96,6 @@ export function Footer() {
         {/* BOTTOM */}
         <div className="flex flex-wrap justify-between items-center gap-4 mt-8 text-[13px] tracking-[0.01em] text-cream/55">
           <span>© 2026 Moddin · Dhaka, Bangladesh</span>
-          <span>Connecting Bangladesh to global businesses</span>
           <a href="#top" className="hover:text-ember hover:opacity-100">
             Back to top ↑
           </a>

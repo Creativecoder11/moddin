@@ -196,8 +196,8 @@ export const PARTNERS: Partner[] = [
     body: "Agencies, embassies, chambers, and development organizations supporting trade and investment flows.",
   },
   {
-    src: "https://images.unsplash.com/photo-1580136607317-ead5073ba6c8?auto=format&fit=crop&w=900&q=80",
-    alt: "Bangladesh industry and export business",
+    src: "/images/partners/bangladesh-local-companies-shapla-square.webp",
+    alt: "Dhaka Shapla Square traffic at dusk",
     topTag: "Local",
     idx: "For BD firms",
     title: "Bangladeshi Companies",

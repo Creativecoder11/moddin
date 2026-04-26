@@ -25,7 +25,7 @@ export function PrimerForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button type="submit">{sent ? "Sent ✓" : "Send"}</button>
+      <button type="submit">{sent ? "Requested ✓" : "Request"}</button>
     </form>
   );
 }

@@ -20,8 +20,9 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
         alt="Moddin Logo"
         width={isFooter ? 180 : 128}
         height={isFooter ? 36 : 25}
-        priority={!isFooter}
+        preload={!isFooter}
         sizes={isFooter ? "180px" : "128px"}
+        unoptimized
         className="object-contain brightness-0 invert"
       />
     </a>

@@ -1,24 +1,29 @@
+import Image, { type StaticImageData } from "next/image";
 import { Reveal } from "../ui/Reveal";
 import { SERVICES, type Service } from "@/app/data/site";
+import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
+import bangladeshResilientReadySkyline from "../../../public/images/services/bangladesh-resilient-ready-skyline.webp";
+import investmentDealFacilitationInstitutionalAccess from "../../../public/images/services/investment-deal-facilitation-institutional-access.png";
+import tradeMarketExpansionPortLogistics from "../../../public/images/services/trade-market-expansion-port-logistics.webp";
 
-type Photo = { src: string; alt: string };
+type Photo = { src: string | StaticImageData; alt: string };
 
 const SERVICE_PHOTOS: Photo[] = [
   {
-    src: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1400&q=80",
-    alt: "Executive boardroom overlooking a financial district at golden hour",
+    src: tradeMarketExpansionPortLogistics,
+    alt: "Port operator coordinating beside a container ship at sunset",
   },
   {
-    src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80",
-    alt: "Two executives shaking hands as a deal is finalised",
+    src: "/images/services/policy-institutional-access-meeting.png",
+    alt: "Policy and institutional access meeting with Bangladesh government view",
   },
   {
-    src: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1600&q=80",
-    alt: "City skyline with global trade connections",
+    src: bangladeshResilientReadySkyline,
+    alt: "Bangladesh resilient ready skyline billboard at sunset",
   },
   {
-    src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1800&q=80",
-    alt: "Audience seated at a global business summit",
+    src: investmentDealFacilitationInstitutionalAccess,
+    alt: "Executives shaking hands in a Bangladesh institutional access meeting",
   },
 ];
 
@@ -91,8 +96,21 @@ function PhotoCard({
       delay={delay}
       className={`svc-photo${wide ? " svc-photo--wide" : ""}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={photo.src} alt={photo.alt} loading="lazy" />
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        fill
+        loading="lazy"
+        placeholder="blur"
+        blurDataURL={
+          typeof photo.src === "string" ? IMAGE_BLUR_DATA_URL : undefined
+        }
+        sizes={
+          wide
+            ? "(max-width: 600px) 100vw, (max-width: 1100px) 100vw, 50vw"
+            : "(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 25vw"
+        }
+      />
     </Reveal>
   );
 }

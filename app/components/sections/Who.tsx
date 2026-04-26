@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
 import { PARTNERS } from "@/app/data/site";
+import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
 
 export function Who() {
   return (
@@ -30,8 +32,15 @@ export function Who() {
               delay={i === 0 ? undefined : (i as 1 | 2 | 3)}
               className="who-card"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt={p.alt} loading="lazy" />
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={IMAGE_BLUR_DATA_URL}
+                sizes="(max-width: 640px) 100vw, (max-width: 1060px) 50vw, 25vw"
+              />
               <span className="top-tag">{p.topTag}</span>
               <div className="inner">
                 <div className="idx">{p.idx}</div>

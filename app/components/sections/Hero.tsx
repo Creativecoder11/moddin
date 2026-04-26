@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
 import { ButtonLink } from "../ui/Button";
-
-const HERO_IMG = "/hero-bangladesh-network.webp";
+import heroImage from "../../../public/hero-bangladesh-network.webp";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -93,10 +92,11 @@ export function Hero() {
         aria-hidden
       >
         <Image
-          src={HERO_IMG}
+          src={heroImage}
           alt=""
           fill
-          priority
+          preload
+          placeholder="blur"
           sizes="(min-width: 1024px) 48vw, 100vw"
           className="object-cover"
           style={{ filter: "saturate(1.05) contrast(1.05)" }}

@@ -1,14 +1,17 @@
-const BAND_IMG = "/bg-bangladesh.webp";
+import Image from "next/image";
+import bandImage from "../../../public/bg-bangladesh.webp";
 
 export function PhotoBand() {
   return (
     <section className="band" aria-label="Field work">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         className="band-img"
-        src={BAND_IMG}
+        src={bandImage}
         alt="Bangladesh textile workers on factory floor"
+        fill
         loading="lazy"
+        placeholder="blur"
+        sizes="100vw"
       />
       <div className="band-inner wrap">
         <div className="eyebrow">

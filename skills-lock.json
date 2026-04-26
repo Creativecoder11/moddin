@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "imagemagick-conversion": {
+      "source": "laurigates/claude-plugins",
+      "sourceType": "github",
+      "computedHash": "6cb256ce99a3bf5b016cf6849dde2e63aa3dbce226cee49f3e62863aee3ad50c"
+    }
+  }
+}

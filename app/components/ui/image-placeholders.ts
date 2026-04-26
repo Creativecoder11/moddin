@@ -1,0 +1,2 @@
+export const IMAGE_BLUR_DATA_URL =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'%3E%3Cfilter id='b' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3C/filter%3E%3Crect width='16' height='10' fill='%23caa571'/%3E%3Cpath d='M0 10 16 0v10z' fill='%235f3928' opacity='.72' filter='url(%23b)'/%3E%3Cpath d='M0 0h16v4H0z' fill='%232b4332' opacity='.56' filter='url(%23b)'/%3E%3C/svg%3E";
