@@ -1,94 +1,65 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { ButtonLink } from "../ui/Button";
 import heroImage from "../../../public/hero-bangladesh-network.webp";
 
+const COUNTER_TARGET = 460;
+const COUNTER_DURATION = 1600;
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const imgRef = useRef<HTMLDivElement>(null);
-  const copyRef = useRef<HTMLDivElement>(null);
   const metricRef = useRef<HTMLDivElement>(null);
+  const [metricCount, setMetricCount] = useState(0);
+  const countPlayedRef = useRef(false);
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const section = sectionRef.current;
-    const image = imgRef.current;
-    const copy = copyRef.current;
-    const metric = metricRef.current;
-    if (!section || !image || !copy) return;
+    const el = metricRef.current;
+    if (!el) return;
+    let timeoutId = 0;
+    let rafId = 0;
 
-    let raf = 0;
-    let pending = false;
-
-    const reset = () => {
-      image.style.transform = "translate3d(0, 0, 0)";
-      copy.style.transform = "translate3d(0, 0, 0)";
-      if (metric) metric.style.transform = "translate3d(0, 0, 0)";
-    };
-
-    const update = () => {
-      pending = false;
-
-      if (reduceMotion.matches) {
-        reset();
-        return;
-      }
-
-      const rect = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-
-      if (rect.bottom < 0 || rect.top > viewportHeight) {
-        return;
-      }
-
-      const progress = Math.min(
-        Math.max((viewportHeight - rect.top) / (viewportHeight + rect.height), 0),
-        1
-      );
-      const centered = progress - 0.5;
-
-      image.style.transform = `translate3d(0, ${centered * 72}px, 0)`;
-      copy.style.transform = `translate3d(0, ${centered * -28}px, 0)`;
-      if (metric) {
-        metric.style.transform = `translate3d(0, ${centered * -44}px, 0)`;
-      }
-    };
-
-    const schedule = () => {
-      if (pending) return;
-      pending = true;
-      raf = requestAnimationFrame(update);
-    };
-
-    const handleMotionChange = () => schedule();
-
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    reduceMotion.addEventListener("change", handleMotionChange);
-    schedule();
-
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting || countPlayedRef.current) continue;
+          countPlayedRef.current = true;
+          io.unobserve(e.target);
+          timeoutId = window.setTimeout(() => {
+            const start = performance.now();
+            const tick = (now: number) => {
+              const p = Math.min((now - start) / COUNTER_DURATION, 1);
+              setMetricCount(Math.round(COUNTER_TARGET * easeOutCubic(p)));
+              if (p < 1) rafId = requestAnimationFrame(tick);
+              else setMetricCount(COUNTER_TARGET);
+            };
+            rafId = requestAnimationFrame(tick);
+          }, 1220);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
     return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      reduceMotion.removeEventListener("change", handleMotionChange);
-      cancelAnimationFrame(raf);
+      io.disconnect();
+      window.clearTimeout(timeoutId);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
     <section
-      ref={sectionRef}
       className="hero-section relative w-full overflow-hidden bg-paper -mt-[112px] max-[560px]:-mt-[96px]"
       aria-label="Bangladesh, Unlocked"
     >
       {/* Single full-bleed image. CSS handles mobile bg vs desktop right-column. */}
       <div
-        ref={imgRef}
-        className="hero-image absolute -inset-y-[8%] inset-x-0 lg:right-0 lg:left-[52.38%] will-change-transform"
-        style={{ transform: "translate3d(0, 0, 0)" }}
+        data-scroll
+        data-scroll-speed="-0.35"
+        className="hero-image absolute -inset-y-[8%] inset-x-0 lg:right-0 lg:left-[52.38%]"
         aria-hidden
       >
         <Image
@@ -132,8 +103,9 @@ export function Hero() {
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] min-h-[100svh] lg:min-h-screen relative">
         {/* LEFT — typography */}
         <div
-          ref={copyRef}
-          className="hero-copy relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(140px,22vw,200px)] lg:pt-[clamp(160px,16vw,220px)] pb-[clamp(64px,12vw,140px)] lg:pb-[clamp(96px,12vw,160px)] will-change-transform"
+          data-scroll
+          data-scroll-speed="0.5"
+          className="hero-copy relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(140px,22vw,200px)] lg:pt-[clamp(160px,16vw,220px)] pb-[clamp(64px,12vw,140px)] lg:pb-[clamp(96px,12vw,160px)]"
         >
           <Reveal
             delay={1}
@@ -182,16 +154,26 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={3} className="max-w-[520px] mb-[clamp(28px,5vw,48px)]">
-            <p className="text-[clamp(18px,2vw,26px)] leading-[1.3] font-sans font-semibold text-cream lg:text-ink mb-[clamp(12px,2vw,20px)] tracking-[-0.01em]">
-              Your gateway to Bangladesh’s market.
-            </p>
-            <p
+            <TextEffect
+              as="p"
+              className="text-[clamp(18px,2vw,26px)] leading-[1.3] font-sans font-semibold text-cream lg:text-ink mb-[clamp(12px,2vw,20px)] tracking-[-0.01em]"
+              per="word"
+              preset="blur"
+              scrollReveal
+            >
+              {"Your gateway to Bangladesh’s market."}
+            </TextEffect>
+            <TextEffect
+              as="p"
               className="text-[clamp(15px,1.1vw,17px)] leading-[1.65] text-cream/75 lg:text-ink/65 font-serif max-w-[440px]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 20' }}
+              per="word"
+              preset="blur"
+              scrollReveal
+              delay={0.15}
             >
-              Moddin connects global businesses with Bangladesh—enabling trade,
-              investment, and real market entry.
-            </p>
+              {"Moddin connects global businesses with Bangladesh—enabling trade, investment, and real market entry."}
+            </TextEffect>
           </Reveal>
 
           <Reveal
@@ -226,7 +208,9 @@ export function Hero() {
         {/* Floating Market Cap card — desktop only */}
         <div
           ref={metricRef}
-          className="absolute z-30 right-[100px] bottom-[100px] w-[320px] hidden lg:block will-change-transform"
+          data-scroll
+          data-scroll-speed="0.8"
+          className="absolute z-30 right-[100px] bottom-[100px] w-[320px] hidden lg:block"
         >
           <Reveal delay={4}>
             <div className="p-7 rounded-[24px] bg-cream border border-[var(--rule-2)] ring-1 ring-black/5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-transform duration-500">
@@ -234,7 +218,7 @@ export function Hero() {
                 Opportunity Size
               </div>
               <div className="text-[64px] font-serif text-ink tracking-[-0.04em] leading-none">
-                $460
+                ${metricCount}
                 <span
                   className="text-[44px] text-terracotta italic ml-[2px]"
                   style={{

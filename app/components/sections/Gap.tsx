@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { GAP_ITEMS } from "@/app/data/site";
 
 export function Gap() {
@@ -16,10 +17,9 @@ export function Gap() {
               <em>Still Hard to Unlock.</em>
             </Reveal>
           </div>
-          <Reveal as="p" delay={2}>
-            Interest in Bangladesh is strong. Conversion into real investment and
-            partnerships is where friction begins — and where Moddin comes in.
-          </Reveal>
+          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+            {"Interest in Bangladesh is strong. Conversion into real investment and partnerships is where friction begins — and where Moddin comes in."}
+          </TextEffect>
         </div>
 
         <div className="gap-grid">
@@ -34,7 +34,9 @@ export function Gap() {
                 <span>{item.label}</span>
               </div>
               <h3 dangerouslySetInnerHTML={{ __html: item.titleHTML }} />
-              <p>{item.body}</p>
+              <TextEffect as="p" per="word" preset="blur" scrollReveal>
+                {item.body}
+              </TextEffect>
             </Reveal>
           ))}
         </div>

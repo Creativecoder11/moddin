@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { ROLES } from "@/app/data/site";
 
 export function Role() {
@@ -16,10 +17,9 @@ export function Role() {
               <em>Real Outcomes.</em>
             </Reveal>
           </div>
-          <Reveal as="p" delay={2}>
-            A structured approach to move from opportunity to execution—clearly,
-            confidently, and at speed.
-          </Reveal>
+          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+            {"A structured approach to move from opportunity to execution—clearly, confidently, and at speed."}
+          </TextEffect>
         </div>
 
         <div className="role-grid">
@@ -32,7 +32,9 @@ export function Role() {
             >
               <div className="num-big">{role.num}</div>
               <h3>{role.title}</h3>
-              <p>{role.body}</p>
+              <TextEffect as="p" per="word" preset="blur" scrollReveal>
+                {role.body}
+              </TextEffect>
               <div className="tag-row">
                 <span className="lab">{role.tag}</span>
                 <span className="arr">→</span>

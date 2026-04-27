@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { PARTNERS } from "@/app/data/site";
 import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
 
@@ -16,10 +17,9 @@ export function Who() {
               Who <em>We Work With.</em>
             </Reveal>
           </div>
-          <Reveal as="p" delay={2}>
-            Different partners, different objectives—supported by the same
-            structured approach and local capability.
-          </Reveal>
+          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+            {"Different partners, different objectives—supported by the same structured approach and local capability."}
+          </TextEffect>
         </div>
 
         <div className="who-grid">
@@ -43,7 +43,9 @@ export function Who() {
               <div className="inner">
                 <div className="idx">{p.idx}</div>
                 <h3>{p.title}</h3>
-                <p>{p.body}</p>
+                <TextEffect as="p" per="word" preset="blur" scrollReveal>
+                  {p.body}
+                </TextEffect>
               </div>
             </Reveal>
           ))}

@@ -1,4 +1,7 @@
+"use client";
+
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { PrimerForm } from "./PrimerForm";
 
 export function FinalCta() {
@@ -30,10 +33,9 @@ export function FinalCta() {
               Clarity and <em>Confidence.</em>
             </span>
           </h2>
-          <Reveal as="p" delay={1} className="lead">
-            Whether you&rsquo;re evaluating entry, partnerships, or investment, we help
-            you move with the right local context and execution support.
-          </Reveal>
+          <TextEffect as="p" className="lead" per="word" preset="blur" scrollReveal delay={0.1}>
+            {"Whether you're evaluating entry, partnerships, or investment, we help you move with the right local context and execution support."}
+          </TextEffect>
           <Reveal delay={2} className="cta-ctas">
             <a href="mailto:hello@moddin.com" className="btn btn-light">
               Book a Call <span>→</span>
@@ -42,9 +44,9 @@ export function FinalCta() {
               Book a Call
             </a>
           </Reveal>
-          <Reveal delay={3} className="second">
-            Response within 24 hours
-          </Reveal>
+          <TextEffect as="div" className="second" per="word" preset="blur" scrollReveal delay={0.3}>
+            {"Response within 24 hours"}
+          </TextEffect>
         </div>
 
         <Reveal as="aside" delay={1} className="aside">
@@ -52,11 +54,12 @@ export function FinalCta() {
             <i />
             Response within 24 hours
           </div>
-          <h3>Request the Business Deck</h3>
-          <p>
-            A structured view of Bangladesh&rsquo;s opportunity&mdash;covering market
-            insights, sector focus, and our execution approach.
-          </p>
+          <TextEffect as="h3" per="word" preset="blur" scrollReveal>
+            {"Request the Business Deck"}
+          </TextEffect>
+          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.1}>
+            {"A structured view of Bangladesh's opportunity—covering market insights, sector focus, and our execution approach."}
+          </TextEffect>
           <PrimerForm />
         </Reveal>
       </div>

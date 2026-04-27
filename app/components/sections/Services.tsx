@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { SERVICES, type Service } from "@/app/data/site";
 import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
 import bangladeshResilientReadySkyline from "../../../public/images/services/bangladesh-resilient-ready-skyline.webp";
@@ -58,7 +59,9 @@ function ServiceCard({
         dangerouslySetInnerHTML={{ __html: svc.titleHTML }}
       />
 
-      <p className="svc-body">{svc.body}</p>
+      <TextEffect as="p" className="svc-body" per="word" preset="blur" scrollReveal>
+        {svc.body}
+      </TextEffect>
 
       <footer className="svc-card__foot">
         <span className="svc-pill">
@@ -130,11 +133,9 @@ export function Services() {
           </div>
 
           <Reveal as="div" delay={2} className="svc-head__aside">
-            <p className="svc-head__lead">
-              Four capabilities across the market-entry journey—from first
-              insight to signed partnership and operating presence in
-              Bangladesh.
-            </p>
+            <TextEffect as="p" className="svc-head__lead" per="word" preset="blur" scrollReveal>
+              {"Four capabilities across the market-entry journey—from first insight to signed partnership and operating presence in Bangladesh."}
+            </TextEffect>
 
           </Reveal>
         </div>

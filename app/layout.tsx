@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PT_Serif, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import "locomotive-scroll/locomotive-scroll.css";
+import { SmoothScroll } from "./components/providers/SmoothScroll";
 
 const ptSerif = PT_Serif({
   variable: "--font-pt-serif",
@@ -38,7 +40,9 @@ export default function RootLayout({
       lang="en"
       className={`${ptSerif.variable} ${outfit.variable} ${jetbrains.variable}`}
     >
-      <body id="top">{children}</body>
+      <body id="top">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }

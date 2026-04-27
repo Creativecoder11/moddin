@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
+import { TextEffect } from "../ui/text-effect";
 import { INSIGHTS } from "@/app/data/site";
 import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
 
@@ -16,10 +17,9 @@ export function Insights() {
               Bangladesh Market <em>Insights.</em>
             </Reveal>
           </div>
-          <Reveal as="p" delay={2}>
-            Practical insights, sector updates, and guides for companies and
-            investors evaluating Bangladesh.
-          </Reveal>
+          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+            {"Practical insights, sector updates, and guides for companies and investors evaluating Bangladesh."}
+          </TextEffect>
         </div>
 
         <div className="ins-grid">
@@ -47,8 +47,12 @@ export function Insights() {
                   <span>{card.metaA}</span>
                   <span>{card.metaB}</span>
                 </div>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
+                <TextEffect as="h3" per="word" preset="blur" scrollReveal>
+                  {card.title}
+                </TextEffect>
+                <TextEffect as="p" per="word" preset="blur" scrollReveal>
+                  {card.body}
+                </TextEffect>
                 <div className="row">
                   <span className="go">{card.cta}</span>
                   <span className="arr">→</span>

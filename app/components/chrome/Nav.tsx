@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Brand } from "./Brand";
 import { NAV_LINKS } from "@/app/data/site";
+import { useSmoothScroll } from "../providers/SmoothScroll";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -12,6 +13,7 @@ export function Nav() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
+  const smooth = useSmoothScroll();
 
   useEffect(() => {
     let lastY = 0;
@@ -25,16 +27,19 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while drawer is open
+  // Lock scroll while drawer is open. Locomotive owns scroll when ready;
+  // body.style.overflow is the fallback for reduced-motion users where
+  // Locomotive does not initialize.
   useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [open]);
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    smooth.stop();
+    return () => {
+      document.body.style.overflow = prev;
+      smooth.start();
+    };
+  }, [open, smooth]);
 
   // Close on Escape
   useEffect(() => {
@@ -82,10 +87,10 @@ export function Nav() {
               <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />
               <a
                 href="#contact"
-                className="inline-flex group relative items-center gap-[10px] rounded-full bg-cream overflow-hidden pl-[16px] pr-[5px] py-[5px] text-[13px] font-sans font-medium text-ink tracking-[0.01em] transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02]"
+                className="inline-flex group relative items-center rounded-full bg-cream overflow-hidden pl-4 pr-1 py-1 text-[13px] font-sans font-medium text-ink tracking-[0.01em] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:pl-9.5 hover:pr-4"
               >
-                <span className="relative z-10 py-[2px]">Partner With Us</span>
-                <span className="relative z-10 flex items-center justify-center size-[28px] rounded-full bg-ink text-cream transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-terracotta group-hover:-rotate-45">
+                <span className="relative z-10 py-[2px] pr-9 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:pr-0">Partner With Us</span>
+                <span className="absolute right-1 z-10 flex items-center justify-center size-7 rounded-full bg-ink text-cream transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:right-[calc(100%-32px)] group-hover:bg-terracotta group-hover:rotate-45">
                   <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
                     <path d="M1 7H13M8 2L13 7L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
