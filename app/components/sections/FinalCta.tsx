@@ -40,9 +40,6 @@ export function FinalCta() {
             <a href="mailto:hello@moddin.com" className="btn btn-light">
               Book a Call <span>→</span>
             </a>
-            <a href="mailto:hello@moddin.com" className="btn btn-outline">
-              Book a Call
-            </a>
           </Reveal>
           <TextEffect as="div" className="second" per="word" preset="blur" scrollReveal delay={0.3}>
             {"Response within 24 hours"}
