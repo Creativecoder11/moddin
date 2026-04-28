@@ -26,7 +26,9 @@
       "Bash(echo \"exit=$?\")",
       "Bash(taskkill //F //FI \"ImageName eq node.exe\")",
       "Bash(npx next *)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(npm view *)",
+      "Bash(tasklist)"
     ]
   }
 }
