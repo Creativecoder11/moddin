@@ -701,19 +701,6 @@ body::before {
 .step p { margin: 0; color: var(--cream); opacity: 0.72; font-size: 14.5px; line-height: 1.55; max-width: 32ch; }
 
 /* ========================================================================
-   QUOTE
-   ======================================================================== */
-.quote { padding: clamp(72px, 9vw, 140px) 0; border-top: 1px solid var(--rule); }
-.quote-grid { display: grid; grid-template-columns: 0.8fr 1.6fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
-@media (max-width: 900px) { .quote-grid { grid-template-columns: 1fr; } }
-.quote-mark { font-family: var(--font-serif); font-weight: 400; font-size: clamp(120px, 18vw, 240px); line-height: 0.6; color: var(--terracotta); font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; transform: translateX(-6px); }
-.quote-text { font-family: var(--font-serif); font-weight: 400; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.14; letter-spacing: -0.015em; font-variation-settings: "opsz" 144, "SOFT" 40; }
-.quote-text em { font-style: italic; color: var(--terracotta); font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; }
-.quote-meta { margin-top: 36px; display: flex; align-items: center; gap: 16px; font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--stone); letter-spacing: -0.005em; }
-.quote-meta i { width: 36px; height: 1px; background: var(--terracotta); opacity: 0.6; font-style: normal; }
-@media (max-width: 560px) { .quote-text { font-size: 24px; } }
-
-/* ========================================================================
    INSIGHTS
    ======================================================================== */
 .insights { padding: clamp(72px, 9vw, 140px) 0; background: var(--bone); border-top: 1px solid var(--rule); }
@@ -771,7 +758,6 @@ body::before {
 .cta .aside .form button { background: var(--ember); color: var(--ink); padding: 10px 18px; border-radius: 100px; font-size: 13px; }
 .cta .aside .form button:hover { background: var(--cream); }
 .cta-ctas { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
-.cta .second { margin-top: 24px; font-size: 14px; color: var(--cream); opacity: 0.65; }
 
 /* ========================================================================
    GLOBAL RESPONSIVE

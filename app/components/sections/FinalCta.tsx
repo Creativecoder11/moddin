@@ -9,10 +9,12 @@ export function FinalCta() {
     <section id="contact" className="cta">
       <div className="wrap cta-inner">
         <div>
-          <div className="eyebrow" style={{ color: "var(--ember)" }}>
+          <Reveal className="eyebrow" style={{ color: "var(--ember)" }}>
             <span>Contact</span>
-          </div>
-          <h2
+          </Reveal>
+          <Reveal
+            as="h2"
+            delay={1}
             className="cta-title"
             style={{
               color: "var(--cream)",
@@ -32,7 +34,7 @@ export function FinalCta() {
             >
               Clarity and <em>Confidence.</em>
             </span>
-          </h2>
+          </Reveal>
           <TextEffect as="p" className="lead" per="word" preset="blur" scrollReveal delay={0.1}>
             {"Whether you're evaluating entry, partnerships, or investment, we help you move with the right local context and execution support."}
           </TextEffect>
@@ -41,9 +43,6 @@ export function FinalCta() {
               Book a Call <span>→</span>
             </a>
           </Reveal>
-          <TextEffect as="div" className="second" per="word" preset="blur" scrollReveal delay={0.3}>
-            {"Response within 24 hours"}
-          </TextEffect>
         </div>
 
         <Reveal as="aside" delay={1} className="aside">

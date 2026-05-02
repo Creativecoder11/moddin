@@ -7,7 +7,6 @@ import { Role } from "./components/sections/Role";
 import { PhotoBand } from "./components/sections/PhotoBand";
 import { Services } from "./components/sections/Services";
 import { Who } from "./components/sections/Who";
-import { Quote } from "./components/sections/Quote";
 import { Insights } from "./components/sections/Insights";
 import { FinalCta } from "./components/sections/FinalCta";
 
@@ -23,7 +22,6 @@ export default function Home() {
         <PhotoBand />
         <Services />
         <Who />
-        <Quote />
         <Insights />
         <FinalCta />
       </main>
