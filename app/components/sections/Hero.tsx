@@ -93,7 +93,7 @@ export function Hero() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 70% 40%, rgba(180,74,30,0.14), transparent 60%)",
+              "radial-gradient(ellipse at 70% 40%, rgba(0,85,64,0.10), transparent 60%)",
           }}
         />
         {/* Hairline seam at column edge on desktop */}
@@ -105,7 +105,7 @@ export function Hero() {
         <div
           data-scroll
           data-scroll-speed="0.5"
-          className="hero-copy relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(140px,22vw,200px)] lg:pt-[clamp(160px,16vw,220px)] pb-[clamp(64px,12vw,140px)] lg:pb-[clamp(96px,12vw,160px)]"
+          className="hero-copy relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(96px,13vw,140px)] lg:pt-[clamp(120px,11vw,160px)] pb-[clamp(40px,7vw,80px)] lg:pb-[clamp(56px,7vw,96px)]"
         >
           <Reveal
             delay={1}
@@ -210,7 +210,7 @@ export function Hero() {
           ref={metricRef}
           data-scroll
           data-scroll-speed="0.8"
-          className="absolute z-30 right-[100px] bottom-[100px] w-[320px] hidden lg:block"
+          className="absolute z-30 right-16 bottom-16 w-75 hidden lg:block"
         >
           <Reveal delay={4}>
             <div className="p-7 rounded-[24px] bg-cream border border-[var(--rule-2)] ring-1 ring-black/5 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-transform duration-500">
