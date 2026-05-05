@@ -33,7 +33,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(netstat -ano)",
       "Bash(findstr \"LISTENING\")",
-      "Bash(findstr \":300\")"
+      "Bash(findstr \":300\")",
+      "Bash(rg -v \"^\\\\+\\\\s*$\")"
     ]
   }
 }
