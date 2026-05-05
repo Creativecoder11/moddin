@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import SplitText from "../ui/SplitText";
 import { StatCounter } from "./StatCounter";
 import { STATS } from "@/app/data/site";
 
@@ -11,11 +12,12 @@ export function Opportunity() {
             <Reveal className="eyebrow">
               <span>The Opportunity</span>
             </Reveal>
-            <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>
-              Why Bangladesh,
-              <br />
-              <em>Why Now.</em>
-            </Reveal>
+            <SplitText tag="h2" className="section-title" style={{ marginTop: 20 }} textAlign="left">
+              <span style={{ display: "block" }}>Why Bangladesh,</span>
+              <span style={{ display: "block" }}>
+                <em>Why Now.</em>
+              </span>
+            </SplitText>
           </div>
           <Reveal delay={2} className="lead-quote">
             Bangladesh is no longer defined by manufacturing alone. It is becoming

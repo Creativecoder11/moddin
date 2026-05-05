@@ -30,7 +30,10 @@
       "Bash(npm view *)",
       "Bash(tasklist)",
       "WebFetch(domain:reactbits.dev)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \"LISTENING\")",
+      "Bash(findstr \":300\")"
     ]
   }
 }

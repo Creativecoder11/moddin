@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
+import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
 import { PARTNERS } from "@/app/data/site";
 import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
@@ -13,9 +14,9 @@ export function Who() {
             <Reveal className="eyebrow">
               <span>Partners</span>
             </Reveal>
-            <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>
+            <SplitText tag="h2" className="section-title" style={{ marginTop: 20 }} textAlign="left">
               Who <em>We Work With.</em>
-            </Reveal>
+            </SplitText>
           </div>
           <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
             {"Different partners, different objectives—supported by the same structured approach and local capability."}

@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
 import { GAP_ITEMS } from "@/app/data/site";
 
@@ -11,11 +12,12 @@ export function Gap() {
             <Reveal className="eyebrow">
               <span>The Gap</span>
             </Reveal>
-            <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>
-              High Potential.
-              <br />
-              <em>Still Hard to Unlock.</em>
-            </Reveal>
+            <SplitText tag="h2" className="section-title" style={{ marginTop: 20 }} textAlign="left">
+              <span style={{ display: "block" }}>High Potential.</span>
+              <span style={{ display: "block" }}>
+                <em>Still Hard to Unlock.</em>
+              </span>
+            </SplitText>
           </div>
           <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
             {"Interest in Bangladesh is strong. Conversion into real investment and partnerships is where friction begins — and where Moddin comes in."}

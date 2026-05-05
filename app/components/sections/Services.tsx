@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import { Reveal } from "../ui/Reveal";
+import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
 import { SERVICES, type Service } from "@/app/data/site";
 import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
@@ -127,9 +128,9 @@ export function Services() {
             <Reveal className="eyebrow">
               <span>Services</span>
             </Reveal>
-            <Reveal as="h2" delay={1} className="section-title svc-h2">
+            <SplitText tag="h2" className="section-title svc-h2" textAlign="left">
               What <em>We Do.</em>
-            </Reveal>
+            </SplitText>
           </div>
 
           <Reveal as="div" delay={2} className="svc-head__aside">

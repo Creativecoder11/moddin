@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "../ui/Reveal";
+import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
 import { PrimerForm } from "./PrimerForm";
 
@@ -12,10 +13,10 @@ export function FinalCta() {
           <Reveal className="eyebrow" style={{ color: "var(--ember)" }}>
             <span>Contact</span>
           </Reveal>
-          <Reveal
-            as="h2"
-            delay={1}
+          <SplitText
+            tag="h2"
             className="cta-title"
+            textAlign="left"
             style={{
               color: "var(--cream)",
               fontSize: "clamp(26px, 4.2vw, 64px)",
@@ -34,7 +35,7 @@ export function FinalCta() {
             >
               Clarity and <em>Confidence.</em>
             </span>
-          </Reveal>
+          </SplitText>
           <TextEffect as="p" className="lead" per="word" preset="blur" scrollReveal delay={0.1}>
             {"Whether you're evaluating entry, partnerships, or investment, we help you move with the right local context and execution support."}
           </TextEffect>

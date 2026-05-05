@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
 import { ROLES } from "@/app/data/site";
 
@@ -11,11 +12,14 @@ export function Role() {
             <Reveal className="eyebrow">
               <span>Our Role</span>
             </Reveal>
-            <Reveal as="h2" delay={1} className="section-title" style={{ marginTop: 20 }}>
-              Turning Market Interest <em>Into</em>
-              <br />
-              <em>Real Outcomes.</em>
-            </Reveal>
+            <SplitText tag="h2" className="section-title" style={{ marginTop: 20 }} textAlign="left">
+              <span style={{ display: "block" }}>
+                Turning Market Interest <em>Into</em>
+              </span>
+              <span style={{ display: "block" }}>
+                <em>Real Outcomes.</em>
+              </span>
+            </SplitText>
           </div>
           <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
             {"A structured approach to move from opportunity to execution—clearly, confidently, and at speed."}
