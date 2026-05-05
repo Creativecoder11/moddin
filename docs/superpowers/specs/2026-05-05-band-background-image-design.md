@@ -17,13 +17,14 @@ Replace the "On the ground in Bangladesh" band image with a new local WebP asset
 
 ## Approach (Recommended)
 - Copy the provided WebP from Downloads into public/images/band-on-ground.webp.
-- Update CSS so .band uses background-image, background-size: cover, background-position: center, and background-repeat: no-repeat, while keeping the fallback background color.
-- Remove .band-img rules and delete the <img class="band-img"> element from the markup.
-- Remove the .band::after overlay rule.
+- Update .band in app/globals.css to use background-image, background-size: cover, background-position: center, and background-repeat: no-repeat, while keeping the fallback background color.
+- Remove the image markup from app/components/sections/PhotoBand.tsx and drop the band-plane/band-media wrappers so no overlay layer remains.
+- Remove band-plane, band-media, and band-img rules from app/globals.css.
 
 ## Files and Locations
 - Asset: public/images/band-on-ground.webp
-- Markup and styles: source/index.html
+- Component markup: app/components/sections/PhotoBand.tsx
+- Styles: app/globals.css
 
 ## Data Flow
 - Static asset served by Next.js from /public; no runtime data flow changes.
