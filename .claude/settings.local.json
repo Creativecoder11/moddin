@@ -28,7 +28,9 @@
       "Bash(npx next *)",
       "Bash(npx eslint *)",
       "Bash(npm view *)",
-      "Bash(tasklist)"
+      "Bash(tasklist)",
+      "WebFetch(domain:reactbits.dev)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

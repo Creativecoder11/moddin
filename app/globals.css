@@ -765,3 +765,62 @@ body::before {
 @media (max-width: 560px) {
   body { padding-top: 64px; }
 }
+
+/* ========================================================================
+   SHORT-VIEWPORT — MacBook 13" Retina (2560×1600 at 2× DPR = 1280×800 CSS
+   pixels) and similar displays where viewport height ≤ 900px.
+   Scoped to desktop widths (≥ 900px) so mobile layout is untouched.
+   Standard 1080p users are unaffected (their viewport is typically ≥ 1000px).
+   ======================================================================== */
+@media (max-height: 900px) and (min-width: 900px) {
+  /* Hero — reduce padding-top/bottom so the ~603px of copy clears the
+     overflow:hidden boundary on an 800px viewport. */
+  .hero-copy {
+    padding-top: clamp(64px, 7.5vw, 100px);
+    padding-bottom: clamp(32px, 4vw, 52px);
+  }
+
+  /* Role section — tighten vertical rhythm and shrink decorative numbers */
+  .role {
+    padding-block: clamp(32px, 4vw, 52px);
+  }
+  .role-head {
+    margin-bottom: clamp(14px, 2vw, 26px);
+  }
+  .role-card {
+    min-height: 290px;
+    gap: 12px;
+  }
+  .role-card .num-big {
+    font-size: clamp(52px, 5.2vw, 80px);
+    margin-bottom: 4px;
+  }
+  .role-card h3 {
+    font-size: clamp(22px, 2vw, 28px);
+  }
+
+  /* Insights section — shorten image ratio and tighten spacing */
+  .insights {
+    padding-block: clamp(32px, 4vw, 52px);
+  }
+  .ins-head {
+    margin-bottom: clamp(14px, 2vw, 26px);
+  }
+  .ins-card .cover {
+    aspect-ratio: 16 / 7.5;
+  }
+  .ins-card .body {
+    min-height: 120px;
+    padding: clamp(14px, 1.4vw, 20px);
+  }
+
+  /* All remaining sections — uniform vertical rhythm reduction */
+  .opportunity,
+  .gap,
+  .services,
+  .who,
+  .process,
+  .cta {
+    padding-block: clamp(32px, 4vw, 52px);
+  }
+}

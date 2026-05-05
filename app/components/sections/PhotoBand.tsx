@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useReducedMotion } from "motion/react";
 import bandImage from "../../../public/bangladesh-on-the-ground-logistics.jpeg";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 export function PhotoBand() {
   const reduce = useReducedMotion();
@@ -39,7 +40,7 @@ export function PhotoBand() {
         <div className="eyebrow">
           <span>On the ground in Bangladesh</span>
         </div>
-        <h3>
+        <ScrollReveal as="h3">
           We spend most of
           <br />
           our week in
@@ -49,7 +50,7 @@ export function PhotoBand() {
           and <em>ministries</em> —
           <br />
           not on slide decks.
-        </h3>
+        </ScrollReveal>
       </div>
     </section>
   );
