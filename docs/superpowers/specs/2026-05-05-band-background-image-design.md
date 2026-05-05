@@ -20,6 +20,7 @@ Replace the "On the ground in Bangladesh" band image with a new local WebP asset
 - Update .band in app/globals.css to use background-image, background-size: cover, background-position: center, and background-repeat: no-repeat, while keeping the fallback background color.
 - Remove the image markup from app/components/sections/PhotoBand.tsx and drop the band-plane/band-media wrappers so no overlay layer remains.
 - Remove band-plane, band-media, and band-img rules from app/globals.css.
+- Remove public/bangladesh-on-the-ground-logistics.jpeg if no longer referenced.
 
 ## Files and Locations
 - Asset: public/images/band-on-ground.webp
