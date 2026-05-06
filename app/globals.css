@@ -594,7 +594,7 @@ body::before {
 }
 @media (max-width: 900px) {
   .role-grid {
-    grid-template-columns: 1fr;
+    display: block;
   }
 }
 .role-card {
@@ -604,6 +604,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 100%;
   min-height: 360px;
   transition:
     transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1),
@@ -1214,7 +1215,7 @@ body::before {
 }
 @media (max-width: 640px) {
   .who-grid {
-    grid-template-columns: 1fr;
+    display: block;
   }
 }
 .who-card {
@@ -1228,6 +1229,7 @@ body::before {
   justify-content: flex-end;
   padding: 24px;
   color: var(--cream);
+  height: 100%;
 }
 .who-card img {
   position: absolute;
@@ -1513,25 +1515,19 @@ body::before {
 }
 @media (max-width: 900px) {
   .ins-grid {
-    display: flex;
-    grid-template-columns: none;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-inline: calc(clamp(24px, 5vw, 72px) * -1);
-    padding-inline: clamp(24px, 5vw, 72px);
-    scroll-padding-inline: clamp(24px, 5vw, 72px);
+    display: block;
   }
-  .ins-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .ins-grid > .ins-card {
-    flex: 0 0 70%;
-    min-width: 0;
-    scroll-snap-align: start;
-  }
+}
+.ins-slide {
+  display: flex;
+}
+.ins-slide > * {
+  flex: 1;
+}
+.carousel-slide .ins-card {
+  height: auto;
+  min-height: 100%;
+  width: 100%;
 }
 .ins-card {
   background: var(--cream);
@@ -1912,4 +1908,151 @@ body::before {
   .cta {
     padding-block: clamp(32px, 4vw, 52px);
   }
+}
+
+/* ========================================================================
+   MOBILE CAROUSEL
+   ======================================================================== */
+.carousel-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 72px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.45s cubic-bezier(0.22, 0.68, 0.32, 1);
+  will-change: transform;
+}
+
+/* Disable reveal animations inside mobile carousels to prevent popping while swiping */
+.carousel-track .reveal,
+.carousel-track [data-scroll],
+.carousel-track [data-scroll] * {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+.carousel-slide {
+  flex: 0 0 80%;
+  width: 80%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Force all direct children inside a slide to fill the slide */
+.carousel-slide > * {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Role carousel slides: enforce uniform card height */
+.role-slide {
+  display: flex;
+}
+.role-slide > * {
+  flex: 1;
+}
+.carousel-slide .role-card {
+  height: auto;
+  min-height: 380px;
+  width: 100%;
+}
+
+/* Who carousel slides: enforce uniform card size */
+.who-slide {
+  display: flex;
+}
+.who-slide > * {
+  flex: 1;
+}
+.carousel-slide .who-card {
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+
+/* Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 38px;
+  left: 0;
+  right: 0;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    transform 0.3s;
+}
+.carousel-dot.active {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  transform: scale(1.2);
+}
+.carousel-dot:hover:not(.active) {
+  border-color: var(--ink);
+}
+
+/* Arrows */
+.carousel-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.carousel-arrow {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    border-color 0.3s,
+    opacity 0.3s;
+  padding: 0;
+}
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.carousel-counter {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--stone);
+  letter-spacing: -0.005em;
+  min-width: 36px;
+  text-align: center;
 }

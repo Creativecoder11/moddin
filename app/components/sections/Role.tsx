@@ -1,9 +1,29 @@
 import { Reveal } from "../ui/Reveal";
 import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
+import { MobileCarousel } from "../ui/MobileCarousel";
 import { ROLES } from "@/app/data/site";
 
 export function Role() {
+  const cards = ROLES.map((role, i) => (
+    <Reveal
+      key={role.num}
+      as="article"
+      delay={i === 0 ? undefined : (i as 1 | 2)}
+      className={`role-card tint-${role.tint}`}
+    >
+      <div className="num-big">{role.num}</div>
+      <h3>{role.title}</h3>
+      <TextEffect as="p" per="word" preset="blur" scrollReveal>
+        {role.body}
+      </TextEffect>
+      <div className="tag-row">
+        <span className="lab">{role.tag}</span>
+        <span className="arr">→</span>
+      </div>
+    </Reveal>
+  ));
+
   return (
     <section className="role">
       <div className="wrap">
@@ -27,24 +47,9 @@ export function Role() {
         </div>
 
         <div className="role-grid">
-          {ROLES.map((role, i) => (
-            <Reveal
-              key={role.num}
-              as="article"
-              delay={i === 0 ? undefined : (i as 1 | 2)}
-              className={`role-card tint-${role.tint}`}
-            >
-              <div className="num-big">{role.num}</div>
-              <h3>{role.title}</h3>
-              <TextEffect as="p" per="word" preset="blur" scrollReveal>
-                {role.body}
-              </TextEffect>
-              <div className="tag-row">
-                <span className="lab">{role.tag}</span>
-                <span className="arr">→</span>
-              </div>
-            </Reveal>
-          ))}
+          <MobileCarousel breakpoint={900} slideClassName="role-slide">
+            {cards}
+          </MobileCarousel>
         </div>
       </div>
     </section>
