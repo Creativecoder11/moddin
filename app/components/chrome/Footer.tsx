@@ -1,4 +1,5 @@
 import { Brand } from "./Brand";
+import SplitText from "../ui/SplitText";
 import { FOOTER_LINKS } from "@/app/data/site";
 
 const SOCIALS = [
@@ -55,20 +56,23 @@ export function Footer() {
 
         {/* MID: tagline + socials */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center py-7 border-t border-b border-[var(--rule-d-2)]">
-          <div
+          <SplitText
+            tag="h2"
+            textAlign="left"
             className="font-serif font-light tracking-[-0.025em] text-[clamp(40px,6vw,72px)] leading-none text-cream"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
           >
-            Connecting Bangladesh
-            <br />
-            to{" "}
-            <em
-              className="text-ember"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
-            >
-              global businesses.
-            </em>
-          </div>
+            <span style={{ display: "block" }}>Connecting Bangladesh</span>
+            <span style={{ display: "block" }}>
+              to{" "}
+              <em
+                className="text-ember"
+                style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
+              >
+                global businesses.
+              </em>
+            </span>
+          </SplitText>
           <div className="flex gap-[10px]" aria-label="Social">
             {SOCIALS.map((s) => (
               <a
