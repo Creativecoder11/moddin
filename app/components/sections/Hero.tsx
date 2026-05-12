@@ -108,19 +108,6 @@ export function Hero() {
           className="hero-copy relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-[clamp(40px,6vw,96px)] lg:pr-[clamp(24px,3vw,56px)] pt-[clamp(96px,13vw,140px)] lg:pt-[clamp(120px,11vw,160px)] pb-[clamp(40px,7vw,80px)] lg:pb-[clamp(56px,7vw,96px)]"
         >
           <Reveal
-            delay={1}
-            className="inline-flex self-start items-center gap-3 mb-[clamp(24px,4vw,40px)] px-4 py-[8px] rounded-full border border-[var(--rule-2)] bg-cream/95 backdrop-blur-sm lg:bg-cream lg:backdrop-blur-0"
-          >
-            <span className="relative flex size-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ember opacity-75" />
-              <span className="relative inline-flex rounded-full size-2 bg-terracotta" />
-            </span>
-            <span className="text-[12px] font-sans tracking-[0.16em] uppercase text-stone font-bold">
-              Moddin
-            </span>
-          </Reveal>
-
-          <Reveal
             as="h1"
             delay={2}
             className="text-[clamp(48px,8vw,128px)] leading-[0.95] tracking-[-0.03em] font-serif text-cream lg:text-ink mb-[clamp(20px,3vw,32px)]"

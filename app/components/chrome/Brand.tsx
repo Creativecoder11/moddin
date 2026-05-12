@@ -11,7 +11,7 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
   return (
     <a
       href="#top"
-      className={`group flex items-center transition-opacity hover:opacity-80 ${className}`}
+      className={`group flex items-center ${isFooter ? 'transition-opacity hover:opacity-80' : ''} ${className}`}
       aria-label="Moddin home"
       {...rest}
     >

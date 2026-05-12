@@ -5,10 +5,10 @@
  */
 
 export const NAV_LINKS = [
-  { label: "Trade" },
-  { label: "Investment" },
-  { label: "Branding" },
-  { label: "Policy & Access" },
+  { label: "Trade", href: "/trade" },
+  { label: "Investment", href: "/investment" },
+  { label: "Branding", href: "/branding" },
+  { label: "Policy & Access", href: "/policy-and-access" },
 ] as const;
 
 export const TICKER_ITEMS = [

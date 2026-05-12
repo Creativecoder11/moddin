@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { Brand } from "./Brand";
 import { NAV_LINKS } from "@/app/data/site";
 import { useSmoothScroll } from "../providers/SmoothScroll";
@@ -66,7 +67,7 @@ export function Nav() {
         ].join(" ")}
       >
         <div className="flex items-center justify-between lg:justify-start w-full py-[6px] pl-[20px] pr-[6px] lg:pr-[6px] gap-[clamp(16px,4vw,64px)]">
-          <Brand className="flex-shrink-0 transition-transform duration-500 hover:scale-95 origin-left" />
+          <Brand className="flex-shrink-0" />
 
           <nav
             aria-label="Primary"
@@ -75,11 +76,12 @@ export function Nav() {
             {NAV_LINKS.map((l, i) => (
               <div key={l.label} className="flex items-center">
                 {i > 0 && <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />}
-                <span
-                  className="flex items-center text-[14.5px] font-sans text-cream/78 whitespace-nowrap cursor-default"
+                <Link
+                  href={l.href}
+                  className="flex items-center text-[14.5px] font-sans text-cream/78 whitespace-nowrap hover:text-cream transition-colors"
                 >
                   <span>{l.label}</span>
-                </span>
+                </Link>
               </div>
             ))}
 
@@ -204,18 +206,20 @@ function MegaMenu({ onClose }: { onClose: () => void }) {
           <ul className="flex flex-col gap-1">
             {NAV_LINKS.map((l) => (
               <motion.li key={l.label} variants={itemVariants(reduce)}>
-                <div
-                  className="flex items-center justify-between py-[16px] border-b border-[var(--rule-2)] whitespace-nowrap overflow-hidden cursor-default"
+                <Link
+                  href={l.href}
+                  onClick={onClose}
+                  className="flex items-center justify-between py-[16px] border-b border-[var(--rule-2)] whitespace-nowrap overflow-hidden group"
                 >
                   <span className="flex items-baseline overflow-hidden">
                     <span
-                      className="font-serif text-[clamp(32px,8vw,48px)] leading-none tracking-[-0.02em] text-ink truncate"
+                      className="font-serif text-[clamp(32px,8vw,48px)] leading-none tracking-[-0.02em] text-ink truncate transition-colors group-hover:text-terracotta"
                       style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
                     >
                       {l.label}
                     </span>
                   </span>
-                </div>
+                </Link>
               </motion.li>
             ))}
           </ul>
