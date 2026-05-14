@@ -14,7 +14,7 @@ export function Role() {
     >
       <div className="num-big">{role.num}</div>
       <h3>{role.title}</h3>
-      <TextEffect as="p" per="word" preset="blur" scrollReveal>
+      <TextEffect as="p" per="word" preset="fade" scrollReveal>
         {role.body}
       </TextEffect>
       <div className="tag-row">
@@ -41,7 +41,7 @@ export function Role() {
               </span>
             </SplitText>
           </div>
-          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+          <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.2}>
             {"A structured approach to move from opportunity to execution—clearly, confidently, and at speed."}
           </TextEffect>
         </div>

@@ -36,7 +36,7 @@ export function FinalCta() {
               Clarity and <em>Confidence.</em>
             </span>
           </SplitText>
-          <TextEffect as="p" className="lead" per="word" preset="blur" scrollReveal delay={0.1}>
+          <TextEffect as="p" className="lead" per="word" preset="fade" scrollReveal delay={0.1}>
             {"Whether you're evaluating entry, partnerships, or investment, we help you move with the right local context and execution support."}
           </TextEffect>
           <Reveal delay={2} className="cta-ctas">
@@ -51,10 +51,10 @@ export function FinalCta() {
             <i />
             Response within 24 hours
           </div>
-          <TextEffect as="h3" per="word" preset="blur" scrollReveal>
+          <TextEffect as="h3" per="word" preset="fade" scrollReveal>
             {"Request the Business Deck"}
           </TextEffect>
-          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.1}>
+          <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.1}>
             {"A structured view of Bangladesh's opportunity—covering market insights, sector focus, and our execution approach."}
           </TextEffect>
           <PrimerForm />

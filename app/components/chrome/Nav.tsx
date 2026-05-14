@@ -87,8 +87,8 @@ export function Nav() {
 
             <div className="flex items-center">
               <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 className="inline-flex group relative items-center rounded-full bg-cream overflow-hidden pl-4 pr-1 py-1 text-[13px] font-sans font-medium text-ink tracking-[0.01em] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:pl-9.5 hover:pr-4"
               >
                 <span className="relative z-10 py-[2px] pr-9 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:pr-0">Partner With Us</span>
@@ -97,7 +97,7 @@ export function Nav() {
                     <path d="M1 7H13M8 2L13 7L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
-              </a>
+              </Link>
             </div>
           </nav>
 
@@ -225,8 +225,8 @@ function MegaMenu({ onClose }: { onClose: () => void }) {
           </ul>
 
           <motion.div className="mt-10 pt-8 border-t border-[var(--rule-2)]" variants={itemVariants(reduce)}>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               onClick={onClose}
               className="group inline-flex items-center justify-between w-full rounded-full bg-ink p-[8px] pl-[24px] text-[15px] font-sans font-medium text-cream tracking-[0.01em] transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-terracotta"
             >
@@ -236,7 +236,7 @@ function MegaMenu({ onClose }: { onClose: () => void }) {
                   <path d="M1 7H13M8 2L13 7L8 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
-            </a>
+            </Link>
           </motion.div>
         </motion.nav>
       </motion.div>

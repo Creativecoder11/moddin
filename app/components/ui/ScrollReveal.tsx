@@ -139,7 +139,7 @@ export function ScrollReveal({
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 90%", "end 40%"],
+    offset: ["start 90%", "center 50%"],
   });
 
   const total = useMemo(() => Math.max(countWords(children), 1), [children]);

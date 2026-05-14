@@ -19,7 +19,7 @@ export function Insights() {
               Bangladesh Market <em>Insights.</em>
             </SplitText>
           </div>
-          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+          <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.2}>
             {"Practical insights, sector updates, and guides for companies and investors evaluating Bangladesh."}
           </TextEffect>
         </div>
@@ -50,10 +50,10 @@ export function Insights() {
                     <span>{card.metaA}</span>
                     <span>{card.metaB}</span>
                   </div>
-                  <TextEffect as="h3" per="word" preset="blur" scrollReveal>
+                  <TextEffect as="h3" per="word" preset="fade" scrollReveal>
                     {card.title}
                   </TextEffect>
-                  <TextEffect as="p" per="word" preset="blur" scrollReveal>
+                  <TextEffect as="p" per="word" preset="fade" scrollReveal>
                     {card.body}
                   </TextEffect>
                   <div className="row">

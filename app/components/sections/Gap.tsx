@@ -19,7 +19,7 @@ export function Gap() {
               </span>
             </SplitText>
           </div>
-          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+          <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.2}>
             {"Interest in Bangladesh is strong. Conversion into real investment and partnerships is where friction begins — and where Moddin comes in."}
           </TextEffect>
         </div>
@@ -36,7 +36,7 @@ export function Gap() {
                 <span>{item.label}</span>
               </div>
               <h3 dangerouslySetInnerHTML={{ __html: item.titleHTML }} />
-              <TextEffect as="p" per="word" preset="blur" scrollReveal>
+              <TextEffect as="p" per="word" preset="fade" scrollReveal>
                 {item.body}
               </TextEffect>
             </Reveal>

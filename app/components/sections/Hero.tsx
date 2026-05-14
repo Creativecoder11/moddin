@@ -145,7 +145,7 @@ export function Hero() {
               as="p"
               className="text-[clamp(18px,2vw,26px)] leading-[1.3] font-sans font-semibold text-cream lg:text-ink mb-[clamp(12px,2vw,20px)] tracking-[-0.01em]"
               per="word"
-              preset="blur"
+              preset="fade"
               scrollReveal
             >
               {"Your gateway to Bangladesh’s market."}
@@ -155,7 +155,7 @@ export function Hero() {
               className="text-[clamp(15px,1.1vw,17px)] leading-[1.65] text-cream/75 lg:text-ink/65 font-serif max-w-[440px]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 20' }}
               per="word"
-              preset="blur"
+              preset="fade"
               scrollReveal
               delay={0.15}
             >

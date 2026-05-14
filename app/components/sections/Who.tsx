@@ -27,7 +27,7 @@ export function Who() {
       <div className="inner">
         <div className="idx">{p.idx}</div>
         <h3>{p.title}</h3>
-        <TextEffect as="p" per="word" preset="blur" scrollReveal>
+        <TextEffect as="p" per="word" preset="fade" scrollReveal>
           {p.body}
         </TextEffect>
       </div>
@@ -46,7 +46,7 @@ export function Who() {
               Who <em>We Work With.</em>
             </SplitText>
           </div>
-          <TextEffect as="p" per="word" preset="blur" scrollReveal delay={0.2}>
+          <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.2}>
             {"Different partners, different objectives—supported by the same structured approach and local capability."}
           </TextEffect>
         </div>

@@ -34,7 +34,12 @@
       "Bash(netstat -ano)",
       "Bash(findstr \"LISTENING\")",
       "Bash(findstr \":300\")",
-      "Bash(rg -v \"^\\\\+\\\\s*$\")"
+      "Bash(rg -v \"^\\\\+\\\\s*$\")",
+      "Skill(high-end-visual-design)",
+      "Skill(high-end-visual-design:*)",
+      "Skill(design-taste-frontend)",
+      "Skill(design-taste-frontend:*)",
+      "Bash(awk 'END { print NR }' app/globals.css)"
     ]
   }
 }

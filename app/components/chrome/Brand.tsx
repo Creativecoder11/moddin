@@ -1,5 +1,6 @@
 import { type HTMLAttributes } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 type BrandProps = HTMLAttributes<HTMLAnchorElement> & {
   variant?: "nav" | "footer";
@@ -9,8 +10,8 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
   const isFooter = variant === "footer";
 
   return (
-    <a
-      href="#top"
+    <Link
+      href="/"
       className={`group flex items-center ${isFooter ? 'transition-opacity hover:opacity-80' : ''} ${className}`}
       aria-label="Moddin home"
       {...rest}
@@ -25,6 +26,6 @@ export function Brand({ variant = "nav", className = "", ...rest }: BrandProps) 
         unoptimized
         className="object-contain brightness-0 invert"
       />
-    </a>
+    </Link>
   );
 }

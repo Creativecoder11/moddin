@@ -60,7 +60,7 @@ function ServiceCard({
         dangerouslySetInnerHTML={{ __html: svc.titleHTML }}
       />
 
-      <TextEffect as="p" className="svc-body" per="word" preset="blur" scrollReveal>
+      <TextEffect as="p" className="svc-body" per="word" preset="fade" scrollReveal>
         {svc.body}
       </TextEffect>
 
@@ -134,7 +134,7 @@ export function Services() {
           </div>
 
           <Reveal as="div" delay={2} className="svc-head__aside">
-            <TextEffect as="p" className="svc-head__lead" per="word" preset="blur" scrollReveal>
+            <TextEffect as="p" className="svc-head__lead" per="word" preset="fade" scrollReveal>
               {"Four capabilities across the market-entry journey—from first insight to signed partnership and operating presence in Bangladesh."}
             </TextEffect>
 
