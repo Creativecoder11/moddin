@@ -23,6 +23,11 @@ export type ServiceWireframeVariant =
   | "narrative"
   | "network";
 
+export type ServicePageStat = {
+  value: string;
+  label: string;
+};
+
 export type ServicePageContent = {
   metadata: {
     title: string;
@@ -30,6 +35,7 @@ export type ServicePageContent = {
   };
   label: string;
   title: string;
+  tagline?: string;
   intro: string;
   image: {
     src: string;
@@ -39,6 +45,10 @@ export type ServicePageContent = {
   wireframeVariant: ServiceWireframeVariant;
   asciiWireframe: string;
   blocks: readonly ServicePageBlock[];
+  stats?: readonly ServicePageStat[];
+  closingStatement?: string;
+  closingBody?: string;
+  bandHeading?: string;
   faqs: readonly ServicePageFaq[];
   cta: {
     title: string;
@@ -63,6 +73,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     },
     label: "Country Primer",
     title: "Why Bangladesh",
+    tagline: "We work in Bangladesh so you don't get lost in it.",
     intro:
       "Bangladesh combines export scale, industrial depth, and a young workforce with a market that still feels hard to navigate from the outside. This page should give decision-makers a clear, execution-focused answer to one question: why now, and how do we enter with less risk?",
     image: {
@@ -72,8 +83,8 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     hero: {
       category: "Country primer",
       subhead: "Bangladesh by the numbers, the frictions to expect, and a credible way in.",
-      bg: "#0e2b22",
-      accent: "#3daa80",
+      bg: "var(--ink)",
+      accent: "var(--ember)",
     },
     wireframeVariant: "brief",
     asciiWireframe: `+--------------------------------------------------------------------------------+
@@ -129,6 +140,15 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
         body: "End the core narrative with a practical operating model: diagnose market fit, structure the right local route, and activate institutional plus commercial pathways required to execute.",
       },
     ],
+    bandHeading: "The only partner you need to navigate every stage of a transaction.",
+    stats: [
+      { value: "$170B+", label: "GDP" },
+      { value: "170M", label: "People" },
+      { value: "8.2%", label: "GDP CAGR" },
+      { value: "12+", label: "Priority Sectors" },
+    ],
+    closingStatement: "Every angle, every path, airtight answers.",
+    closingBody: "Bangladesh rewards operators who pair conviction with sequencing. We translate macro thesis into a structured first 90 days—what to validate, who to meet, and where to commit.",
     faqs: [
       {
         question: "What is the fastest way to assess Bangladesh fit for our business?",
@@ -160,6 +180,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     },
     label: "Service Content",
     title: "Trade & Market Expansion",
+    tagline: "We work in trade so you don't get lost in it.",
     intro:
       "This page should reassure global operators that Bangladesh trade entry can be systematic, data-backed, and operationally manageable. Keep the message focused on route-to-market clarity, supply-side reliability, and partner fit.",
     image: {
@@ -169,8 +190,8 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     hero: {
       category: "Trade & Market Expansion",
       subhead: "Market entry, sourcing, and partner setup—built one corridor at a time.",
-      bg: "#0e2b22",
-      accent: "#3daa80",
+      bg: "var(--ink)",
+      accent: "var(--ember)",
     },
     wireframeVariant: "corridor",
     asciiWireframe: `+--------------------------------------------------------------------------------+
@@ -219,6 +240,15 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
         body: "Set outcomes in operational language: faster partner qualification, fewer false starts, and a clear first 90-day execution path.",
       },
     ],
+    bandHeading: "The only partner you need to navigate every corridor of a trade move.",
+    stats: [
+      { value: "$60B+", label: "Trade Volume" },
+      { value: "5+", label: "Corridors" },
+      { value: "Global", label: "Clients" },
+      { value: "10+", label: "Sectors" },
+    ],
+    closingStatement: "Every corridor, every channel, qualified partners.",
+    closingBody: "Trade isn't won at the contract—it's won in the sequencing of market choice, partner fit, and operating readiness. We bundle those decisions into one disciplined plan.",
     faqs: [
       {
         question: "Do you only support export opportunities from Bangladesh?",
@@ -250,6 +280,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     },
     label: "Service Content",
     title: "Investment & Deal Facilitation",
+    tagline: "We work in deals so you don't get lost in them.",
     intro:
       "This page should help investors move from broad interest to executable opportunity. The voice should be disciplined and transaction-oriented, with clear emphasis on pipeline quality, local intelligence, and coordinated deal progress.",
     image: {
@@ -259,8 +290,8 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     hero: {
       category: "Investment & Deal Facilitation",
       subhead: "Mandate-aligned pipeline, structured diligence, faster go/no-go decisions.",
-      bg: "#0c2620",
-      accent: "#c29a4e",
+      bg: "var(--ink)",
+      accent: "var(--brass)",
     },
     wireframeVariant: "pipeline",
     asciiWireframe: `+--------------------------------------------------------------------------------+
@@ -304,6 +335,15 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
         body: "Anchor value in outcomes investors care about: tighter pipeline quality, reduced dead-end diligence, and faster movement to informed go/no-go decisions.",
       },
     ],
+    bandHeading: "The only partner you need to navigate every stage of a transaction.",
+    stats: [
+      { value: "$100M+", label: "Deal Flow" },
+      { value: "6+", label: "Years" },
+      { value: "Global", label: "LPs & Sponsors" },
+      { value: "10+", label: "Industries" },
+    ],
+    closingStatement: "Every angle, every path, airtight answers.",
+    closingBody: "From mandate to close, the work that matters is local. We turn macro thesis into qualified pipeline, sharpen diligence, and reduce time between conviction and commitment.",
     faqs: [
       {
         question: "Do you act as an investment advisor?",
@@ -335,6 +375,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     },
     label: "Service Content",
     title: "Country Branding & Positioning",
+    tagline: "We work on the national narrative so you don't get lost in it.",
     intro:
       "This page should frame branding as economic strategy, not cosmetics. The core message: strong national positioning improves investor confidence, partner quality, and deal conversion when narrative and execution signals are aligned.",
     image: {
@@ -344,8 +385,8 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     hero: {
       category: "Country Branding & Positioning",
       subhead: "National narrative as conversion infrastructure—not campaign collateral.",
-      bg: "#13302a",
-      accent: "#3daa80",
+      bg: "var(--ink)",
+      accent: "var(--ember)",
     },
     wireframeVariant: "narrative",
     asciiWireframe: `+--------------------------------------------------------------------------------+
@@ -388,6 +429,15 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
         body: "Highlight coordination mechanisms that keep ministries, agencies, and delivery partners aligned on one coherent market-facing message.",
       },
     ],
+    bandHeading: "The only partner you need to build a coherent country narrative.",
+    stats: [
+      { value: "1", label: "Narrative System" },
+      { value: "4+", label: "Audience Tracks" },
+      { value: "Global", label: "Stakeholders" },
+      { value: "12+", label: "Asset Formats" },
+    ],
+    closingStatement: "One country, one narrative, infinite proof.",
+    closingBody: "Branding is execution infrastructure. We align ministries, agencies, and delivery partners around a story that performs when investors, operators, and institutions stress-test it.",
     faqs: [
       {
         question: "Is this service only for public-sector entities?",
@@ -419,6 +469,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     },
     label: "Service Content",
     title: "Policy & Institutional Access",
+    tagline: "We work in policy so you don't get lost in it.",
     intro:
       "This page should reduce perceived policy uncertainty by showing a structured approach to institutional engagement. The tone should be practical, process-driven, and focused on reducing execution friction.",
     image: {
@@ -428,8 +479,8 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
     hero: {
       category: "Policy & Institutional Access",
       subhead: "Sequenced engagement with the institutions that move execution forward.",
-      bg: "#0a221c",
-      accent: "#c29a4e",
+      bg: "var(--ink)",
+      accent: "var(--brass)",
     },
     wireframeVariant: "network",
     asciiWireframe: `+--------------------------------------------------------------------------------+
@@ -473,6 +524,15 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
         body: "Position outcomes as fewer process surprises, better institutional communication, and stronger continuity from initial outreach to implementation.",
       },
     ],
+    bandHeading: "The only partner you need to engage the institutions that move execution.",
+    stats: [
+      { value: "20+", label: "Institutions Mapped" },
+      { value: "6+", label: "Years" },
+      { value: "Multi-Agency", label: "Coordination" },
+      { value: "8+", label: "Sectors Covered" },
+    ],
+    closingStatement: "Every approval, every signal, well-sequenced.",
+    closingBody: "Institutional access isn't about shortcuts. It is sequenced, well-prepared engagement with the agencies, chambers, and sponsors that actually move decisions forward.",
     faqs: [
       {
         question: "Does this include legal advice?",

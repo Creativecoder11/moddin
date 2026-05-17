@@ -125,8 +125,8 @@ export default function ContactPage() {
           hero={{
             category: "Contact",
             subhead: "Tell us where you are. We'll come back with the right next step.",
-            bg: "#0e2b22",
-            accent: "#3daa80",
+            bg: "var(--ink)",
+            accent: "var(--ember)",
           }}
           wireframeVariant="brief"
           image={{

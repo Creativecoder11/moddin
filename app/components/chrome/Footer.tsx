@@ -1,4 +1,3 @@
-import { Brand } from "./Brand";
 import SplitText from "../ui/SplitText";
 import { FOOTER_LINKS } from "@/app/data/site";
 
@@ -19,17 +18,8 @@ export function Footer() {
   return (
     <footer className="bg-coal text-cream pt-[clamp(56px,7vw,96px)] pb-9 relative">
       <div className="wrap">
-        {/* TOP: brand + link columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-[clamp(24px,3vw,48px)] mb-16">
-          <div className="flex flex-col gap-4 max-w-[360px]">
-            <Brand variant="footer" />
-            <p className="text-cream/70 text-[14.5px] leading-[1.5]">
-              A partner to global businesses
-              <br />
-              entering Bangladesh.
-            </p>
-          </div>
-
+        {/* TOP: link columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[clamp(24px,3vw,48px)] mb-16">
           <FooterColumn title="Explore" links={FOOTER_LINKS.explore} />
           <FooterColumn title="Services" links={FOOTER_LINKS.services} />
 
@@ -38,8 +28,6 @@ export function Footer() {
               Office
             </h4>
             <address className="not-italic text-[14.5px] text-cream/80 leading-[1.55]">
-              Moddin
-              <br />
               Dhaka, Bangladesh
               <br />
               <br />
