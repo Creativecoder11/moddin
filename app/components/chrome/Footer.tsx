@@ -28,15 +28,15 @@ export function Footer() {
               Office
             </h4>
             <address className="not-italic text-[14.5px] text-cream/80 leading-[1.55]">
-              Dhaka, Bangladesh
+              House: 654, Road: 09 Ave: 04, Mirpur DOHS, Dhaka 1216
               <br />
               <br />
-              <a href="mailto:hello@moddin.com" className="hover:opacity-100 hover:text-ember">
-                hello@moddin.com
+              <a href="mailto:muddin@mostafiz.org" className="hover:opacity-100 hover:text-ember">
+                muddin@mostafiz.org
               </a>
               <br />
               <a href="tel:+8801730035100" className="hover:opacity-100 hover:text-ember">
-                +880 1730 035 100
+                +880 1784-398934
               </a>
             </address>
           </div>

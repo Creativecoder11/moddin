@@ -52,7 +52,7 @@ export function Hero() {
 
   return (
     <section
-      className="hero-section relative w-full overflow-hidden bg-paper -mt-[112px] max-[560px]:-mt-[96px]"
+      className="hero-section relative w-full overflow-hidden bg-paper -mt-[32px] max-[560px]:-mt-[96px]"
       aria-label="Bangladesh, Unlocked"
     >
       {/* Single full-bleed image. CSS handles mobile bg vs desktop right-column. */}
