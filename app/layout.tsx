@@ -1,28 +1,33 @@
 import type { Metadata } from "next";
-import { PT_Serif, Outfit, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "locomotive-scroll/locomotive-scroll.css";
 import { SmoothScroll } from "./components/providers/SmoothScroll";
 
-const ptSerif = PT_Serif({
+// Self-hosted (latin subset) instead of next/font/google: fetching Google Fonts
+// at build time fails under Turbopack on Vercel.
+const ptSerif = localFont({
   variable: "--font-pt-serif",
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
+  src: [
+    { path: "./fonts/pt-serif-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/pt-serif-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/pt-serif-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/pt-serif-700-italic.woff2", weight: "700", style: "italic" },
+  ],
   display: "swap",
 });
 
-const outfit = Outfit({
+const outfit = localFont({
   variable: "--font-outfit",
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+  src: "./fonts/outfit-latin-var.woff2",
+  weight: "300 700",
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
+const jetbrains = localFont({
   variable: "--font-jetbrains",
-  weight: ["400", "500"],
-  subsets: ["latin"],
+  src: "./fonts/jetbrains-mono-latin-var.woff2",
+  weight: "400 500",
   display: "swap",
 });
 
