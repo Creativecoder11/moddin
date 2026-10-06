@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "../ui/Reveal";
 import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
-import { INSIGHTS } from "@/app/data/site";
-import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
+import { ARTICLES } from "@/app/data/insights";
 import { MobileCarousel } from "../ui/MobileCarousel";
+import { InsightCard } from "./InsightCard";
 
 export function Insights() {
   return (
@@ -26,51 +26,17 @@ export function Insights() {
 
         <div className="ins-grid">
           <MobileCarousel breakpoint={900} slideClassName="ins-slide">
-            {INSIGHTS.map((card, i) => (
-              <Reveal
-                key={card.title}
-                as="article"
-                delay={i === 0 ? undefined : (i as 1 | 2)}
-                className="ins-card"
-              >
-                <div className="cover">
-                  <Image
-                    src={card.src}
-                    alt={card.alt}
-                    fill
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL={IMAGE_BLUR_DATA_URL}
-                    sizes="(max-width: 900px) 100vw, 33vw"
-                  />
-                  <span className="tag">{card.tag}</span>
-                </div>
-                <div className="body">
-                  <div className="meta">
-                    <span>{card.metaA}</span>
-                    <span>{card.metaB}</span>
-                  </div>
-                  <TextEffect as="h3" per="word" preset="fade" scrollReveal>
-                    {card.title}
-                  </TextEffect>
-                  <TextEffect as="p" per="word" preset="fade" scrollReveal>
-                    {card.body}
-                  </TextEffect>
-                  <div className="row">
-                    <span className="go">{card.cta}</span>
-                    <span className="arr">→</span>
-                  </div>
-                </div>
-              </Reveal>
+            {ARTICLES.slice(0, 3).map((article, i) => (
+              <InsightCard key={article.slug} article={article} index={i} />
             ))}
           </MobileCarousel>
         </div>
 
         <Reveal className="ins-cta">
           <span className="t">All insights in one place</span>
-          <a href="#" className="btn btn-ghost">
+          <Link href="/insights" className="btn btn-ghost">
             View Insights <span>→</span>
-          </a>
+          </Link>
         </Reveal>
       </div>
     </section>

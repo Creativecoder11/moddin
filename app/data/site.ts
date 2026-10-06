@@ -244,55 +244,12 @@ export const STEPS: Step[] = [
   },
 ];
 
-export type Insight = {
-  src: string;
-  alt: string;
-  tag: string;
-  metaA: string;
-  metaB: string;
-  title: string;
-  body: string;
-  cta: string;
-};
-export const INSIGHTS: Insight[] = [
-  {
-    src: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&w=900&q=80",
-    alt: "Dhaka port",
-    tag: "Brief",
-    metaA: "Country brief",
-    metaB: "10 min read",
-    title: "Bangladesh Opportunity Briefs",
-    body: "Short, structured primers on where the market is going — and what that means for capital and partners.",
-    cta: "Read the series",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1590556409324-aa1d726e5c3c?auto=format&fit=crop&w=900&q=80",
-    alt: "Sector analytics and signals",
-    tag: "Sectors",
-    metaA: "Sector notes",
-    metaB: "Quarterly",
-    title: "Sector Notes & Market Signals",
-    body: "On-the-ground reads across textiles, digital, energy, logistics, agri, and financial services.",
-    cta: "See sector notes",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
-    alt: "Market entry planning",
-    tag: "Guides",
-    metaA: "Guides",
-    metaB: "Checklists",
-    title: "Market Entry Guides & Checklists",
-    body: "Step-by-step playbooks covering setup, licensing, partner selection, and first 180 days.",
-    cta: "Browse the guides",
-  },
-];
-
 export const FOOTER_LINKS = {
   explore: [
     { href: "#why", label: "Why Bangladesh" },
     { href: "#services", label: "Services" },
     { href: "#who", label: "Who We Work With" },
-    { href: "#insights", label: "Insights" },
+    { href: "/insights", label: "Insights" },
     { href: "#contact", label: "Contact" },
   ],
   services: [
