@@ -35,7 +35,7 @@ export function Footer() {
                 muddin@mostafiz.org
               </a>
               <br />
-              <a href="tel:+8801730035100" className="hover:opacity-100 hover:text-ember">
+              <a href="tel:+8801784398934" className="hover:opacity-100 hover:text-ember">
                 +880 1784-398934
               </a>
             </address>
@@ -75,7 +75,7 @@ export function Footer() {
               </a>
             ))}
             <a
-              href="mailto:hello@moddin.com"
+              href="mailto:muddin@mostafiz.org"
               aria-label="Mail"
               className="size-[42px] rounded-full border border-[var(--rule-d-2)] grid place-items-center transition-all duration-[250ms] text-cream hover:bg-ember hover:border-ember hover:text-ink hover:-translate-y-0.5"
             >
