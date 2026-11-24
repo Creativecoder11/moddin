@@ -1,54 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCountUp } from "./StatCounter";
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
 import { TextEffect } from "../ui/text-effect";
 import { ButtonLink } from "../ui/Button";
 import heroImage from "../../../public/hero-bangladesh-network.webp";
 
-const COUNTER_TARGET = 460;
-const COUNTER_DURATION = 1600;
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const COUNTER_TARGET = 501;
+const COUNTER_START_DELAY = 1220;
 
 export function Hero() {
-  const metricRef = useRef<HTMLDivElement>(null);
-  const [metricCount, setMetricCount] = useState(0);
-  const countPlayedRef = useRef(false);
-
-  useEffect(() => {
-    const el = metricRef.current;
-    if (!el) return;
-    let timeoutId = 0;
-    let rafId = 0;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting || countPlayedRef.current) continue;
-          countPlayedRef.current = true;
-          io.unobserve(e.target);
-          timeoutId = window.setTimeout(() => {
-            const start = performance.now();
-            const tick = (now: number) => {
-              const p = Math.min((now - start) / COUNTER_DURATION, 1);
-              setMetricCount(Math.round(COUNTER_TARGET * easeOutCubic(p)));
-              if (p < 1) rafId = requestAnimationFrame(tick);
-              else setMetricCount(COUNTER_TARGET);
-            };
-            rafId = requestAnimationFrame(tick);
-          }, 1220);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    io.observe(el);
-    return () => {
-      io.disconnect();
-      window.clearTimeout(timeoutId);
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
+  const { ref: metricRef, text: metricText } = useCountUp<HTMLDivElement>(
+    COUNTER_TARGET,
+    0,
+    COUNTER_START_DELAY,
+  );
 
   return (
     <section
@@ -143,23 +110,12 @@ export function Hero() {
           <Reveal delay={3} className="max-w-[520px] mb-[clamp(28px,5vw,48px)]">
             <TextEffect
               as="p"
-              className="text-[clamp(18px,2vw,26px)] leading-[1.3] font-sans font-semibold text-cream lg:text-ink mb-[clamp(12px,2vw,20px)] tracking-[-0.01em]"
+              className="text-[clamp(18px,2vw,26px)] leading-[1.3] font-sans font-semibold text-cream lg:text-ink tracking-[-0.01em]"
               per="word"
               preset="fade"
               scrollReveal
             >
-              {"Your gateway to Bangladesh’s market."}
-            </TextEffect>
-            <TextEffect
-              as="p"
-              className="text-[clamp(15px,1.1vw,17px)] leading-[1.65] text-cream/75 lg:text-ink/65 font-serif max-w-[440px]"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 20' }}
-              per="word"
-              preset="fade"
-              scrollReveal
-              delay={0.15}
-            >
-              {"Moddin connects global businesses with Bangladesh—enabling trade, investment, and real market entry."}
+              {"Moddin helps global companies, investors and institutions enter Bangladesh."}
             </TextEffect>
           </Reveal>
 
@@ -205,7 +161,7 @@ export function Hero() {
                 Opportunity Size
               </div>
               <div className="text-[64px] font-serif text-ink tracking-[-0.04em] leading-none">
-                ${metricCount}
+                {`$${metricText}`}
                 <span
                   className="text-[44px] text-terracotta italic ml-[2px]"
                   style={{
@@ -214,11 +170,12 @@ export function Hero() {
                 >
                   B
                 </span>
+                +
               </div>
               <div className="mt-5 pt-4 border-t border-[var(--rule-2)] flex items-center gap-3">
                 <span className="size-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
                 <span className="text-[13px] font-sans font-medium text-stone tracking-[0.01em]">
-                  Fastest growing
+                  One of Asia&apos;s fastest-growing economies
                 </span>
               </div>
             </div>

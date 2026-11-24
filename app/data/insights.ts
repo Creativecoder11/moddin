@@ -650,11 +650,14 @@ export function readTimeMinutes(article: Article): number {
   return Math.max(1, Math.round(words / 220));
 }
 
+/** Short date, e.g. "12 Nov 2026". en-GB ICU renders September as "Sept"; keep a 3-letter month. */
 export function formatArticleDate(iso: string): string {
-  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
+  return new Date(`${iso}T00:00:00Z`)
+    .toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    })
+    .replace("Sept", "Sep");
 }

@@ -10,11 +10,11 @@ import {
 } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
 } from "motion/react";
+import { useReducedMotion } from "./use-reduced-motion";
 
 type AsTag = "div" | "p" | "h2" | "h3" | "h4";
 
@@ -33,6 +33,7 @@ type WordOptions = {
   baseOpacity: number;
   blurStrength: number;
   enableBlur: boolean;
+  reduce: boolean;
 };
 
 type WalkState = { count: number; total: number };
@@ -88,8 +89,10 @@ function renderTree(
   if (isValidElement(node)) {
     const element = node as ReactElement<{ children?: ReactNode }>;
     const inner = element.props?.children;
-    if (inner == null) return element;
-    return cloneElement(element, undefined, renderTree(inner, state, options, keyHint));
+    // Arrays built with .map() are not treated as static children, so every element needs a key.
+    const config = { key: element.key ?? keyHint };
+    if (inner == null) return cloneElement(element, config);
+    return cloneElement(element, config, renderTree(inner, state, options, keyHint));
   }
   return node;
 }
@@ -105,7 +108,7 @@ function Word({
   options: WordOptions;
   children: ReactNode;
 }) {
-  const { progress, baseOpacity, blurStrength, enableBlur } = options;
+  const { progress, baseOpacity, blurStrength, enableBlur, reduce } = options;
   const denom = Math.max(total - 1, 1);
   const start = 0.15 + (index / denom) * 0.55;
   const end = Math.min(start + 0.2, 1);
@@ -116,8 +119,8 @@ function Word({
     <motion.span
       style={{
         display: "inline-block",
-        opacity,
-        filter: enableBlur ? filter : undefined,
+        opacity: reduce ? 1 : opacity,
+        filter: reduce ? "none" : enableBlur ? filter : undefined,
         willChange: "opacity, filter",
       }}
     >
@@ -153,25 +156,21 @@ export function ScrollReveal({
           baseOpacity,
           blurStrength,
           enableBlur,
+          reduce,
         },
         "sr"
       ),
-    [children, total, scrollYProgress, baseOpacity, blurStrength, enableBlur]
+    [children, total, scrollYProgress, baseOpacity, blurStrength, enableBlur, reduce]
   );
 
   const rotate = useTransform(scrollYProgress, [0, 0.45], [baseRotation, 0]);
-
-  if (reduce) {
-    const Plain = as;
-    return <Plain className={className}>{children}</Plain>;
-  }
 
   const Tag = motionTags[as];
   return (
     <Tag
       ref={ref as never}
       className={className}
-      style={{ rotate, transformOrigin: "0% 50%" }}
+      style={{ rotate: reduce ? 0 : rotate, transformOrigin: "0% 50%" }}
     >
       {tree}
     </Tag>

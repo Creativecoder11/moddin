@@ -3,7 +3,12 @@ import Link from "next/link";
 import { Reveal } from "../ui/Reveal";
 import { TextEffect } from "../ui/text-effect";
 import { IMAGE_BLUR_DATA_URL } from "../ui/image-placeholders";
-import { articleHref, readTimeMinutes, type Article } from "@/app/data/insights";
+import {
+  articleHref,
+  formatArticleDate,
+  readTimeMinutes,
+  type Article,
+} from "@/app/data/insights";
 
 export function InsightCard({ article, index = 0 }: { article: Article; index?: number }) {
   return (
@@ -28,7 +33,12 @@ export function InsightCard({ article, index = 0 }: { article: Article; index?: 
         <div className="body">
           <div className="meta">
             <span>{article.series}</span>
-            <span>{readTimeMinutes(article)} min read</span>
+            <span>
+              <time dateTime={article.published}>
+                {formatArticleDate(article.published)}
+              </time>
+              {` · ${readTimeMinutes(article)} min read`}
+            </span>
           </div>
           <TextEffect as="h3" per="word" preset="fade" scrollReveal>
             {article.title}

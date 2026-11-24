@@ -1,11 +1,21 @@
 import type { ServicePageContent, ServicePageKey } from "@/app/data/service-pages";
+import type { InquiryId } from "@/lib/lead-validation";
 import { ServiceHero } from "./ServiceHero";
 import { ServiceBody } from "./ServiceBody";
 import { ServiceFaq } from "./ServiceFaq";
 import { ServiceCta } from "./ServiceCta";
 
+const INQUIRY_BY_PAGE: Record<ServicePageKey, InquiryId> = {
+  whyBangladesh: "general",
+  trade: "trade",
+  investment: "investment",
+  branding: "branding",
+  policyAndAccess: "policy",
+};
+
 export function ServicePageContent({
   content,
+  pageKey,
 }: {
   content: ServicePageContent;
   pageKey?: ServicePageKey;
@@ -26,6 +36,7 @@ export function ServicePageContent({
         body={content.cta.body}
         buttonLabel={content.cta.buttonLabel}
         accent={content.hero.accent}
+        inquiry={pageKey ? INQUIRY_BY_PAGE[pageKey] : "general"}
       />
     </>
   );

@@ -71,7 +71,7 @@ export function MobileCarousel({
     });
     ro.observe(wrapRef.current);
     return () => ro.disconnect();
-  }, []);
+  }, [isMobile]);
 
   // Reset active slide when switching modes
   useEffect(() => {

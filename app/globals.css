@@ -697,27 +697,6 @@ body::before {
   color: var(--ink);
   opacity: 0.72;
 }
-.role-card .tag-row .arr {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(11, 11, 12, 0.2);
-  display: grid;
-  place-items: center;
-  transition:
-    background 0.3s,
-    color 0.3s,
-    border-color 0.3s,
-    transform 0.3s;
-  color: var(--ink);
-  background: transparent;
-}
-.role-card:hover .tag-row .arr {
-  background: var(--ink);
-  color: var(--cream);
-  border-color: var(--ink);
-  transform: rotate(-45deg);
-}
 
 /* ========================================================================
    PHOTO BAND
@@ -1029,6 +1008,30 @@ body::before {
   background: var(--ember);
 }
 
+/* Homepage: whole service card is one link (stretched title link) */
+.svc-title__link {
+  color: inherit;
+  text-decoration: none;
+}
+.svc-title__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+.svc-title__link:focus-visible {
+  outline: none;
+}
+.svc-title__link:focus-visible::after {
+  outline: 2px solid var(--terracotta);
+  outline-offset: -4px;
+  border-radius: 6px;
+}
+.svc-card--dark .svc-title__link:focus-visible::after {
+  outline-color: var(--ember);
+}
+
 /* Body */
 .svc-body {
   margin: 0;
@@ -1206,6 +1209,12 @@ body::before {
   color: var(--cream);
   height: 100%;
 }
+/* Responsive-Who: two columns of 3/4 portraits get 450x600 cards at 1024; square keeps them card-sized. */
+@media (min-width: 641px) and (max-width: 1060px) {
+  .who-card {
+    aspect-ratio: 1;
+  }
+}
 .who-card img {
   position: absolute;
   inset: 0;
@@ -1234,17 +1243,6 @@ body::before {
   position: relative;
   z-index: 2;
 }
-.who-card .idx {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 13px;
-  margin-bottom: 14px;
-  color: var(--cream);
-  display: inline-block;
-  padding: 4px 11px;
-  border-radius: 100px;
-  background: var(--ember);
-}
 .who-card h3 {
   font-family: var(--font-serif);
   font-weight: 400;
@@ -1262,27 +1260,6 @@ body::before {
   line-height: 1.55;
   opacity: 0.9;
   max-width: 28ch;
-}
-.who-card .top-tag {
-  position: absolute;
-  top: 22px;
-  left: 22px;
-  z-index: 3;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 14.5px;
-  color: var(--cream);
-  opacity: 0.88;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.who-card .top-tag::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ember);
 }
 
 /* ========================================================================
@@ -1588,6 +1565,17 @@ body::before {
   opacity: 0.4;
   margin-left: 10px;
 }
+/* Responsive-Insights: stack series above date where the card body is too narrow for one row. */
+@media (min-width: 901px) and (max-width: 1239px), (max-width: 560px) {
+  .ins-card .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .ins-card .meta span:not(:last-child)::after {
+    display: none;
+  }
+}
 .ins-card h3 {
   font-family: var(--font-serif);
   font-weight: 400;
@@ -1810,6 +1798,151 @@ body::before {
 .cta .aside .form button:hover {
   background: var(--cream);
 }
+
+/* Forms: DeckRequest (both variants sit on a dark surface; colours follow currentColor) */
+.deck-request {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* Form and download link share one grid cell so the success state keeps the same height. */
+.deck-request__stage {
+  display: grid;
+}
+.deck-request__stage > * {
+  grid-area: 1 / 1;
+}
+.deck-request__form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.deck-request__form[inert] {
+  visibility: hidden;
+}
+.deck-request__label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+/* Pill. In the homepage CTA, `.cta .aside .form` already styles it; these cover the sidebar. */
+.deck-request__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: 100px;
+  padding: 4px 4px 4px 16px;
+}
+.deck-request__row:focus-within {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
+}
+.deck-request .deck-request__row:has(input[aria-invalid="true"]) {
+  border-color: var(--terracotta);
+}
+.deck-request__row input {
+  flex: 1;
+  min-width: 0;
+  /* Drop the input's intrinsic ~20ch width so the pill fits 390px screens; flex sets the size. */
+  width: 0;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  padding: 8px 0;
+}
+.deck-request__row input::placeholder {
+  color: color-mix(in srgb, currentColor 50%, transparent);
+}
+.deck-request__row button {
+  flex: none;
+  white-space: nowrap;
+  background: var(--ember);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-size: 13px;
+  transition: background 0.25s ease;
+}
+.deck-request__row button:hover:not(:disabled) {
+  background: var(--cream);
+}
+.deck-request__row button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* Responsive-DeckRequest: below ~440px the pill leaves the input under 120px (placeholder clips), so stack the button under it. */
+@media (max-width: 440px) {
+  .deck-request .form.deck-request__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 24px;
+  }
+  .deck-request .form.deck-request__row input {
+    flex: none;
+    width: auto;
+    padding: 10px 12px 6px;
+  }
+  .deck-request .form.deck-request__row button {
+    padding: 12px 18px;
+  }
+}
+.deck-request__download {
+  align-self: center;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 22px;
+  border-radius: 100px;
+  background: var(--ember);
+  color: var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.25s ease;
+}
+.deck-request__download:hover {
+  background: var(--cream);
+}
+/* The hidden sizer reserves room for the longest message; the live message overlays it. */
+.deck-request__note {
+  position: relative;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.deck-request__note-size {
+  display: block;
+  visibility: hidden;
+}
+.deck-request__msg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.deck-request__msg a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.deck-request__msg.is-error {
+  color: color-mix(in srgb, var(--terracotta) 65%, var(--cream));
+}
+.deck-request__consent {
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.6;
+}
+.deck-request__consent a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .cta-ctas {
   margin-top: 40px;
   display: flex;
@@ -1892,6 +2025,8 @@ body::before {
   position: relative;
   width: 100%;
   padding-bottom: 72px;
+  /* Slides are translated beyond the wrap; clip (not hidden) keeps overflow-y visible. */
+  overflow-x: clip;
 }
 
 .carousel-track {
@@ -2293,7 +2428,6 @@ body::before {
     border-right: 1px solid var(--rule);
   }
   .contact-info__cell:nth-child(n + 3) {
-    padding-bottom: 0;
     border-bottom: 0;
   }
   .contact-info__cell:last-child {
@@ -2309,13 +2443,10 @@ body::before {
     border-right: 0;
     border-bottom: 1px solid var(--rule);
     padding: 24px 0;
+    min-height: 0;
   }
   .contact-info__cell:last-child {
     border-bottom: 0;
-    padding-bottom: 0;
-  }
-  .contact-info__cell:first-child {
-    padding-top: 0;
   }
 }
 
@@ -2369,7 +2500,8 @@ body::before {
   padding: clamp(28px, 3vw, 52px);
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  /* contain: paint clips the decorative ::before (it bleeds 20% past the right edge, the only thing wider than the panel) without making the panel a scroll container. With overflow: hidden the panel stayed scriptable-scrollable (scrollLeft 60 took effect), which is how a focused field could shift it sideways. */
+  contain: paint;
 }
 .contact-panel::before {
   content: "";
@@ -2414,14 +2546,6 @@ body::before {
     "SOFT" 100,
     "WONK" 1;
 }
-.contact-panel__counter {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--stone);
-}
-
 /* Inquiry-type chips */
 .contact-chips {
   display: flex;
@@ -2532,6 +2656,84 @@ body::before {
   border-bottom-color: var(--ink);
 }
 
+/* Forms: select, validation, failure line, honeypot, success stack */
+.contact-field select {
+  appearance: none;
+  width: 100%;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%230b0b0c' stroke-opacity='.6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 2px center / 12px 8px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  color: var(--ink);
+  padding: 10px 24px 12px 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.4;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}
+.contact-field select:focus {
+  border-bottom-color: var(--terracotta);
+}
+.contact-field:not(.contact-field--filled) select {
+  color: rgba(11, 11, 12, 0.32);
+}
+.contact-field select option {
+  color: var(--ink);
+}
+.contact-field--filled select {
+  border-bottom-color: var(--ink);
+}
+.contact-field--invalid input,
+.contact-field--invalid textarea,
+.contact-field--invalid select {
+  border-bottom-color: var(--terracotta);
+  box-shadow: 0 1px 0 0 var(--terracotta);
+}
+.contact-field__error {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--terracotta);
+}
+.contact-form__failure {
+  margin: 0;
+  flex: 1 1 240px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--terracotta);
+}
+.contact-form__failure a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Out of flow and invisible, but still in the DOM for bots to fill. */
+.hp-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Form and success share one grid cell, so swapping them never changes the height. */
+.contact-stack {
+  display: grid;
+}
+.contact-stack > * {
+  grid-area: 1 / 1;
+}
+.contact-form--sent {
+  visibility: hidden;
+}
+
 .contact-meta {
   display: flex;
   align-items: center;
@@ -2540,23 +2742,8 @@ body::before {
   flex-wrap: wrap;
   margin-top: clamp(8px, 1vw, 14px);
 }
-.contact-meta__note {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--stone);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.contact-meta__note::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ember);
-  box-shadow: 0 0 0 0 rgba(61, 170, 128, 0.6);
-  animation: pulse 2.2s infinite;
+.contact-meta .contact-submit {
+  margin-left: auto;
 }
 .contact-submit {
   display: inline-flex;
@@ -2604,8 +2791,10 @@ body::before {
 
 /* Success state */
 .contact-success {
+  align-self: center;
   text-align: center;
   padding: clamp(24px, 4vw, 48px) 0;
+  outline: none;
 }
 .contact-success__check {
   width: 56px;
@@ -2628,25 +2817,7 @@ body::before {
     opacity: 1;
   }
 }
-.contact-success h3 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: clamp(26px, 2.6vw, 36px);
-  margin: 0 0 10px;
-  letter-spacing: -0.02em;
-  font-variation-settings:
-    "opsz" 144,
-    "SOFT" 40;
-}
-.contact-success h3 em {
-  font-style: italic;
-  color: var(--terracotta);
-  font-variation-settings:
-    "opsz" 144,
-    "SOFT" 100,
-    "WONK" 1;
-}
-.contact-success p {
+.contact-success__msg {
   margin: 0 auto;
   max-width: 42ch;
   color: var(--ink);
@@ -2753,6 +2924,22 @@ body::before {
   color: rgba(250, 245, 233, 0.74);
 }
 
+/* ContactPage: step 03 "Book a Call" link */
+.contact-steps__link {
+  display: block;
+  width: fit-content;
+  margin-top: 8px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  letter-spacing: -0.005em;
+  color: var(--ember);
+  transition: transform 0.3s ease;
+}
+.contact-steps__link:hover {
+  transform: translateX(2px);
+}
+
 .contact-aside__channels {
   border-top: 1px solid var(--rule-d-2);
   padding-top: clamp(20px, 2.4vw, 28px);
@@ -2815,6 +3002,13 @@ body::before {
   opacity: 0.78;
   font-size: clamp(15px, 1.1vw, 17px);
 }
+/* GSAP SplitText (smartWrap) wraps each <em> in an inline-block; where the
+   heading's <em> straddles a line end it gets split in two and the space
+   between "focus" and "area." collapses to 0 (seen at 390: "focusarea.").
+   Keep the <em> wrappers inline so the space survives and the word wraps. */
+.contact-paths__head .section-title em {
+  display: inline !important;
+}
 @media (max-width: 900px) {
   .contact-paths__head {
     grid-template-columns: 1fr;
@@ -2834,6 +3028,14 @@ body::before {
   .contact-paths__grid {
     grid-template-columns: 1fr;
   }
+}
+/* Each card sits inside a Reveal wrapper (the grid item); let the wrapper and the card fill the row so card heights and footers line up. */
+.contact-paths__grid > * {
+  display: flex;
+}
+.contact-paths__grid > * > .contact-path {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .contact-path {
   display: flex;
@@ -3584,13 +3786,13 @@ body::before {
   grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
   column-gap: clamp(32px, 6vw, 112px);
   align-items: start;
-  padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 72px) clamp(96px, 11vw, 160px);
+  padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 72px) clamp(56px, 6.5vw, 96px);
 }
 @media (max-width: 820px) {
   .sub-hero__grid {
     grid-template-columns: 1fr;
     gap: 32px;
-    padding-bottom: clamp(120px, 18vw, 180px);
+    padding-bottom: clamp(48px, 10vw, 80px);
   }
 }
 .sub-hero__headline {
@@ -4219,6 +4421,15 @@ body::before {
     0 24px 60px -36px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(11, 11, 12, 0.04);
 }
+@media (max-width: 480px) {
+  /* Responsive-RespService: give the fields more of a 360px screen */
+  .sub-cta__form {
+    padding: 24px 18px 22px;
+  }
+  .sub-cta__form-shell {
+    padding: 4px;
+  }
+}
 .sub-cta__form-head {
   display: flex;
   flex-direction: column;
@@ -4321,6 +4532,72 @@ body::before {
 }
 .sub-cta__submit:hover .sub-cta__submit-pill {
   transform: translateX(3px);
+}
+
+/* ServiceForm: sub-cta lead form states (inline errors, consent, failure, success). The form sits on the cream card. */
+.sub-cta__field--invalid input,
+.sub-cta__field--invalid textarea {
+  border-bottom-color: var(--terracotta);
+  box-shadow: 0 1px 0 0 var(--terracotta);
+}
+.sub-cta__error {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--terracotta);
+}
+.sub-cta__consent {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--stone);
+}
+.sub-cta__consent a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--svc-accent, var(--ember));
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.sub-cta__failure {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--terracotta);
+}
+.sub-cta__failure a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.sub-cta__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.sub-cta__success {
+  align-self: center;
+  text-align: center;
+  padding: clamp(16px, 3vw, 32px) 0;
+  outline: none;
+}
+.sub-cta__success-check {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--svc-accent, var(--ember));
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+}
+.sub-cta__success p {
+  margin: 0 auto;
+  max-width: 36ch;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  opacity: 0.78;
 }
 
 /* ========================================================================
@@ -5787,15 +6064,10 @@ body::before {
   font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
 }
 .svar-narrative__lede {
-  max-width: 720px;
+  /* One short paragraph with a drop cap: a single readable column. Two CSS
+     columns split the float away from the first line and orphaned the "D". */
+  max-width: 64ch;
   column-count: 1;
-}
-@media (min-width: 900px) {
-  .svar-narrative__lede {
-    column-count: 2;
-    column-gap: clamp(40px, 5vw, 80px);
-    column-rule: 1px solid var(--rule-2);
-  }
 }
 .svar-narrative__lede p {
   font-family: var(--font-sans);
@@ -6647,6 +6919,39 @@ body::before {
   }
 }
 
+/* Responsive-RespService: insights index cards */
+.insights-index .ins-card .body {
+  flex: 1;
+}
+.insights-index .ins-card .meta {
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 2px;
+}
+.insights-index .ins-card .meta span {
+  white-space: nowrap;
+}
+@media (min-width: 640px) and (max-width: 900px) {
+  /* two columns; a lone last card runs full width as a horizontal feature */
+  .insights-index__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .insights-index__grid > .ins-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .insights-index__grid > .ins-card:last-child:nth-child(odd) .ins-card__link {
+    flex-direction: row;
+  }
+  .insights-index__grid > .ins-card:last-child:nth-child(odd) .cover {
+    flex: 0 0 48%;
+    aspect-ratio: auto;
+    min-height: 260px;
+  }
+  .insights-index__grid > .ins-card:last-child:nth-child(odd) .body {
+    justify-content: center;
+  }
+}
+
 /* --- Article hero ------------------------------------------------------ */
 .article-hero__grid {
   padding-bottom: clamp(48px, 6vw, 80px);
@@ -7089,4 +7394,145 @@ body::before {
   .article-related__grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ========================================================================
+   LEGAL — /privacy (FooterPrivacy)
+   Paper-background take on the sub-hero type; the body reuses
+   .article, .article-section, .article-ul and .article-callout.
+   ======================================================================== */
+.legal-hero {
+  background: var(--paper);
+  padding: calc(var(--nav-h) + clamp(40px, 6vw, 88px)) 0 clamp(36px, 4.5vw, 64px);
+}
+.legal-hero__title {
+  margin-top: clamp(18px, 2vw, 26px);
+}
+.legal-hero__updated {
+  margin: clamp(18px, 2vw, 28px) 0 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--stone);
+}
+/* Privacy page: two-column grid (TOC left, text right) used by the hero and the body */
+.legal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 40px);
+}
+@media (min-width: 1200px) {
+  .legal-grid {
+    /* Fixed tracks (TOC + 760px text) centred in the wrap, so the block is balanced instead of hugging the left edge. */
+    grid-template-columns: minmax(200px, 240px) minmax(0, 760px);
+    column-gap: clamp(40px, 5vw, 80px);
+    justify-content: center;
+  }
+  .legal-hero__body {
+    grid-column: 2;
+  }
+}
+.legal-main {
+  min-width: 0;
+  max-width: 760px;
+}
+.legal-prose p,
+.legal-prose .article-ul li {
+  font-size: clamp(16px, 1.25vw, 18px);
+}
+/* Below 1200px the TOC sits above the text as a compact list (two columns once there is room). */
+@media (max-width: 1199px) {
+  .legal-side {
+    max-width: 760px;
+    padding-bottom: clamp(20px, 3vw, 32px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .legal-side .article-toc {
+    position: static;
+  }
+  .legal-side .article-toc ol {
+    border-left: 0;
+    margin-top: 10px;
+  }
+  .legal-side .article-toc a {
+    margin-left: 0;
+    padding: 7px 0;
+    border-left: 0;
+  }
+}
+@media (min-width: 540px) and (max-width: 1199px) {
+  .legal-side .article-toc ol {
+    columns: 2;
+    column-gap: 32px;
+  }
+  .legal-side .article-toc li {
+    break-inside: avoid;
+  }
+}
+.legal-prose a {
+  color: var(--terracotta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal-contact {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+.legal-contact p {
+  margin: 0 0 6px;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.legal-contact a {
+  color: var(--terracotta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal-contact__address {
+  font-style: normal;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ink) 86%, transparent);
+}
+
+/* <SiteSEO>: not-found page (app/not-found.tsx) */
+.notfound {
+  background: var(--paper);
+  padding: calc(var(--nav-h) + clamp(56px, 8vw, 120px)) 0 clamp(72px, 9vw, 136px);
+  min-height: 70vh;
+}
+.notfound__title {
+  margin-top: clamp(18px, 2vw, 26px);
+}
+.notfound__lede {
+  max-width: 460px;
+  margin: clamp(18px, 2vw, 28px) 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ink) 78%, transparent);
+}
+.notfound__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(28px, 3.4vw, 44px);
+}
+
+/* <NavLinks>: skip link (visually hidden until focused) */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: 0 0 12px 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateY(-100%);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--ember);
+  outline-offset: -2px;
 }

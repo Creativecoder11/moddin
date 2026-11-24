@@ -1,4 +1,5 @@
 import Image, { type StaticImageData } from "next/image";
+import Link from "next/link";
 import { Reveal } from "../ui/Reveal";
 import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
@@ -55,20 +56,19 @@ function ServiceCard({
         <span className="svc-rule__dot" aria-hidden />
       </header>
 
-      <h3
-        className="svc-title"
-        dangerouslySetInnerHTML={{ __html: svc.titleHTML }}
-      />
+      <h3 className="svc-title">
+        <Link
+          href={svc.href}
+          className="svc-title__link"
+          dangerouslySetInnerHTML={{ __html: svc.titleHTML }}
+        />
+      </h3>
 
       <TextEffect as="p" className="svc-body" per="word" preset="fade" scrollReveal>
         {svc.body}
       </TextEffect>
 
       <footer className="svc-card__foot">
-        <span className="svc-pill">
-          <span className="svc-pill__dot" aria-hidden />
-          {svc.pill}
-        </span>
         <span className="svc-arr" aria-hidden>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
             <path

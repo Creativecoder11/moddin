@@ -30,7 +30,12 @@ export function Opportunity() {
           {STATS.map((s) => (
             <div key={s.kicker} className="stat">
               <div className="kicker">{s.kicker}</div>
-              <StatCounter target={s.value} prefix={s.prefix} suffix={s.suffix} />
+              <StatCounter
+                target={s.value}
+                decimals={s.decimals}
+                prefix={s.prefix}
+                suffix={s.suffix}
+              />
               <div className="lbl">{s.label}</div>
             </div>
           ))}

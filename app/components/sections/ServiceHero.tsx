@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { useRef, type ReactNode } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useReducedMotion } from "../ui/use-reduced-motion";
 import { Reveal } from "../ui/Reveal";
 import type {
   ServicePageHeroMeta,
@@ -10,14 +11,20 @@ import type {
 } from "@/app/data/service-pages";
 
 type Props = {
-  title: string;
+  title: ReactNode;
+  /** Accessible name; derived from `title` when that is a plain string. */
+  label?: string;
   tagline?: string;
   hero: ServicePageHeroMeta;
   wireframeVariant: ServiceWireframeVariant;
   image: { src: string; alt: string };
+  /** Hero button. Defaults to "Contact Us" → /contact so service pages are unchanged. */
+  cta?: { label: string; href: string; target?: string; rel?: string };
 };
 
-export function ServiceHero({ title, tagline, hero, image }: Props) {
+const DEFAULT_CTA = { label: "Contact Us", href: "/contact" };
+
+export function ServiceHero({ title, label, tagline, hero, image, cta = DEFAULT_CTA }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
 
@@ -35,7 +42,7 @@ export function ServiceHero({ title, tagline, hero, image }: Props) {
       ref={ref}
       className="sub-hero"
       style={{ ["--svc-accent" as string]: hero.accent }}
-      aria-label={title}
+      aria-label={label ?? (typeof title === "string" ? title : undefined)}
     >
       <div className="sub-hero__media">
         <motion.div
@@ -72,8 +79,8 @@ export function ServiceHero({ title, tagline, hero, image }: Props) {
 
           <Reveal as="aside" delay={2} className="sub-hero__aside">
             <p className="sub-hero__lede">{hero.subhead}</p>
-            <a href="/contact" className="sub-hero__cta btn btn-dark">
-              <span>Contact Us</span>
+            <a href={cta.href} target={cta.target} rel={cta.rel} className="sub-hero__cta btn btn-dark">
+              <span>{cta.label}</span>
               <span className="sub-hero__cta-arrow" aria-hidden>→</span>
             </a>
           </Reveal>

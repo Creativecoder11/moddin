@@ -23,9 +23,7 @@ export function Who() {
         blurDataURL={IMAGE_BLUR_DATA_URL}
         sizes="(max-width: 640px) 100vw, (max-width: 1060px) 50vw, 25vw"
       />
-      <span className="top-tag">{p.topTag}</span>
       <div className="inner">
-        <div className="idx">{p.idx}</div>
         <h3>{p.title}</h3>
         <TextEffect as="p" per="word" preset="fade" scrollReveal>
           {p.body}
@@ -47,7 +45,7 @@ export function Who() {
             </SplitText>
           </div>
           <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.2}>
-            {"Different partners, different objectives—supported by the same structured approach and local capability."}
+            {"Different objectives, same structured approach."}
           </TextEffect>
         </div>
 

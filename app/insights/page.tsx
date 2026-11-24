@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { Nav } from "../components/chrome/Nav";
 import { Footer } from "../components/chrome/Footer";
 import { Reveal } from "../components/ui/Reveal";
 import { InsightCard } from "../components/sections/InsightCard";
 import { ARTICLES } from "@/app/data/insights";
+import { pageMetadata } from "@/app/data/seo";
 
-export const metadata: Metadata = {
-  title: "Insights - Moddin",
+export const metadata = pageMetadata({
+  title: "Insights",
   description:
     "Opportunity briefs, sector notes, and market entry guides for companies and investors evaluating Bangladesh.",
-};
+  path: "/insights",
+});
 
 export default function InsightsIndexPage() {
   const articles = [...ARTICLES].sort((a, b) =>
@@ -19,7 +20,7 @@ export default function InsightsIndexPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content">
         <section className="insights insights-index">
           <div className="wrap">
             <div className="ins-head">

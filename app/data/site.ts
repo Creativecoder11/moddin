@@ -4,11 +4,51 @@
  * edit without touching markup.
  */
 
+/** Canonical origin for metadata, OG URLs and the sitemap. */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://moddin.com").replace(/\/$/, "");
+
+/**
+ * Approved contact details — the single source of truth for every email,
+ * phone, address and booking link on the site.
+ */
+export const CONTACT = {
+  office: "House: 654, Road: 09, Ave: 04, Mirpur DOHS, Dhaka 1216",
+  officeShort: "House 654, Road 09, Ave 04, Mirpur DOHS, Dhaka 1216",
+  email: "muddin@mostafiz.org",
+  phone: "+880 1784-398934",
+  phoneHref: "tel:+8801784398934",
+  hours: "Sun – Thu, 9:00 – 18:00 GMT+6 (Dhaka)",
+  /** PLACEHOLDER: replace "#" with the booking-calendar URL (Calendly, Google appointment page…). */
+  bookingUrl: "#" as string,
+  /** Business deck served from /public. */
+  deckUrl: "/moddin-business-deck.pdf",
+  /** PLACEHOLDER: replace each "#" with the real profile URL. */
+  socials: [
+    { label: "LinkedIn", href: "#" },
+    { label: "X", href: "#" },
+  ] as { label: "LinkedIn" | "X"; href: string }[],
+  map: {
+    lat: 23.837439828964076,
+    lng: 90.36883026744783,
+    directionsUrl:
+      "https://www.google.com/maps/dir/?api=1&destination=23.837439828964076,90.36883026744783",
+    embedUrl:
+      "https://www.openstreetmap.org/export/embed.html?bbox=90.35883026744783%2C23.832439828964076%2C90.37883026744783%2C23.842439828964076&layer=mapnik&marker=23.837439828964076%2C90.36883026744783",
+  },
+} as const;
+
+/** Booking CTA target; opens in a new tab once a real URL replaces the "#" placeholder. */
+export const BOOKING_LINK =
+  CONTACT.bookingUrl === "#"
+    ? { href: "#" }
+    : { href: CONTACT.bookingUrl, target: "_blank", rel: "noopener noreferrer" };
+
 export const NAV_LINKS = [
   { label: "Trade", href: "/trade" },
   { label: "Investment", href: "/investment" },
   { label: "Branding", href: "/branding" },
   { label: "Policy & Access", href: "/policy-and-access" },
+  { label: "Insights", href: "/insights" },
 ] as const;
 
 export const TICKER_ITEMS = [
@@ -29,37 +69,39 @@ export const TRUST_ITEMS = [
 export type Stat = {
   kicker: string;
   value: number;
+  /** Decimal places shown while counting and at rest (e.g. 1 for "2.2"). */
+  decimals?: number;
   prefix?: string;
   suffix: string;
   label: string;
 };
 export const STATS: Stat[] = [
   {
-    kicker: "Population",
-    value: 176,
+    kicker: "Consumers",
+    value: 179,
     suffix: "m",
-    label: "The 8th largest consumer base in the world.",
+    label: "The world's 8th-largest consumer base",
   },
   {
     kicker: "GDP",
-    value: 460,
+    value: 501,
     prefix: "$",
     suffix: "bn",
-    label: "Consistent mid-single-digit real growth over the past decade.",
+    label: "A half-trillion-dollar economy (FY2025-26)",
   },
   {
     kicker: "Exports",
-    value: 55,
+    value: 48,
     prefix: "$",
-    suffix: "bn+",
-    label: "Led by textiles, leather, jute, and a fast-rising digital economy.",
+    suffix: "bn",
+    label: "Garments, home textiles, leather, jute, engineering and agro-products",
   },
   {
     kicker: "Workforce",
-    value: 8,
-    suffix: "th",
-    label:
-      "Largest workforce globally, with deep industrial and technical depth.",
+    value: 2.2,
+    decimals: 1,
+    suffix: "m",
+    label: "Young graduates join the workforce every year",
   },
 ];
 
@@ -97,29 +139,29 @@ export type Role = {
   num: string;
   title: string;
   body: string;
-  tag: string;
+  outcome: string;
   tint: 1 | 2 | 3;
 };
 export const ROLES: Role[] = [
   {
     num: "01",
     title: "Position",
-    body: "We shape how Bangladesh is understood—through clear market narratives, sector insights, and investor-ready positioning.",
-    tag: "Opportunity Definition",
+    body: "We shape the market case: sector insight, narrative and investor-ready positioning.",
+    outcome: "A clear entry thesis",
     tint: 1,
   },
   {
     num: "02",
     title: "Connect",
-    body: "We connect you to institutions, investors, and partners that matter—turning access into aligned opportunity.",
-    tag: "Strategic Access",
+    body: "Introductions to the ministries, investors and partners that matter, made with context.",
+    outcome: "The right rooms, the right people",
     tint: 2,
   },
   {
     num: "03",
     title: "Execute",
-    body: "We support market entry, partnerships, and transactions—ensuring progress from first step to measurable result.",
-    tag: "Execution & Delivery",
+    body: "Hands-on support through market entry, partnerships and transactions.",
+    outcome: "A deal or operation that's live",
     tint: 3,
   },
 ];
@@ -127,57 +169,58 @@ export const ROLES: Role[] = [
 export type Service = {
   num: string;
   label: string;
-  footerLabel: string;
-  /** Where the footer link for this service points. */
-  footerHref: string;
+  /** Plain-text title (footer, contact page focus cards). */
+  title: string;
+  /** Service page URL. */
+  href: string;
+  /** Contact page focus-card link label. */
+  linkLabel: string;
   titleHTML: string;
   body: string;
-  pill: string;
 };
+/** Shared by the homepage Services cards, the footer and the contact page focus cards. */
 export const SERVICES: Service[] = [
   {
     num: "01",
     label: "Trade",
-    footerLabel: "Trade & Market Expansion",
-    footerHref: "/trade",
+    title: "Trade & Market Expansion",
+    href: "/trade",
+    linkLabel: "Explore Trade",
     titleHTML: "Trade &amp; <em>Market</em> Expansion",
-    body: "Enable cross-border trade through structured market access, sourcing alignment, and partner connections across Bangladesh’s industrial ecosystem.",
-    pill: "For global companies",
+    body: "Market access, sourcing alignment and partner connections for cross-border trade.",
   },
   {
     num: "02",
     label: "Investment",
-    footerLabel: "Investment & Deal Facilitation",
-    footerHref: "/investment",
+    title: "Investment & Deal Facilitation",
+    href: "/investment",
+    linkLabel: "Explore Investment",
     titleHTML: "Investment &amp; <em>Deal</em> Facilitation",
-    body: "Support investors from opportunity discovery to deal execution—covering partnerships, structuring, and market entry.",
-    pill: "For investors & corporates",
+    body: "From opportunity discovery to deal execution.",
   },
   {
     num: "03",
     label: "Branding",
-    footerLabel: "Country Branding & Positioning",
-    footerHref: "/branding",
+    title: "Country Branding & Positioning",
+    href: "/branding",
+    linkLabel: "Explore Branding",
     titleHTML: "Country Branding &amp; <em>Positioning</em>",
-    body: "Shape how Bangladesh is understood globally—through clear investment narratives, sector positioning, and investor-facing communication.",
-    pill: "For governments & national platforms",
+    body: "Investment narratives, sector positioning and investor communication.",
   },
   {
     num: "04",
     label: "Policy & Access",
-    footerLabel: "Policy & Institutional Access",
-    footerHref: "/policy-and-access",
+    title: "Policy & Institutional Access",
+    href: "/policy-and-access",
+    linkLabel: "Explore Policy & Access",
     titleHTML: "Policy &amp; <em>Institutional</em> Access",
-    body: "Navigate regulatory pathways and unlock access to ministries, agencies, and key institutions—enabling smoother entry and execution.",
-    pill: "For institutions & partners",
+    body: "Regulatory pathways and structured access to ministries and agencies.",
   },
 ];
 
 export type Partner = {
   src: string;
   alt: string;
-  topTag: string;
-  idx: string;
   title: string;
   body: string;
 };
@@ -185,34 +228,26 @@ export const PARTNERS: Partner[] = [
   {
     src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80",
     alt: "Global corporates in a boardroom",
-    topTag: "Global",
-    idx: "For companies",
     title: "Global Companies",
-    body: "Exploring sourcing, expansion, regional strategy, and operational setup in Bangladesh.",
+    body: "A clear route to sourcing, expansion and local setup, with partners already vetted.",
   },
   {
     src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
     alt: "Investors reviewing analytics",
-    topTag: "Capital",
-    idx: "For capital",
     title: "Investors & Funds",
-    body: "Capital looking at high-growth opportunities, partnerships, and long-term market access.",
+    body: "A qualified pipeline and faster go/no-go decisions.",
   },
   {
     src: "/890c84c0-c673-48c9-836c-185287fdcecc-ezgif.com-resize.webp",
     alt: "International flags outside a government institution",
-    topTag: "Public",
-    idx: "For institutions",
     title: "Government & Institutions",
-    body: "Agencies, embassies, chambers, and development organizations supporting trade and investment flows.",
+    body: "A coherent national story, and the partners to deliver it.",
   },
   {
     src: "/images/partners/bangladesh-local-companies-shapla-square.webp",
     alt: "Dhaka Shapla Square traffic at dusk",
-    topTag: "Local",
-    idx: "For BD firms",
     title: "Bangladeshi Companies",
-    body: "Local firms seeking capital, global positioning, strategic partnerships, and cross-border growth.",
+    body: "Capital, global positioning and partnerships to grow beyond home.",
   },
 ];
 
@@ -246,16 +281,14 @@ export const STEPS: Step[] = [
 
 export const FOOTER_LINKS = {
   explore: [
-    { href: "#why", label: "Why Bangladesh" },
-    { href: "#services", label: "Services" },
-    { href: "#who", label: "Who We Work With" },
+    { href: "/#why", label: "Why Bangladesh" },
+    { href: "/#services", label: "Services" },
+    { href: "/#who", label: "Who We Work With" },
     { href: "/insights", label: "Insights" },
-    { href: "#contact", label: "Contact" },
+    { href: "/#contact", label: "Contact" },
   ],
-  services: [
-    ...SERVICES.map((service) => ({
-      href: service.footerHref,
-      label: service.footerLabel,
-    })),
-  ],
+  services: SERVICES.map((service) => ({
+    href: service.href,
+    label: service.title,
+  })),
 } as const;

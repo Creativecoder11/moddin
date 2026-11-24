@@ -4,39 +4,44 @@ import { Footer } from "../components/chrome/Footer";
 import { ServiceHero } from "../components/sections/ServiceHero";
 import { ServiceFaq } from "../components/sections/ServiceFaq";
 import { ContactForm } from "../components/sections/ContactForm";
+import { DeckRequest } from "../components/sections/DeckRequest";
 import { Reveal } from "../components/ui/Reveal";
 import SplitText from "../components/ui/SplitText";
 import { TextEffect } from "../components/ui/text-effect";
+import { BOOKING_LINK, CONTACT, SERVICES } from "@/app/data/site";
+import { pageMetadata } from "@/app/data/seo";
 
-export const metadata = {
-  title: "Contact Us | Moddin",
+export const metadata = pageMetadata({
+  title: "Contact",
   description:
     "Get in touch with Moddin to discuss market entry, trade, investment, or institutional access in Bangladesh. Responses within 24 hours.",
-};
+  path: "/contact",
+});
 
 type InfoCell = { kicker: string; value: string; href?: string; sub: string };
 
 const INFO: InfoCell[] = [
   {
     kicker: "Email",
-    value: "hello@moddin.com",
-    href: "mailto:hello@moddin.com",
-    sub: "For inquiries, briefs, and partnerships.",
+    value: CONTACT.email,
+    href: `mailto:${CONTACT.email}`,
+    sub: "For inquiries, briefs and partnerships.",
+  },
+  {
+    kicker: "Phone",
+    value: CONTACT.phone,
+    href: CONTACT.phoneHref,
+    sub: "Sun – Thu, during office hours.",
   },
   {
     kicker: "Office",
-    value: "Gulshan Avenue, Dhaka 1212",
-    sub: "Gulshan business district, Bangladesh — meetings by appointment.",
+    value: CONTACT.officeShort,
+    sub: "Meetings by appointment.",
   },
   {
     kicker: "Hours",
-    value: "Sun – Thu",
-    sub: "9:00 – 18:00 BST (GMT+6). Calls scheduled by request.",
-  },
-  {
-    kicker: "Reply",
-    value: "< 24 hours",
-    sub: "We acknowledge every inquiry — usually within the same day.",
+    value: CONTACT.hours,
+    sub: "Calls scheduled on request.",
   },
 ];
 
@@ -55,37 +60,6 @@ const STEPS = [
   },
 ] as const;
 
-const PATHS = [
-  {
-    num: "01",
-    label: "Trade",
-    title: "Trade & Market expansion",
-    body: "Cross-border trade, sourcing alignment, and partner connections across Bangladesh's industrial ecosystem.",
-    href: "/trade",
-  },
-  {
-    num: "02",
-    label: "Investment",
-    title: "Investment & Deal facilitation",
-    body: "Opportunity discovery through to deal execution — partnerships, structuring, and market entry.",
-    href: "/investment",
-  },
-  {
-    num: "03",
-    label: "Branding",
-    title: "Country branding & Positioning",
-    body: "Investment narratives, sector positioning, and investor-facing communication for Bangladesh.",
-    href: "/branding",
-  },
-  {
-    num: "04",
-    label: "Policy",
-    title: "Policy & Institutional access",
-    body: "Regulatory pathways, ministerial access, and institutional coordination for smoother execution.",
-    href: "/policy-and-access",
-  },
-] as const;
-
 const FAQS = [
   {
     question: "What kind of inquiries do you respond to?",
@@ -95,7 +69,7 @@ const FAQS = [
   {
     question: "How quickly will I hear back?",
     answer:
-      "Almost always within 24 hours of receiving your message, often the same business day. If your inquiry needs a coordinated response across our team, we'll acknowledge it immediately and follow up with substance soon after.",
+      "Usually the same business day, always within 24 hours. If your inquiry needs input from across the team, we'll confirm we've received it first and follow up in full shortly after.",
   },
   {
     question: "Do I need a formal RFP or brief before reaching out?",
@@ -105,7 +79,7 @@ const FAQS = [
   {
     question: "Can we meet in person in Dhaka?",
     answer:
-      "Yes — we're based in Dhaka and host meetings by appointment in Gulshan. Let us know your dates and we'll find a window. We also travel for engagements where it's useful.",
+      "Yes. We meet by appointment at our office in Mirpur DOHS, and we travel for engagements where meeting in person helps.",
   },
   {
     question: "Is there a cost to an initial conversation?",
@@ -118,10 +92,12 @@ export default function ContactPage() {
   return (
     <>
       <Nav />
-      <main className="bg-paper">
+      <main id="main-content" className="bg-paper">
         {/* HERO — same pattern as other non-home pages */}
         <ServiceHero
-          title="Let's start the conversation"
+          title={<>Let&apos;s start the <em>conversation.</em></>}
+          label="Let's start the conversation."
+          cta={{ label: "Book a Call", ...BOOKING_LINK }}
           hero={{
             category: "Contact",
             subhead: "Tell us where you are. We'll come back with the right next step.",
@@ -131,7 +107,7 @@ export default function ContactPage() {
           wireframeVariant="brief"
           image={{
             src: "/bg-bangladesh.webp",
-            alt: "Dhaka skyline",
+            alt: "",
           }}
         />
 
@@ -191,7 +167,6 @@ export default function ContactPage() {
                   <h2>
                     Your <em>message.</em>
                   </h2>
-                  <span className="contact-panel__counter">Form · 01 / 01</span>
                 </div>
                 <ContactForm />
               </Reveal>
@@ -213,23 +188,22 @@ export default function ContactPage() {
                       <span className="contact-steps__body">
                         <strong>{s.title}</strong>
                         <span>{s.body}</span>
+                        {i === 2 && (
+                          <a className="contact-steps__link" {...BOOKING_LINK}>
+                            Book a Call →
+                          </a>
+                        )}
                       </span>
                     </li>
                   ))}
                 </ol>
 
                 <div className="contact-aside__channels">
-                  <a className="contact-aside__channel" href="mailto:hello@moddin.com">
+                  <a className="contact-aside__channel" href={`mailto:${CONTACT.email}`}>
                     <span className="contact-aside__channel-label">Email us</span>
-                    <span className="contact-aside__channel-value">hello@moddin.com →</span>
+                    <span className="contact-aside__channel-value">{`${CONTACT.email} →`}</span>
                   </a>
-                  <a
-                    className="contact-aside__channel"
-                    href="mailto:hello@moddin.com?subject=Business%20Deck%20Request"
-                  >
-                    <span className="contact-aside__channel-label">Business deck</span>
-                    <span className="contact-aside__channel-value">Request →</span>
-                  </a>
+                  <DeckRequest variant="aside" />
                 </div>
               </Reveal>
             </div>
@@ -266,14 +240,14 @@ export default function ContactPage() {
             </header>
 
             <div className="contact-paths__grid">
-              {PATHS.map((p, i) => (
-                <Reveal key={p.label} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
-                  <Link href={p.href} className="contact-path">
-                    <span className="contact-path__num">{p.num}. {p.label}</span>
-                    <h3 className="contact-path__title">{p.title}</h3>
-                    <p className="contact-path__body">{p.body}</p>
+              {SERVICES.map((s, i) => (
+                <Reveal key={s.num} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
+                  <Link href={s.href} className="contact-path">
+                    <span className="contact-path__num">{s.num}. {s.label}</span>
+                    <h3 className="contact-path__title">{s.title}</h3>
+                    <p className="contact-path__body">{s.body}</p>
                     <div className="contact-path__foot">
-                      <span className="contact-path__cta">Read more</span>
+                      <span className="contact-path__cta">{`${s.linkLabel} →`}</span>
                       <span className="contact-path__arr" aria-hidden>
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                           <path
@@ -320,8 +294,7 @@ export default function ContactPage() {
                 scrollReveal
                 delay={0.1}
               >
-                Meetings by appointment in the Gulshan business district. Let us know your dates
-                and we&apos;ll find a window that works.
+                Meetings are by appointment. Share a few dates and we&apos;ll find a time.
               </TextEffect>
             </header>
 
@@ -331,16 +304,15 @@ export default function ContactPage() {
                   <span>Our office</span>
                 </span>
                 <h3 className="contact-map__addr">
-                  Dhaka, <em>Bangladesh</em>
+                  Mirpur DOHS, <em>Dhaka.</em>
                 </h3>
                 <p className="contact-map__sub">
-                  Set in the Gulshan business district — the diplomatic and corporate heart
-                  of the capital. Meetings are hosted by appointment.
+                  House 654, Road 09, Ave 04, Dhaka 1216.
                 </p>
 
                 <a
                   className="contact-map__dir"
-                  href="https://www.google.com/maps/dir/?api=1&destination=23.837439828964076,90.36883026744783"
+                  href={CONTACT.map.directionsUrl}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
@@ -362,8 +334,8 @@ export default function ContactPage() {
               <Reveal className="contact-map__frame" delay={2}>
                 <iframe
                   className="contact-map__iframe"
-                  title="Moddin office location, Dhaka"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=90.35883026744783%2C23.832439828964076%2C90.37883026744783%2C23.842439828964076&layer=mapnik&marker=23.837439828964076%2C90.36883026744783"
+                  title="Map of the Moddin office in Mirpur DOHS, Dhaka"
+                  src={CONTACT.map.embedUrl}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen

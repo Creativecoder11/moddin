@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "locomotive-scroll/locomotive-scroll.css";
 import { SmoothScroll } from "./components/providers/SmoothScroll";
+import { SITE_URL } from "./data/site";
+import { OG_DEFAULTS } from "./data/seo";
 
 // Self-hosted (latin subset) instead of next/font/google: fetching Google Fonts
 // at build time fails under Turbopack on Vercel.
@@ -32,9 +34,16 @@ const jetbrains = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Moddin — Bangladesh, Made Easier to Enter",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Moddin — Bangladesh, Made Easier to Enter",
+    template: "%s | Moddin",
+  },
+  applicationName: "Moddin",
   description:
     "Moddin helps global investors, companies, and institutions understand Bangladesh, access the right stakeholders, and move from interest to execution.",
+  openGraph: { ...OG_DEFAULTS },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

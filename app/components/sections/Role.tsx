@@ -18,8 +18,7 @@ export function Role() {
         {role.body}
       </TextEffect>
       <div className="tag-row">
-        <span className="lab">{role.tag}</span>
-        <span className="arr">→</span>
+        <span className="lab">Outcome: {role.outcome}</span>
       </div>
     </Reveal>
   ));
@@ -33,16 +32,14 @@ export function Role() {
               <span>Our Role</span>
             </Reveal>
             <SplitText tag="h2" className="section-title" style={{ marginTop: 20 }} textAlign="left">
+              <span style={{ display: "block" }}>Turning Market Interest </span>
               <span style={{ display: "block" }}>
-                Turning Market Interest <em>Into</em>
-              </span>
-              <span style={{ display: "block" }}>
-                <em>Real Outcomes.</em>
+                <em>Into Real Outcomes.</em>
               </span>
             </SplitText>
           </div>
           <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.2}>
-            {"A structured approach to move from opportunity to execution—clearly, confidently, and at speed."}
+            {"One structured path, from first look to signed deal."}
           </TextEffect>
         </div>
 

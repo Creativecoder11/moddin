@@ -67,7 +67,7 @@ export type ServicePageKey =
 export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = {
   whyBangladesh: {
     metadata: {
-      title: "Why Bangladesh - Moddin",
+      title: "Why Bangladesh",
       description:
         "A practical Bangladesh market brief: opportunity, friction points, priority sectors, and what it takes to execute with confidence.",
     },
@@ -174,7 +174,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
   },
   trade: {
     metadata: {
-      title: "Trade & Market Expansion - Moddin",
+      title: "Trade & Market Expansion",
       description:
         "Content architecture for trade expansion into and from Bangladesh: market selection, partner matching, and execution support.",
     },
@@ -274,7 +274,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
   },
   investment: {
     metadata: {
-      title: "Investment & Deal Facilitation - Moddin",
+      title: "Investment & Deal Facilitation",
       description:
         "Investment-focused page content covering opportunity origination, diligence coordination, stakeholder access, and transaction support.",
     },
@@ -369,7 +369,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
   },
   branding: {
     metadata: {
-      title: "Country Branding & Positioning - Moddin",
+      title: "Country Branding & Positioning",
       description:
         "Country branding page content: narrative strategy, investor messaging, campaign assets, and institutional communication alignment.",
     },
@@ -463,7 +463,7 @@ export const SERVICE_PAGE_CONTENT: Record<ServicePageKey, ServicePageContent> = 
   },
   policyAndAccess: {
     metadata: {
-      title: "Policy & Institutional Access - Moddin",
+      title: "Policy & Institutional Access",
       description:
         "Policy and access service page content for regulatory navigation, stakeholder alignment, and institution-facing execution support in Bangladesh.",
     },

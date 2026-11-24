@@ -1,26 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useReducedMotion } from "motion/react";
 import { ScrollReveal } from "../ui/ScrollReveal";
 import bandImage from "../../../public/bg-bangladesh.webp";
 
 export function PhotoBand() {
-  const reduce = useReducedMotion();
-  const speedAttr = (v: string) => (reduce ? undefined : v);
+  // Parallax speeds render unconditionally so server and client markup match; SmoothScroll
+  // never initialises under prefers-reduced-motion, so the attributes are inert there.
 
   return (
     <section className="band" aria-label="Field work">
       <div
         className="band-plane"
         data-scroll
-        data-scroll-speed={speedAttr("0.12")}
+        data-scroll-speed="0.12"
         aria-hidden
       />
       <div
         className="band-media"
         data-scroll
-        data-scroll-speed={speedAttr("-0.3")}
+        data-scroll-speed="-0.3"
       >
         <Image
           className="band-img"
@@ -35,7 +34,7 @@ export function PhotoBand() {
       <div
         className="band-inner wrap"
         data-scroll
-        data-scroll-speed={speedAttr("0.35")}
+        data-scroll-speed="0.35"
       >
         <div className="eyebrow">
           <span>On the ground in Bangladesh</span>

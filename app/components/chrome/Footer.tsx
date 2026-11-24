@@ -1,15 +1,14 @@
+import Link from "next/link";
 import SplitText from "../ui/SplitText";
-import { FOOTER_LINKS } from "@/app/data/site";
+import { CONTACT, FOOTER_LINKS } from "@/app/data/site";
 
-const SOCIALS = [
+const SOCIAL_ICONS = [
   {
     label: "LinkedIn",
-    href: "#",
     path: "M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.21 24 24 23.23 24 22.28V1.72C24 .77 23.21 0 22.23 0z",
   },
   {
     label: "X",
-    href: "#",
     path: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
   },
 ];
@@ -28,15 +27,15 @@ export function Footer() {
               Office
             </h4>
             <address className="not-italic text-[14.5px] text-cream/80 leading-[1.55]">
-              House: 654, Road: 09 Ave: 04, Mirpur DOHS, Dhaka 1216
+              {CONTACT.office}
               <br />
               <br />
-              <a href="mailto:muddin@mostafiz.org" className="hover:opacity-100 hover:text-ember">
-                muddin@mostafiz.org
+              <a href={`mailto:${CONTACT.email}`} className="hover:opacity-100 hover:text-ember">
+                {CONTACT.email}
               </a>
               <br />
-              <a href="tel:+8801784398934" className="hover:opacity-100 hover:text-ember">
-                +880 1784-398934
+              <a href={CONTACT.phoneHref} className="hover:opacity-100 hover:text-ember">
+                {CONTACT.phone}
               </a>
             </address>
           </div>
@@ -50,32 +49,36 @@ export function Footer() {
             className="font-serif font-light tracking-[-0.025em] text-[clamp(40px,6vw,72px)] leading-none text-cream"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
           >
-            <span style={{ display: "block" }}>Connecting Bangladesh</span>
+            <span style={{ display: "block" }}>Connecting Bangladesh</span>{" "}
             <span style={{ display: "block" }}>
-              to{" "}
               <em
                 className="text-ember"
                 style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
               >
-                global businesses.
+                to global businesses.
               </em>
             </span>
           </SplitText>
           <div className="flex gap-[10px]" aria-label="Social">
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                aria-label={s.label}
-                className="size-[42px] rounded-full border border-[var(--rule-d-2)] grid place-items-center transition-all duration-[250ms] text-cream hover:bg-ember hover:border-ember hover:text-ink hover:-translate-y-0.5"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
-                  <path d={s.path} />
-                </svg>
-              </a>
-            ))}
+            {CONTACT.socials.map((s) => {
+              const icon = SOCIAL_ICONS.find((i) => i.label === s.label);
+              if (!icon) return null;
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  {...(s.href !== "#" && { target: "_blank", rel: "noopener noreferrer" })}
+                  aria-label={`Moddin on ${s.label}`}
+                  className="size-[42px] rounded-full border border-[var(--rule-d-2)] grid place-items-center transition-all duration-[250ms] text-cream hover:bg-ember hover:border-ember hover:text-ink hover:-translate-y-0.5"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden>
+                    <path d={icon.path} />
+                  </svg>
+                </a>
+              );
+            })}
             <a
-              href="mailto:muddin@mostafiz.org"
+              href={`mailto:${CONTACT.email}`}
               aria-label="Mail"
               className="size-[42px] rounded-full border border-[var(--rule-d-2)] grid place-items-center transition-all duration-[250ms] text-cream hover:bg-ember hover:border-ember hover:text-ink hover:-translate-y-0.5"
             >
@@ -89,7 +92,12 @@ export function Footer() {
 
         {/* BOTTOM */}
         <div className="flex flex-wrap justify-between items-center gap-4 mt-8 text-[13px] tracking-[0.01em] text-cream/55">
-          <span>© 2026 Moddin · Dhaka, Bangladesh</span>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <span>© 2026 Moddin · Dhaka, Bangladesh</span>
+            <Link href="/privacy" className="hover:text-ember hover:opacity-100">
+              Privacy Policy
+            </Link>
+          </div>
           <a href="#top" className="hover:text-ember hover:opacity-100">
             Back to top ↑
           </a>
@@ -114,12 +122,12 @@ function FooterColumn({
       <ul className="list-none p-0 m-0 flex flex-col gap-[10px]">
         {links.map((l) => (
           <li key={l.label}>
-            <a
+            <Link
               href={l.href}
               className="text-[14.5px] text-cream/80 hover:text-ember hover:opacity-100 transition-opacity"
             >
               {l.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

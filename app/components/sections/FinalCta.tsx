@@ -3,7 +3,8 @@
 import { Reveal } from "../ui/Reveal";
 import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
-import { PrimerForm } from "./PrimerForm";
+import { BOOKING_LINK } from "@/app/data/site";
+import { DeckRequest } from "./DeckRequest";
 
 export function FinalCta() {
   return (
@@ -27,20 +28,20 @@ export function FinalCta() {
               className="cta-title-line"
               style={{ display: "block", whiteSpace: "nowrap" }}
             >
-              Explore Bangladesh With
+              Explore Bangladesh With{" "}
             </span>
             <span
               className="cta-title-line"
               style={{ display: "block", whiteSpace: "nowrap" }}
             >
-              Clarity and <em>Confidence.</em>
+              <em>Clarity and Confidence.</em>
             </span>
           </SplitText>
           <TextEffect as="p" className="lead" per="word" preset="fade" scrollReveal delay={0.1}>
             {"Whether you're evaluating entry, partnerships, or investment, we help you move with the right local context and execution support."}
           </TextEffect>
           <Reveal delay={2} className="cta-ctas">
-            <a href="mailto:hello@moddin.com" className="btn btn-light">
+            <a {...BOOKING_LINK} className="btn btn-light">
               Book a Call <span>→</span>
             </a>
           </Reveal>
@@ -57,7 +58,7 @@ export function FinalCta() {
           <TextEffect as="p" per="word" preset="fade" scrollReveal delay={0.1}>
             {"A structured view of Bangladesh's opportunity—covering market insights, sector focus, and our execution approach."}
           </TextEffect>
-          <PrimerForm />
+          <DeckRequest variant="cta" />
         </Reveal>
       </div>
     </section>

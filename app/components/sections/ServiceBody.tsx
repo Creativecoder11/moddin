@@ -2,12 +2,8 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useReducedMotion } from "../ui/use-reduced-motion";
 import { Reveal } from "../ui/Reveal";
 import type {
   ServicePageBlock,
@@ -230,7 +226,7 @@ function BodyBrief({ content }: { content: ServicePageContent }) {
             {content.bandHeading ?? bandBlock?.title}
           </h3>
           <p className="svar-brief__cine-body">{bandBlock?.body}</p>
-          <PillCTA label="Read more" accent={accent} />
+          <PillCTA label="Read more" href="/insights" accent={accent} />
         </Reveal>
       </section>
 

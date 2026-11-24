@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "../ui/use-reduced-motion";
 import type { ServiceWireframeVariant } from "@/app/data/service-pages";
 
 type Props = {
@@ -200,12 +201,12 @@ export function ServiceWireframe({ variant, bg, accent, title }: Props) {
                   }}
                 >
                   <motion.div
-                    initial={reduce ? false : { width: 0 }}
+                    initial={{ width: 0 }}
                     whileInView={{ width: `${row.w * 100}%` }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{
-                      delay: 0.25 + i * 0.1,
-                      duration: 0.95,
+                      delay: reduce ? 0 : 0.25 + i * 0.1,
+                      duration: reduce ? 0 : 0.95,
                       ease: [0.32, 0.72, 0, 1],
                     }}
                     className="h-full rounded-full"
@@ -260,10 +261,10 @@ export function ServiceWireframe({ variant, bg, accent, title }: Props) {
 
       {/* Floating annotation badge */}
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ delay: 0.5, duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+        transition={{ delay: reduce ? 0 : 0.5, duration: reduce ? 0 : 0.6, ease: [0.32, 0.72, 0, 1] }}
         className="absolute -bottom-3 left-4 sm:left-8 inline-flex items-center gap-2 px-3.5 py-2 rounded-full font-mono text-[10.5px] uppercase tracking-[0.18em]"
         style={{
           background: "#faf5e9",

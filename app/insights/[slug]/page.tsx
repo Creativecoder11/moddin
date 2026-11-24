@@ -8,6 +8,7 @@ import { ArticleBody } from "../../components/insights/ArticleBody";
 import { InsightCard } from "../../components/sections/InsightCard";
 import { ServiceCta } from "../../components/sections/ServiceCta";
 import { ARTICLES, getArticle, getRelatedArticles } from "@/app/data/insights";
+import { pageMetadata } from "@/app/data/seo";
 
 export const dynamicParams = false;
 
@@ -22,18 +23,17 @@ export async function generateMetadata({
   const article = getArticle(slug);
   if (!article) return {};
 
-  return {
-    title: `${article.title} - Moddin`,
+  return pageMetadata({
+    title: article.title,
     description: article.dek,
+    path: `/insights/${article.slug}`,
     openGraph: {
       type: "article",
-      title: article.title,
-      description: article.dek,
       publishedTime: article.published,
       authors: [article.author],
       images: [{ url: article.image.src, alt: article.image.alt }],
     },
-  };
+  });
 }
 
 export default async function InsightArticlePage({
@@ -48,7 +48,7 @@ export default async function InsightArticlePage({
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content">
         <ArticleHero article={article} />
         <ArticleBody article={article} />
 
@@ -77,6 +77,7 @@ export default async function InsightArticlePage({
           body={article.closing.body}
           buttonLabel={article.closing.buttonLabel}
           accent={article.accent}
+          inquiry="general"
         />
       </main>
       <Footer />

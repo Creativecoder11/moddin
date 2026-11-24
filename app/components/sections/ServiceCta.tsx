@@ -1,17 +1,23 @@
-"use client";
-
+import { CONTACT } from "@/app/data/site";
+import type { InquiryId } from "@/lib/lead-validation";
 import { Reveal } from "../ui/Reveal";
 import SplitText from "../ui/SplitText";
 import { TextEffect } from "../ui/text-effect";
+import { ServiceCtaForm } from "./ServiceCtaForm";
+
+// The "@" is aria-hidden in the sig line, so the address is split once here.
+const [emailUser, emailHost] = CONTACT.email.split("@");
 
 type Props = {
   title: string;
   body: string;
   buttonLabel: string;
   accent?: string;
+  /** Which inquiry the form files the lead under; must be an INQUIRY_TYPES id. */
+  inquiry: InquiryId;
 };
 
-export function ServiceCta({ title, body, buttonLabel, accent }: Props) {
+export function ServiceCta({ title, body, buttonLabel, accent, inquiry }: Props) {
   return (
     <section
       className="sub-cta"
@@ -56,7 +62,9 @@ export function ServiceCta({ title, body, buttonLabel, accent }: Props) {
           <Reveal delay={2} className="sub-cta__sig">
             <span className="sub-cta__sig-line" aria-hidden />
             <span>
-              hello<span aria-hidden>@</span>moddin.com · Reply within 24 hours
+              {emailUser}
+              <span aria-hidden>@</span>
+              {emailHost} · Reply within 24 hours
             </span>
           </Reveal>
         </div>
@@ -77,49 +85,7 @@ export function ServiceCta({ title, body, buttonLabel, accent }: Props) {
               </p>
             </div>
 
-            <form
-              className="sub-cta__form-fields"
-              onSubmit={(e) => {
-                e.preventDefault();
-                window.location.href = "mailto:hello@moddin.com";
-              }}
-            >
-              <div className="sub-cta__row">
-                <label className="sub-cta__field">
-                  <span>01 — Name</span>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    required
-                  />
-                </label>
-                <label className="sub-cta__field">
-                  <span>02 — Email</span>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="you@company.com"
-                    required
-                  />
-                </label>
-              </div>
-              <label className="sub-cta__field">
-                <span>03 — Objective</span>
-                <textarea
-                  name="message"
-                  placeholder="A sentence or two on your objective."
-                  rows={3}
-                />
-              </label>
-
-              <button type="submit" className="sub-cta__submit">
-                <span>{buttonLabel}</span>
-                <span className="sub-cta__submit-pill" aria-hidden>
-                  →
-                </span>
-              </button>
-            </form>
+            <ServiceCtaForm inquiry={inquiry} buttonLabel={buttonLabel} />
           </div>
         </Reveal>
       </div>

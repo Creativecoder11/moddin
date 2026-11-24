@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "../ui/use-reduced-motion";
 import Link from "next/link";
 import { Brand } from "./Brand";
 import { NAV_LINKS } from "@/app/data/site";
@@ -9,11 +11,16 @@ import { useSmoothScroll } from "../providers/SmoothScroll";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/** Active on the exact route or any child route (/insights/<slug> marks Insights). */
+const isActive = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(href + "/");
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
+  const pathname = usePathname();
   const smooth = useSmoothScroll();
 
   useEffect(() => {
@@ -54,6 +61,9 @@ export function Nav() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <header
         className={[
           "fixed top-[0.75rem] sm:top-[1rem] left-1/2 -translate-x-1/2 z-50 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
@@ -73,22 +83,30 @@ export function Nav() {
             aria-label="Primary"
             className="hidden lg:flex items-center"
           >
-            {NAV_LINKS.map((l, i) => (
-              <div key={l.label} className="flex items-center">
-                {i > 0 && <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />}
-                <Link
-                  href={l.href}
-                  className="flex items-center text-[14.5px] font-sans text-cream/78 whitespace-nowrap hover:text-cream transition-colors"
-                >
-                  <span>{l.label}</span>
-                </Link>
-              </div>
-            ))}
+            {NAV_LINKS.map((l, i) => {
+              const active = isActive(pathname, l.href);
+              return (
+                <div key={l.label} className="flex items-center">
+                  {i > 0 && <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />}
+                  <Link
+                    href={l.href}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative flex items-center text-[14.5px] font-sans whitespace-nowrap hover:text-cream transition-colors ${active ? "text-cream" : "text-cream/78"}`}
+                  >
+                    <span>{l.label}</span>
+                    {active && (
+                      <span aria-hidden className="absolute left-1/2 -bottom-[5px] size-[4px] -translate-x-1/2 rounded-full bg-ember" />
+                    )}
+                  </Link>
+                </div>
+              );
+            })}
 
             <div className="flex items-center">
               <span className="w-[1px] h-[14px] bg-[var(--rule-d)] mx-[clamp(16px,2vw,32px)]" />
               <Link
                 href="/contact"
+                aria-current={isActive(pathname, "/contact") ? "page" : undefined}
                 className="inline-flex group relative items-center rounded-full bg-cream overflow-hidden pl-4 pr-1 py-1 text-[13px] font-sans font-medium text-ink tracking-[0.01em] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:pl-9.5 hover:pr-4"
               >
                 <span className="relative z-10 py-[2px] pr-9 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:pr-0">Partner With Us</span>
@@ -145,6 +163,7 @@ export function Nav() {
 
 function MegaMenu({ onClose }: { onClose: () => void }) {
   const reduce = useReducedMotion();
+  const pathname = usePathname();
 
   return (
     <motion.div
@@ -204,30 +223,35 @@ function MegaMenu({ onClose }: { onClose: () => void }) {
           </motion.div>
 
           <ul className="flex flex-col gap-1">
-            {NAV_LINKS.map((l) => (
-              <motion.li key={l.label} variants={itemVariants(reduce)}>
-                <Link
-                  href={l.href}
-                  onClick={onClose}
-                  className="flex items-center justify-between py-[16px] border-b border-[var(--rule-2)] whitespace-nowrap overflow-hidden group"
-                >
-                  <span className="flex items-baseline overflow-hidden">
-                    <span
-                      className="font-serif text-[clamp(32px,8vw,48px)] leading-none tracking-[-0.02em] text-ink truncate transition-colors group-hover:text-terracotta"
-                      style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
-                    >
-                      {l.label}
+            {NAV_LINKS.map((l) => {
+              const active = isActive(pathname, l.href);
+              return (
+                <motion.li key={l.label} variants={itemVariants(reduce)}>
+                  <Link
+                    href={l.href}
+                    onClick={onClose}
+                    aria-current={active ? "page" : undefined}
+                    className="flex items-center justify-between py-[16px] border-b border-[var(--rule-2)] whitespace-nowrap overflow-hidden group"
+                  >
+                    <span className="flex items-baseline overflow-hidden">
+                      <span
+                        className={`font-serif text-[clamp(32px,8vw,48px)] leading-none tracking-[-0.02em] truncate transition-colors group-hover:text-terracotta ${active ? "text-terracotta" : "text-ink"}`}
+                        style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30' }}
+                      >
+                        {l.label}
+                      </span>
                     </span>
-                  </span>
-                </Link>
-              </motion.li>
-            ))}
+                  </Link>
+                </motion.li>
+              );
+            })}
           </ul>
 
           <motion.div className="mt-10 pt-8 border-t border-[var(--rule-2)]" variants={itemVariants(reduce)}>
             <Link
               href="/contact"
               onClick={onClose}
+              aria-current={isActive(pathname, "/contact") ? "page" : undefined}
               className="group inline-flex items-center justify-between w-full rounded-full bg-ink p-[8px] pl-[24px] text-[15px] font-sans font-medium text-cream tracking-[0.01em] transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-terracotta"
             >
               <span>Partner With Us</span>
